@@ -1,7 +1,7 @@
 #include "std_macros.h"
 #include <avr/io.h>
 
-void DIO_vsetPINDir(unsigned char portName, unsigned char pinNumber, unsigned char dir)
+void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t dir)
 {
 	// To Set PIN as Output
 	// Write 1 in Pin
@@ -59,7 +59,7 @@ void DIO_vsetPINDir(unsigned char portName, unsigned char pinNumber, unsigned ch
 	}
 }
 
-void DIO_Write_PIN(unsigned char portName, unsigned char pinNumber, unsigned char value)
+void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t value)
 {
 	switch(portName)
 	{
@@ -111,9 +111,9 @@ void DIO_Write_PIN(unsigned char portName, unsigned char pinNumber, unsigned cha
 	}
 }
 
-unsigned char DIO_Read_PIN(unsigned char portName, unsigned char pinNumber)
+uint8_t DIO_Read_PIN(char portName, uint8_t pinNumber)
 {
-	unsigned char x = 0;
+	uint8_t x = 0;
 
 	switch(portName)
 	{
@@ -136,7 +136,7 @@ unsigned char DIO_Read_PIN(unsigned char portName, unsigned char pinNumber)
 	return x;
 }
 
-void DIO_Toggle_PIN(unsigned char portName, unsigned char pinNumber)
+void DIO_Toggle_PIN(char portName, uint8_t pinNumber)
 {
 	switch(portName)
 	{
@@ -158,7 +158,7 @@ void DIO_Toggle_PIN(unsigned char portName, unsigned char pinNumber)
 	}
 }
 
-void DIO_Set_PORT_Direction(unsigned char portName, unsigned char dir)
+void DIO_Set_PORT_Direction(char portName, uint8_t dir)
 {
 	// To set port as output -> write 1
 	// To set port as input -> write 0
@@ -211,7 +211,7 @@ void DIO_Set_PORT_Direction(unsigned char portName, unsigned char dir)
 	}
 }
 
-void DIO_Write_PORT(unsigned char portName, unsigned char portValue)
+void DIO_Write_PORT(char portName, uint8_t portValue)
 {
 	switch(portName)
 	{
@@ -233,9 +233,9 @@ void DIO_Write_PORT(unsigned char portName, unsigned char portValue)
 	}
 }
 
-unsigned char DIO_Read_PORT(unsigned char portName)
+uint8_t DIO_Read_PORT(unsigned char portName)
 {
-	unsigned char x = 0;
+	uint8_t x = 0;
 
 	switch(portName)
 	{
@@ -259,7 +259,7 @@ unsigned char DIO_Read_PORT(unsigned char portName)
 	return x;
 }
 
-void DIO_Toggle_PORT(unsigned char portName)
+void DIO_Toggle_PORT(char portName)
 {
 	switch(portName)
 	{
@@ -281,7 +281,7 @@ void DIO_Toggle_PORT(unsigned char portName)
 	}
 }
 
-void DIO_Connect_PullUp(unsigned char portName, unsigned char pinNumber, unsigned char value)
+void DIO_Connect_PullUp(char portName, uint8_t pinNumber, uint8_t value)
 {
 	switch(portName)
 	{
@@ -331,7 +331,7 @@ void DIO_Connect_PullUp(unsigned char portName, unsigned char pinNumber, unsigne
 	}
 }
 
-void DIO_Write_Low_Nibble(unsigned char portName, unsigned char value)
+void DIO_Write_Low_Nibble(char portName, uint8_t value)
 {
 	value &= 0x0f;
 	switch(portName)
@@ -358,7 +358,7 @@ void DIO_Write_Low_Nibble(unsigned char portName, unsigned char value)
 	}
 }
 
-void DIO_Write_High_Nibble(unsigned char portName, unsigned char value)
+void DIO_Write_High_Nibble(char portName, uint8_t value)
 {
 	value = value << 4;
 	value &= 0xf0;
@@ -387,9 +387,9 @@ void DIO_Write_High_Nibble(unsigned char portName, unsigned char value)
 }
 
 
-void DIO_Write_Low_5_Nibble(unsigned char portName, unsigned char value)
+void DIO_Write_Low_5_Nibble(char portName, uint8_t value)
 {
-	unsigned char mask = 0x1f;
+	uint8_t mask = 0x1f;
 	value &= mask;
 	
 	// value &= 0x1f;
