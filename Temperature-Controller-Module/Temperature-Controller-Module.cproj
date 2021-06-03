@@ -120,66 +120,73 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="libs\ADC_driver.c">
+    <Compile Include="Drivers\ADC_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\ADC_driver.h">
+    <Compile Include="Drivers\ADC_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\Button.c">
+    <Compile Include="Drivers\Button.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\Button.h">
+    <Compile Include="Drivers\Button.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\DIO.c">
+    <Compile Include="Drivers\DIO.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\DIO.h">
+    <Compile Include="Drivers\DIO.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\keypad_driver.c">
+    <Compile Include="Drivers\keypad_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\keypad_driver.h">
+    <Compile Include="Drivers\keypad_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\LCD.c">
+    <Compile Include="Drivers\LCD.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\LCD.h">
+    <Compile Include="Drivers\LCD.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\LCD_config.h">
+    <Compile Include="Drivers\LCD_config.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\LED.c">
+    <Compile Include="Drivers\LED.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\LED.h">
+    <Compile Include="Drivers\LED.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\Seven_Segment.c">
+    <Compile Include="Drivers\Seven_Segment.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\Seven_Segment.h">
+    <Compile Include="Drivers\Seven_Segment.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\Seven_Segment_BCD.c">
+    <Compile Include="Drivers\Seven_Segment_BCD.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\Seven_Segment_BCD.h">
+    <Compile Include="Drivers\Seven_Segment_BCD.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="libs\std_macros.h">
+    <Compile Include="Drivers\std_macros.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Managers\DSP_Manager.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Managers\DSP_Manager.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="libs" />
+    <Folder Include="Drivers" />
+    <Folder Include="Managers" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
