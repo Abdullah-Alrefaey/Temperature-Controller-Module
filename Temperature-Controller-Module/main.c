@@ -8,6 +8,8 @@
 #define F_CPU 16000000UL
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -16,12 +18,14 @@
 int SET_Temperature = 25;
 int CRT_Temperature = 0;
 
-char * STATE = "SSSSS";
+char * states[4] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
+char STATE[10] = "SSSSS";
 
 void WelcomeScreen(void);
 void IdleScreen(void);
 void Update_SET_Temperature(int value);
 void Update_CRT_Temperature(int value);
+void Update_STATE(char* state);
 
 int main(void)
 {
@@ -31,10 +35,6 @@ int main(void)
 	// WelcomeScreen();
 	
 	IdleScreen();
-	
-	_delay_ms(500);
-	
-	Update_SET_Temperature(3);
 	
     while (1) 
     {
@@ -59,6 +59,7 @@ void WelcomeScreen()
 		{
 			LCD_movecursor(1, steps);
 			LCD_vSend_string("WELCOME");
+			/* TODO: Convert this delay to a periodic timer function*/
 			_delay_ms(100);
 			LCD_clearscreen();
 		}
@@ -86,6 +87,12 @@ void IdleScreen()
 	
 	Update_SET_Temperature(SET_Temperature);
 	Update_CRT_Temperature(CRT_Temperature);
+
+	/* Update System State */
+	LCD_movecursor(2, 1);
+	LCD_vSend_string("STATE:");
+
+	Update_STATE("STANDBY");
 }
 
 void Update_SET_Temperature(int value)
@@ -130,8 +137,21 @@ void Update_CRT_Temperature(int value)
 		sprintf(temp_value, "%d", CRT_Temperature);
 	}
 	
-	/* Location of XX in LCD (CRT:YY) */
+	/* Location of YY in LCD (CRT:YY) */
 	LCD_movecursor(1, 15);
 	LCD_vSend_string(temp_value);
 	
+}
+
+void Update_STATE(char *state)
+{
+	/* System state section shall be written on the form STATE: SSSSS. 
+	 * Where SSSSS is equal to the system state.
+	 */
+
+	strcpy(STATE, state);
+	/* Location of System State in LCD (STATE:SSSSS) */
+	LCD_movecursor(2, 7);
+	LCD_vSend_string(state);
+	LCD_vSend_string("     ");
 }
