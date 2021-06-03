@@ -50,3 +50,19 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+Proteus-Design/Backup Of Temperature-Controller-Module.pdsbak
+
+Proteus-Design/Last Loaded Temperature-Controller-Module.pdsbak
+
+Temperature-Controller-Module/Debug/makedep.mk
+
+Temperature-Controller-Module/Debug/Temperature-Controller-Module.lss
+
+Temperature-Controller-Module/Debug/Temperature-Controller-Module.eep
+
+Temperature-Controller-Module/Debug/Makefile
+
+Temperature-Controller-Module/.vs/Temperature-Controller-Module/v14/
+
+*.srec

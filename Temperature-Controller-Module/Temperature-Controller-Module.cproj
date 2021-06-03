@@ -120,9 +120,6 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="libs\ADC using potentiometer.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="libs\ADC_driver.c">
       <SubType>compile</SubType>
     </Compile>
