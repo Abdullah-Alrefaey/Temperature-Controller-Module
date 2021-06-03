@@ -113,7 +113,8 @@ void DIO_Write_PIN(unsigned char portName, unsigned char pinNumber, unsigned cha
 
 unsigned char DIO_Read_PIN(unsigned char portName, unsigned char pinNumber)
 {
-	unsigned char x;
+	unsigned char x = 0;
+
 	switch(portName)
 	{
 		case 'A':
@@ -234,7 +235,7 @@ void DIO_Write_PORT(unsigned char portName, unsigned char portValue)
 
 unsigned char DIO_Read_PORT(unsigned char portName)
 {
-	unsigned char x;
+	unsigned char x = 0;
 
 	switch(portName)
 	{
