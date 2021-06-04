@@ -66,3 +66,5 @@ Temperature-Controller-Module/Debug/Makefile
 Temperature-Controller-Module/.vs/Temperature-Controller-Module/v14/
 
 *.srec
+
+*.workspace
