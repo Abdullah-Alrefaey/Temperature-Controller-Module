@@ -159,6 +159,12 @@
     <Compile Include="Drivers\LED.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Drivers\PWM.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\PWM.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Drivers\Seven_Segment.c">
       <SubType>compile</SubType>
     </Compile>

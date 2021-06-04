@@ -5,6 +5,11 @@
 #ifndef DIO_H_
 #define DIO_H_
 
+#ifndef avrio
+#define avrio
+#include <avr/io.h>
+#endif
+
 /*
 	Function Name        : DIO_vsetPINDir
 	Function Returns     : void
