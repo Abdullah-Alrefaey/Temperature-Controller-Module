@@ -8,8 +8,8 @@
 #include "DSP_Manager.h"
 
 /* Declare and Define Global Variables Shared with other files */
-extern int SET_Temperature = 25;
-extern int CRT_Temperature = 0;
+extern uint8_t SET_Temperature = 25;
+extern uint8_t CRT_Temperature = 0;
 
 extern char * states[4] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
 extern char STATE[10] = "SSSSS";
@@ -20,13 +20,13 @@ void WelcomeScreen()
 	LCD_vInit();
 	
 	/* Number of loops for welcome screen animation */
-	int animation_loops = 3;
+	uint8_t animation_loops = 3;
 	
 	/* The welcome Screen shall display the word “WELCOME” on the Character LCD */
 	for (animation_loops = 3; animation_loops > 0; animation_loops--)
 	{
 		/* The welcome word shall move from right to left until the end of the screen */
-		int steps = 16;
+		uint8_t steps = 16;
 		for (steps = 16; steps >= 1; steps--)
 		{
 			LCD_movecursor(1, steps);
@@ -68,7 +68,7 @@ void IdleScreen()
 	Update_STATE("STANDBY");
 }
 
-void Update_SET_Temperature(int value)
+void Update_SET_Temperature(uint8_t value)
 {
 	SET_Temperature = value;
 	
@@ -92,7 +92,7 @@ void Update_SET_Temperature(int value)
 	
 }
 
-void Update_CRT_Temperature(int value)
+void Update_CRT_Temperature(uint8_t value)
 {
 	CRT_Temperature = value;
 	
