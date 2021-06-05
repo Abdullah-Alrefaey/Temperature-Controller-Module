@@ -186,6 +186,12 @@
     <Compile Include="Drivers\std_macros.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Drivers\TC72.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\TC72.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Drivers\Timer.c">
       <SubType>compile</SubType>
     </Compile>
@@ -199,6 +205,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Managers\DSP_Manager.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Managers\TMP_Manager.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Managers\TMP_Manager.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

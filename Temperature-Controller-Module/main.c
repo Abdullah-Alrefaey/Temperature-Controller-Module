@@ -6,6 +6,8 @@
 #define F_CPU 16000000UL
 
 #include "Managers/DSP_Manager.h"
+#include "Managers/TMP_Manager.h"
+
 #include "Drivers/PWM.h"
 #include "Drivers/keypad_driver.h"
 #include "Drivers/Timer.h"
@@ -14,10 +16,11 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-volatile unsigned char counter1 = 0;
-volatile unsigned char counter2 = 0;
-volatile unsigned short counter3 = 0;
+volatile uint8_t counter1 = 0;
+volatile uint8_t counter2 = 0;
+volatile uint8_t counter3 = 0;
 
+extern uint8_t CRT_Temperature;
 
 int main(void)
 {
@@ -39,20 +42,10 @@ int main(void)
     while (1)
     {
 		
-		/* This means when 1 second (1000 ms) is passed */
-		if (counter1 >= 100)
-		{
-			LCD_vSend_string("c1");
-			counter1 = 0;
-		}
-		/* This means when 2 seconds are passed */
-		if (counter2 >= 200)
-		{
-			LCD_clearscreen();
-			LCD_vSend_string("c1 ");
-			LCD_vSend_string("c2");
-			counter2 = 0;
-		}
+		update_crt_temp();
+		// update_res();
+		
+		Display_CRT_Temperature(CRT_Temperature);
 		
 		// pressed_key = keypad_u8check_press();
 		
