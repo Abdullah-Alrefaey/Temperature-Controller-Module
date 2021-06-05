@@ -29,29 +29,24 @@ int main(void)
 	keypad_vInit();
 	timer_CTC_init_interrupt();
 	PotInit();
-	// PWM_Init(2,1,2);
-	// uint8_t duty = 127;
-	// Set_PWM_Duty(2, duty);
-	char temp_value[5];
+	HeaterInit();
 	double V = 0;
 	uint8_t op_pressed = 0;
 	
     while (1)
     {
-		/* Check if you are in STANDBY State -> Update Value 
+		/* Check if you are in STANDBY State -> Update Value */
 		if (state_indx == 0)
 		{
 			update_set_temp();
-		}*/
+		}
 		
 		// update_crt_temp();
 		// update_res();
-		//GetPotVolt
+	
 		V = GetPotVolt();
-		sprintf(temp_value, "%d", (uint8_t)V);
-		LCD_movecursor(1, 5);
-		LCD_vSend_string(temp_value);
-		//Display_SET_Temperature(SET_Temperature);
+		SetHeaterVolt(5.0, V);
+		Display_SET_Temperature(V);
 		// Display_CRT_Temperature(CRT_Temperature);
 		
 		

@@ -11,5 +11,6 @@
 
 #include "../Drivers/Potentiometer.h"
 #include "../Drivers/PWM.h"
-
+void HeaterInit(void);
+void SetHeaterVolt(double TragetV, double PotV);
 #endif /* HEATER_CONTROL_H_ */
