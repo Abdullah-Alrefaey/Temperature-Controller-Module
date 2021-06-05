@@ -11,6 +11,6 @@
 #include "std_macros.h"
 
 void ADC_vinit(void);
-unsigned short ADC_u16Read(void);
+uint16_t ADC_u16Read(void);
 
 #endif /* ADC_DRIVER_H_ */

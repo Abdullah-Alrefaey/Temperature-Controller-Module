@@ -10,7 +10,7 @@
 void PWM_Init(uint8_t Timer, uint8_t Mode, uint8_t Scale){
 	if (Timer == 0)
 	{
-		/* Set Timer0 on Fast PWM (Mode=1) or Phase Correct (Mode=2) With Non-Inverted Output */
+		/* Set Timer0 on Fast PWM (Mode=1) or Phase Correct (Mode=0) With Non-Inverted Output */
 		TCCR0 = (1<<WGM00) | (Mode<<WGM01) | (1<<COM01);
 		
 		/* Set Freq, 0->Clk, 1->Clk/8 */
