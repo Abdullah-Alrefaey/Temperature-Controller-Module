@@ -10,11 +10,6 @@
 extern uint8_t SET_Temperature;
 extern uint8_t CRT_Temperature;
 
-/* TODO: Remove States variables to Heater Control Manager */
-extern char * states[4] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
-extern char STATE[10] = "SSSSS";
-
-
 void WelcomeScreen()
 {
 	/* Setup LCD PORT and PINs Configurations */
@@ -119,7 +114,6 @@ void Display_STATE(char *state)
 	 * Where SSSSS is equal to the system state.
 	 */
 
-	strcpy(STATE, state);
 	/* Location of System State in LCD (STATE:SSSSS) */
 	LCD_movecursor(2, 7);
 	LCD_vSend_string(state);

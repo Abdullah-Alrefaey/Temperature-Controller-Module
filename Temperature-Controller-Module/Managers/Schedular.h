@@ -17,8 +17,5 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-volatile uint8_t counter1 = 0;
-volatile uint8_t counter2 = 0;
-volatile uint8_t counter3 = 0;
 
 #endif /* SCHEDULAR_H_ */

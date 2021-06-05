@@ -5,15 +5,17 @@
  *  Author: Refaey
  */ 
 
-#include "../Drivers/TC72.h"
-#include "../Drivers/keypad_driver.h"
+#include "TMP_Manager.h"
 
 /* Declare and Define Global Variables Shared with other files */
 uint8_t SET_Temperature = 25;
 uint8_t CRT_Temperature = 0;
 
 extern uint8_t counter1;
+extern uint8_t counter2;
 extern uint8_t counter3;
+
+extern uint8_t state_indx;
 
 void update_crt_temp()
 {
@@ -28,6 +30,33 @@ void update_crt_temp()
 		/* Do Nothing, Didn't reach the required time */
 	}
 }
+
+void update_set_temp()
+{
+	/* Update SET_Temperature */
+	
+	/* This means when (50 ms) is passed */
+	if (counter2 >= 50)
+	{
+		/* Check if you are in STANDBY State */
+		/* Can Update Value now */
+		if (state_indx == 0)
+		{
+			/* Get SET Temp From Keypad */
+			char units = keypad_u8check_press();
+			char tens = keypad_u8check_press();
+			
+			/* Convert characters to int and update SET_Temperature */
+			// SET_Temperature = 
+			counter2 = 0;
+		}
+	}
+	else
+	{
+		/* Do Nothing, Didn't reach the required time */
+	}
+}
+
 
 uint8_t check_off_key()
 {

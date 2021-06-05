@@ -12,10 +12,4 @@
 #include "../Drivers/Potentiometer.h"
 #include "../Drivers/PWM.h"
 
-extern uint8_t SET_Temperature;
-extern uint8_t CRT_Temperature;
-
-char * states[4] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
-uint8_t state_indx = 0;
-
 #endif /* HEATER_CONTROL_H_ */

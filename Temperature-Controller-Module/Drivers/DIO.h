@@ -1,10 +1,12 @@
+
+
+#ifndef DIO_H_
+#define DIO_H_
+
 #ifndef stdint
 #define stdint
 #include <stdint.h>
 #endif
-
-#ifndef DIO_H_
-#define DIO_H_
 
 #ifndef avrio
 #define avrio

@@ -7,6 +7,10 @@
 
 #include "Schedular.h"
 
+volatile uint8_t counter1 = 0;
+volatile uint8_t counter2 = 0;
+volatile uint8_t counter3 = 0;
+
 ISR(TIMER0_COMP_vect)
 {
 	counter1++;
