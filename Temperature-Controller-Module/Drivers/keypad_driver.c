@@ -92,11 +92,15 @@
   * This Function return 1 if the # Key is Pressed
   * and 0 if not
   */
-uint8_t check_OPKey(){
+uint8_t check_OPKey()
+{
 	char val;
 	uint8_t pressed = 0;
 	
 	// Send Signal in Specified Cow
+	DIO_Write_PIN(KEYPADPORT, 0, 1);
+	DIO_Write_PIN(KEYPADPORT, 1, 1);
+	DIO_Write_PIN(KEYPADPORT, 2, 1);
 	DIO_Write_PIN(KEYPADPORT, 3, 0);
 	
 	// Read from Specified Column
@@ -104,6 +108,8 @@ uint8_t check_OPKey(){
 	
 	if (val == 0){
 		pressed = 1;
+	} else {
+		/* Do Nothing (# is not pressed) */
 	}
 	return pressed;
 }
