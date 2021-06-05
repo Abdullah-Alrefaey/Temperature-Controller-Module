@@ -16,6 +16,8 @@
 #include <util/delay.h>
 
 extern uint8_t CRT_Temperature;
+extern uint8_t SET_Temperature;
+extern uint8_t state_indx;
 
 int main(void)
 {
@@ -36,11 +38,17 @@ int main(void)
 	
     while (1)
     {
+		/* Check if you are in STANDBY State -> Update Value */
+		if (state_indx == 0)
+		{
+			update_set_temp();
+		}
 		
-		update_crt_temp();
+		// update_crt_temp();
 		// update_res();
 		
-		Display_CRT_Temperature(CRT_Temperature);
+		Display_SET_Temperature(SET_Temperature);
+		// Display_CRT_Temperature(CRT_Temperature);
 		
 		
     }

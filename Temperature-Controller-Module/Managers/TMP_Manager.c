@@ -6,6 +6,9 @@
  */ 
 
 #include "TMP_Manager.h"
+#include "../Drivers/LCD.h"
+
+#include <util/delay.h>
 
 /* Declare and Define Global Variables Shared with other files */
 uint8_t SET_Temperature = 25;
@@ -16,6 +19,9 @@ extern uint8_t counter2;
 extern uint8_t counter3;
 
 extern uint8_t state_indx;
+
+char reading_buffer[2] = {'0', '0'};
+uint8_t pos = 0;		/* Indicates the units and tens in SET Temperature */
 
 void update_crt_temp()
 {
@@ -32,31 +38,45 @@ void update_crt_temp()
 }
 
 void update_set_temp()
-{
-	/* Update SET_Temperature */
-	
-	/* This means when (50 ms) is passed */
-	if (counter2 >= 50)
+{	
+	/* This means when (150 ms) is passed */
+	if (counter2 >= 15)
 	{
-		/* Check if you are in STANDBY State */
-		/* Can Update Value now */
-		if (state_indx == 0)
+		/* Get SET Temperature From Keypad */
+		reading_buffer[pos] = keypad_u8check_press();
+		
+		/* Check that User Pressed an actual Key */
+		if (reading_buffer[pos] != NOTPRESSED)
 		{
-			/* Get SET Temp From Keypad */
-			char units = keypad_u8check_press();
-			char tens = keypad_u8check_press();
-			
-			/* Convert characters to int and update SET_Temperature */
-			// SET_Temperature = 
-			counter2 = 0;
+			/* Clear SET Temperature */
+			if (reading_buffer[pos] == '*')
+			{
+				reading_buffer[0] = '0';
+				reading_buffer[1] = '0';
+				SET_Temperature = atoi(reading_buffer);
+			}
+			else
+			{
+				if (pos == 0)
+				{
+					pos++;
+				}
+				else
+				{
+					/* Convert String Value to integer */
+					SET_Temperature = atoi(reading_buffer);
+					/* (pos is 1 now) we need to reset it with 0*/
+					pos = 0;
+				}
+			}
 		}
+		counter2 = 0;
 	}
 	else
 	{
 		/* Do Nothing, Didn't reach the required time */
 	}
 }
-
 
 uint8_t check_off_key()
 {
