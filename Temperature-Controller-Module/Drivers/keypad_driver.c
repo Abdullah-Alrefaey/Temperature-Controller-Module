@@ -42,7 +42,7 @@
  * Pressed Element 
  */
  char keypad_u8check_press(){
-	 char kp[4][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}, {' ', '0', '#'}};
+	 char kp[4][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}, {'*', '0', '#'}};
 	 char row;
 	 char coloumn; 
 	 char x;
