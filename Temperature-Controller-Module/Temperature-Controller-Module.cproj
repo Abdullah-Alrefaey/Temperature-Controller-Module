@@ -177,7 +177,19 @@
     <Compile Include="Drivers\Seven_Segment_BCD.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Drivers\SPI_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\SPI_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Drivers\std_macros.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Timer.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
