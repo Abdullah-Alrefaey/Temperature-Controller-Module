@@ -7,12 +7,13 @@
 
 #include "DSP_Manager.h"
 
-/* Declare and Define Global Variables Shared with other files */
-extern uint8_t SET_Temperature = 25;
-extern uint8_t CRT_Temperature = 0;
+extern uint8_t SET_Temperature;
+extern uint8_t CRT_Temperature;
 
+/* TODO: Remove States variables to Heater Control Manager */
 extern char * states[4] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
 extern char STATE[10] = "SSSSS";
+
 
 void WelcomeScreen()
 {
@@ -58,32 +59,30 @@ void IdleScreen()
 	LCD_vSend_string("CRT:");
 	
 	/* Update Temperatures Values */
-	Update_SET_Temperature(SET_Temperature);
-	Update_CRT_Temperature(CRT_Temperature);
+	Display_SET_Temperature(SET_Temperature);
+	Display_CRT_Temperature(CRT_Temperature);
 
 	/* Update System State */
 	LCD_movecursor(2, 1);
 	LCD_vSend_string("STATE:");
 
-	Update_STATE("STANDBY");
+	Display_STATE("STANDBY");
 }
 
-void Update_SET_Temperature(uint8_t value)
-{
-	SET_Temperature = value;
-	
+void Display_SET_Temperature(uint8_t value)
+{	
 	char temp_value[2];
 	
 	/* If Set temperature is less than 10, its value shall be written on the form 0X */
-	if (SET_Temperature < 10)
+	if (value < 10)
 	{
 		/* Converts Units to character */
 		temp_value[0] = '0';
-		temp_value[1] = SET_Temperature + '0';
+		temp_value[1] = value + '0';
 	}
 	else
 	{
-		sprintf(temp_value, "%d", SET_Temperature);
+		sprintf(temp_value, "%d", value);
 	}
 	
 	/* Location of XX in LCD (SET:XX) */
@@ -92,22 +91,20 @@ void Update_SET_Temperature(uint8_t value)
 	
 }
 
-void Update_CRT_Temperature(uint8_t value)
+void Display_CRT_Temperature(uint8_t value)
 {
-	CRT_Temperature = value;
-	
 	char temp_value[2];
 	
 	/* If Current temperature is less than 10, its value shall be written on the form 0X */
-	if (CRT_Temperature < 10)
+	if (value < 10)
 	{
 		/* Converts Units to character */
 		temp_value[0] = '0';
-		temp_value[1] = CRT_Temperature + '0';
+		temp_value[1] = value + '0';
 	}
 	else
 	{
-		sprintf(temp_value, "%d", CRT_Temperature);
+		sprintf(temp_value, "%d", value);
 	}
 	
 	/* Location of YY in LCD (CRT:YY) */
@@ -116,7 +113,7 @@ void Update_CRT_Temperature(uint8_t value)
 	
 }
 
-void Update_STATE(char *state)
+void Display_STATE(char *state)
 {
 	/* System state section shall be written on the form STATE: SSSSS. 
 	 * Where SSSSS is equal to the system state.

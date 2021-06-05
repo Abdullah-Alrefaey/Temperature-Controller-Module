@@ -22,8 +22,8 @@
 
 void WelcomeScreen(void);
 void IdleScreen(void);
-void Update_SET_Temperature(uint8_t value);
-void Update_CRT_Temperature(uint8_t value);
-void Update_STATE(char* state);
+void Display_SET_Temperature(uint8_t value);
+void Display_CRT_Temperature(uint8_t value);
+void Display_STATE(char* state);
 
 #endif /* DSP_MANAGER_H_ */
