@@ -65,7 +65,7 @@ void LCD_vInit(void)
 }
 
 
-static void send_falling_edge(void)
+void send_falling_edge(void)
 {
 	/* Used to enable the LCD display 
 	*/
@@ -74,6 +74,7 @@ static void send_falling_edge(void)
 	DIO_Write_PIN(PORT_NAME, EN, 0);
 	_delay_ms(2);
 }
+
 void LCD_vSend_cmd(char cmd)
 {
 	#if defined eight_bits_mode

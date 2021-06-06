@@ -35,7 +35,7 @@
 #endif
 
 void LCD_vInit(void);
-static void send_falling_edge(void);
+void send_falling_edge(void);
 void LCD_vSend_cmd(char cmd);
 void LCD_vSend_char(char data);
 void LCD_vSend_string(char *data);

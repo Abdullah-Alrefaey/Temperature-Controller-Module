@@ -7,17 +7,20 @@
 
 #include "Schedular.h"
 
-volatile uint8_t counter1 = 0;
-volatile uint8_t counter2 = 0;
-volatile uint8_t counter3 = 0;
+volatile uint8_t CRT_TEMP_COUNTER = 0;
+volatile uint8_t SET_TEMP_COUNTER = 0;
+volatile uint8_t HASH_KEY_COUNTER = 0;
 volatile uint8_t ADC_COUNTER = 0;
 
-timer_CTC_init_interrupt();
+void Schedular_vInit()
+{
+	timer_CTC_init_interrupt();
+}
 
 ISR(TIMER0_COMP_vect)
 {
-	counter1++;
-	counter2++;
-	counter3++;
+	CRT_TEMP_COUNTER++;
+	SET_TEMP_COUNTER++;
+	HASH_KEY_COUNTER++;
 	ADC_COUNTER++;
 }

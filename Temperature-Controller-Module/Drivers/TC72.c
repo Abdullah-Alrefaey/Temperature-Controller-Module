@@ -7,7 +7,11 @@
 
 #include "TC72.h"
 
+
 void TC72_Init(char mode){
+	
+	SPI_MasterInit();
+	
 	// Create a Rising Edge on the	
 	// TC72 Port to Start SPI Communication
 	DIO_Write_PIN('B', 4, 1);

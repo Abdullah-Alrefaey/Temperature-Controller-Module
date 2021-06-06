@@ -8,7 +8,7 @@
 #include "SPI.h"
 
 void SPI_MasterInit(void)
-{
+{	
 	// Set SS / MOSI / SCK  as output pins for master*/
 	DIO_vsetPINDir('B', 4, 1);
 	DIO_vsetPINDir('B', 5, 1);

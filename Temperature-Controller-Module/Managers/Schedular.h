@@ -9,12 +9,13 @@
 #ifndef SCHEDULAR_H_
 #define SCHEDULAR_H_
 
-#ifndef stdint
-#define stdint
+#include "../Drivers/Timer.h"
+
 #include <stdint.h>
-#endif
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+
+void Schedular_vInit();
 
 #endif /* SCHEDULAR_H_ */
