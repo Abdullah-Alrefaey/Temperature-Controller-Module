@@ -1,16 +1,24 @@
 /*
  * spi_driver.h
  *
- * Created: 3/10/2018 5:20:42 PM
- *  Author: Mohamed Zaghlol
+ * Created: 5/6/2021 5:20:42 PM
+ * Author : Ahmad Abdalmageed
  */ 
 
 
 #ifndef SPI_DRIVER_H_
 #define SPI_DRIVER_H_
+
+// Driver Imports
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include "DIO.h"
+#include "std_macros.h"
+#include <util/delay.h>
+
+// Driver Functions 
 void SPI_MasterInit(void);
-void SPI_SlaveInit(void);
-unsigned char SPI_MasterTransmitchar(unsigned char Data);
-unsigned char SPI_SlaveReceivechar(unsigned char Data);
-void SPI_MasterTransmitstring(unsigned char *ptr);
+char SPI_MasterTransmitchar(char Data);
+
+
 #endif /* SPI_DRIVER_H_ */
