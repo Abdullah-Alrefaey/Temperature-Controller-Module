@@ -3,11 +3,8 @@
  *
  */ 
  
- 
- #define F_CPU 16000000UL
-
- #include <util/delay.h>
- 
+/*#define F_CPU 8000000UL*/
+#define F_CPU 16000000UL
 #include "Managers/Schedular.h"
 #include "Managers/TMP_Manager.h"
 #include "Managers/DSP_Manager.h"
