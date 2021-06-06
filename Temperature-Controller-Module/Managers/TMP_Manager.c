@@ -8,8 +8,6 @@
 #include "TMP_Manager.h"
 #include "../Drivers/LCD.h"
 
-#include <util/delay.h>
-
 /* Declare and Define Global Variables Shared with other files */
 uint8_t SET_Temperature = 25;
 uint8_t CRT_Temperature = 0;

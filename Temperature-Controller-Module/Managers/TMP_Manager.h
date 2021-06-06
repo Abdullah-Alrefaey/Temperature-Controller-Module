@@ -9,6 +9,10 @@
 #ifndef TMP_MANAGER_H_
 #define TMP_MANAGER_H_
 
+#define F_CPU 16000000UL
+
+#include <util/delay.h>
+
 #include "../Drivers/TC72.h"
 #include "../Drivers/keypad_driver.h"
 #include "Heater_Control.h"

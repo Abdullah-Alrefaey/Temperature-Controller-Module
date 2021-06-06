@@ -9,14 +9,9 @@
 #ifndef DSP_MANAGER_H_
 #define DSP_MANAGER_H_
 
-/*#define F_CPU 16000000UL*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include <avr/io.h>
-#include <util/delay.h>
 
 #include "../Drivers/LCD.h"
 

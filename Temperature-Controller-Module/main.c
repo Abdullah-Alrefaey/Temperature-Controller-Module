@@ -3,18 +3,16 @@
  *
  */ 
  
-/*#define F_CPU 8000000UL*/
-#define F_CPU 4000000UL
+ 
+ #define F_CPU 16000000UL
+
+ #include <util/delay.h>
+ 
 #include "Managers/Schedular.h"
 #include "Managers/TMP_Manager.h"
 #include "Managers/DSP_Manager.h"
 
-#include "Drivers/PWM.h"
 #include "Drivers/keypad_driver.h"
-#include "Drivers/Timer.h"
-#include "Drivers/Potentiometer.h"
-
-#include <util/delay.h>
 
 extern uint8_t CRT_Temperature;
 extern uint8_t SET_Temperature;
@@ -31,17 +29,17 @@ int main(void)
 	// LCD_vInit();
 	keypad_vInit();
 	
-	HeaterInit();
+	// HeaterInit();
 	
 	uint8_t op_pressed = 0;
 	
     while (1)
     {
 		/* Check if you are in STANDBY State -> Update Value */
-		if (state_indx == 0)
+		/*if (state_indx == 0)
 		{
 			Update_SET_Temperature();
-		}
+		}*/
 		
 		Update_CRT_Temperature();
 		
