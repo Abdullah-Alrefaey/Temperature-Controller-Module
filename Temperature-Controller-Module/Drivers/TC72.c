@@ -2,7 +2,7 @@
  * TC72.c
  *
  * Created: 05-Jun-21 2:34:36 PM
- *  Author: Refaey
+ * Author: Ahmad Abdalmageed
  */ 
 
 #include "TC72.h"
@@ -20,8 +20,7 @@ void TC72_Init(char mode){
 	SPI_MasterTransmitchar(mode);
 	
 	// Finish Communication 
-	DIO_Write_PIN('B', 4, 0);  
-	_delay_ms(10);
+	DIO_Write_PIN('B', 4, 0);
 }
 
 char TC72_Read(){
