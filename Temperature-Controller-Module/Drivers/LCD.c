@@ -160,3 +160,17 @@ void LCD_movecursor(char row, char coloumn)
 	
 	_delay_ms(1);
 }
+
+void LCD_vShiftDisplay(uint8_t direction)
+{
+	/* Shift Left */
+	if (direction == 1)
+	{
+		LCD_vSend_cmd(SHIFT_LEFT);
+	}
+	else if (direction == 0)
+	{
+		LCD_vSend_cmd(SHIFT_RIGHT);
+	}
+	
+}
