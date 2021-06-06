@@ -21,6 +21,7 @@ void TC72_Init(char mode){
 	
 	// Finish Communication 
 	DIO_Write_PIN('B', 4, 0);  
+	_delay_ms(10);
 }
 
 char TC72_Read(){

@@ -13,7 +13,8 @@
 #include "DIO.h"
 #include "SPI_driver.h"
 
-// Driver Functions 
-int tc72_read();
+// Driver Functions
+void TC72_Init(char mode)
+char TC72_Read();
 
 #endif /* TC72_H_ */
