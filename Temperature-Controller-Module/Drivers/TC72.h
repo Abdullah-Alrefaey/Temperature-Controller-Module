@@ -14,7 +14,7 @@
 #include "SPI_driver.h"
 
 // Driver Functions
-void TC72_Init(char mode)
+void TC72_Init(char mode);
 char TC72_Read();
 
 #endif /* TC72_H_ */
