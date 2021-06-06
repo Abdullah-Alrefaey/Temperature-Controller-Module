@@ -23,12 +23,12 @@ extern uint8_t state_indx;
 char reading_buffer[2] = {'0', '0'};
 uint8_t pos = 0;		/* Indicates the units and tens in SET Temperature */
 
-void update_crt_temp()
+void Update_CRT_Temperature()
 {
 	/* This means when (200 ms) is passed */
 	if (counter1 >= 20)
 	{
-		CRT_Temperature = tc72_read();
+		CRT_Temperature = TC72_Read();
 		counter1 = 0;
 	}
 	else
@@ -37,7 +37,7 @@ void update_crt_temp()
 	}
 }
 
-void update_set_temp()
+void Update_SET_Temperature()
 {	
 	/* This means when (150 ms) is passed */
 	if (counter2 >= 15)

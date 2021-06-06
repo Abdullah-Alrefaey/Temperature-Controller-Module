@@ -13,8 +13,8 @@
 #include "../Drivers/keypad_driver.h"
 #include "Heater_Control.h"
 
-void update_crt_temp();
-void update_set_temp();
+void Update_CRT_Temperature();
+void Update_SET_Temperature();
 uint8_t check_off_key();
 
 #endif /* TMP_MANAGER_H_ */

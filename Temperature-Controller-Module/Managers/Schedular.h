@@ -17,5 +17,4 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-
 #endif /* SCHEDULAR_H_ */

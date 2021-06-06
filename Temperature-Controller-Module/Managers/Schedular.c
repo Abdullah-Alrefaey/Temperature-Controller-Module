@@ -10,10 +10,14 @@
 volatile uint8_t counter1 = 0;
 volatile uint8_t counter2 = 0;
 volatile uint8_t counter3 = 0;
+volatile uint8_t ADC_COUNTER = 0;
+
+timer_CTC_init_interrupt();
 
 ISR(TIMER0_COMP_vect)
 {
 	counter1++;
 	counter2++;
 	counter3++;
+	ADC_COUNTER++;
 }
