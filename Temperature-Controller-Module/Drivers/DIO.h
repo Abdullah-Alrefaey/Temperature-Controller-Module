@@ -1,15 +1,9 @@
 #ifndef DIO_H_
 #define DIO_H_
 
-#ifndef stdint
-#define stdint
 #include <stdint.h>
-#endif
-
-#ifndef avrio
-#define avrio
 #include <avr/io.h>
-#endif
+
 
 /*
 	Function Name        : DIO_vsetPINDir

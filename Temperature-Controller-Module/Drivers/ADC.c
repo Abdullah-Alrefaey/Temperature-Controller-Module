@@ -3,7 +3,7 @@
  *
  */ 
 
-#include "ADC_driver.h"
+#include "ADC.h"
 
 void ADC_vinit(void)
 {

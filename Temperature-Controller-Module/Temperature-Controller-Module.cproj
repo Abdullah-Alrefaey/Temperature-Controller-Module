@@ -120,16 +120,10 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Drivers\ADC_driver.c">
+    <Compile Include="Drivers\ADC.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\ADC_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\Button.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\Button.h">
+    <Compile Include="Drivers\ADC.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Drivers\DIO.c">
@@ -138,10 +132,10 @@
     <Compile Include="Drivers\DIO.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\keypad_driver.c">
+    <Compile Include="Drivers\Keypad.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\keypad_driver.h">
+    <Compile Include="Drivers\Keypad.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Drivers\LCD.c">
@@ -171,25 +165,10 @@
     <Compile Include="Drivers\PWM.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\Seven_Segment.c">
+    <Compile Include="Drivers\SPI.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\Seven_Segment.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\Seven_Segment_BCD.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\Seven_Segment_BCD.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\SPI_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\SPI_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\std_macros.h">
+    <Compile Include="Drivers\SPI.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Drivers\TC72.c">

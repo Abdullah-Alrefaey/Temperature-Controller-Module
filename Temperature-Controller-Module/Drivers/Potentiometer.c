@@ -6,7 +6,7 @@
  */ 
 
 #include "Potentiometer.h"
-#include "ADC_driver.h"
+#include "ADC.h"
 
 void PotInit(void)
 {

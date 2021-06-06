@@ -9,7 +9,7 @@
 #ifndef POTENTIOMETER_H_
 #define POTENTIOMETER_H_
 
-#include "ADC_driver.h"
+#include "ADC.h"
 
 void PotInit(void);
 double GetPotVolt(void);

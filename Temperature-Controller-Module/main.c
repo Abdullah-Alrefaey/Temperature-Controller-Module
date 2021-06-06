@@ -12,7 +12,7 @@
 #include "Managers/TMP_Manager.h"
 #include "Managers/DSP_Manager.h"
 
-#include "Drivers/keypad_driver.h"
+#include "Drivers/Keypad.h"
 
 extern uint8_t CRT_Temperature;
 extern uint8_t SET_Temperature;
@@ -26,10 +26,9 @@ int main(void)
 	// Start Main Application
 	WelcomeScreen();
 	IdleScreen();
-	// LCD_vInit();
 	keypad_vInit();
 	
-	// HeaterInit();
+	HeaterInit();
 	
 	uint8_t op_pressed = 0;
 	

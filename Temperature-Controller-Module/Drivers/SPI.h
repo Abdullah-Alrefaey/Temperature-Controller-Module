@@ -10,10 +10,10 @@
 #define SPI_DRIVER_H_
 
 // Driver Imports
+#include "DIO.h"
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "DIO.h"
-#include "std_macros.h"
 #include <util/delay.h>
 
 // Driver Functions 
