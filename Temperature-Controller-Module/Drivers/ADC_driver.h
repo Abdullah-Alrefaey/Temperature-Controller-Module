@@ -8,7 +8,7 @@
 #define ADC_DRIVER_H_
 
 #include <avr/io.h>
-#include "std_macros.h"
+
 
 void ADC_vinit(void);
 uint16_t ADC_u16Read(void);
