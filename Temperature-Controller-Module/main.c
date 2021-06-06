@@ -34,8 +34,6 @@ int main(void)
 		
 	while (1)
     {
-		
-		
 		Display_SET_Temperature(SET_Temperature);
 		Display_CRT_Temperature(CRT_Temperature);
 		Display_STATE(states[state_indx]);
@@ -46,9 +44,13 @@ int main(void)
 		 */
 		if (state_indx == 0)
 		{
+			/* PWM OFF */
+			Vt = 0;
+			Vr = 0;
+			SetHeaterVolt(Vt, Vr);
 			Update_SET_Temperature();
 			Display_SET_Temperature(SET_Temperature);
-			Check_Operation_State();
+			Check_OPERATION_State_Key();
 		}
 		
 		/* Check if you are in OPERATION STATE */
@@ -58,12 +60,37 @@ int main(void)
 			Update_Vt();
 			Update_Vr();
 			
-			SetHeaterVolt(Vt, Vr);
-			
 			Check_STANDBY_State();
+			Check_NORMAL_State();
+			
+			/* This function should handle Error 3 min */
+			/*Check_ERROR_State();*/
 		}
 		
+		/* Check if you are in NORMAL STATE */
+		if (state_indx == 2)
+		{
+			/* PWM OFF */
+			Vt = 0;
+			Vr = 0;
+			Update_CRT_Temperature();
+						
+			Check_STANDBY_State();			
+			Check_OPERATION_State();	
+			Check_ERROR_State();		
+		}
 		
+		/* Check if you are in ERROR STATE */
+		if (state_indx == 3)
+		{
+			/* PWM OFF */
+			Vt = 0;
+			Vr = 0;
+			
+			/* Must POWER OFF */
+		}
 		
+		/* Update PWM Wave */
+		SetHeaterVolt(Vt, Vr);
     }
 }
