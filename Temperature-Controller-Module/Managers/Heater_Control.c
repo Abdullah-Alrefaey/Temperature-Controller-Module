@@ -1,5 +1,5 @@
 #include "Heater_Control.h"
-#include <math.h>
+
 
 extern uint8_t SET_Temperature;
 extern uint8_t CRT_Temperature;
@@ -63,10 +63,9 @@ void SetHeaterVolt(double Vt, double Vr)
 	Set_PWM_Duty(2, Duty);
 }
 
-void Check_Operation_State()
+void Check_OPERATION_State_Key()
 {	
 	/* Change To OPERATIONAL State if user pressed '#' key */
-	
 	char value = NOTPRESSED;
 	
 	/* Wait for user to enter tens */
@@ -78,6 +77,15 @@ void Check_Operation_State()
 	} while (value != 12);
 		
 	state_indx = 1;
+}
+
+void Check_OPERATION_State()
+{
+	/* Change To OPERATIONAL State if SET - CRT > 5 */
+	if ((SET_Temperature - CRT_Temperature) > 5)
+	{
+		state_indx = 1;
+	}	
 }
 
 /*
@@ -99,6 +107,7 @@ void Check_Operation_State()
 	}
 }*/
 
+/* TODO: Fix Debouncing Issue */
 void Check_STANDBY_State()
 {
 	/* This means when (200 ms) is passed */
@@ -118,3 +127,20 @@ void Check_STANDBY_State()
 	}
 }
 
+void Check_NORMAL_State()
+{
+	if (abs(SET_Temperature - CRT_Temperature) <= 5)
+	{
+		state_indx = 2;
+	}
+}
+
+
+void Check_ERROR_State()
+{
+	/* Change To ERROR State if CRT - SET > 10 */
+	if ((CRT_Temperature - SET_Temperature) > 10)
+	{
+		state_indx = 3;
+	}
+}

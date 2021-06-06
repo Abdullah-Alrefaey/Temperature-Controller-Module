@@ -14,11 +14,17 @@
 #include "../Drivers/Keypad.h"
 #include "../Drivers/SPI.h"
 
+#include <math.h>
+#include <stdlib.h>
+
 void HeaterInit(void);
 void SetHeaterVolt(double TargetV, double PotV);
 void Update_Vt();
 void Update_Vr();
-void Check_Operation_State();
+void Check_OPERATION_State_Key();
+void Check_OPERATION_State();
 void Check_STANDBY_State();
+void Check_NORMAL_State();
+void Check_ERROR_State();
 
 #endif /* HEATER_CONTROL_H_ */
