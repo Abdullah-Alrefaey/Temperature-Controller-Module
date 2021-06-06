@@ -18,7 +18,7 @@ void SPI_MasterInit(void)
 	SPCR |= (1 << MSTR);
 	
 	// Select SPI Mode 
-	SPCR|= 1<<CPHA;
+	SPCR&= ~(1<<CPHA);
 	SPCR|= 1<<CPOL;
 	
 	// Set clock to SC/128
