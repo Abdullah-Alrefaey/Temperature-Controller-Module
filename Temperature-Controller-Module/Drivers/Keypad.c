@@ -41,12 +41,12 @@
  * in the Keypad Matrix (4*3) and Return the 
  * Pressed Element 
  */
- char keypad_u8check_press(){
-	 char kp[4][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}, {'*', '0', '#'}};
-	 char row;
-	 char coloumn; 
-	 char x;
-	 char returnval = NOTPRESSED;
+ uint8_t keypad_u8check_press(){
+	 uint8_t kp[4][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {0, 0, 12}};
+	 uint8_t row;
+	 uint8_t coloumn; 
+	 uint8_t x;
+	 uint8_t returnval = NOTPRESSED;
 	 
 	 // Matrix Loop Check for each Keypad Element
 	 for(row = 0; row < 4; row++){
@@ -111,5 +111,6 @@ uint8_t check_OPKey()
 	} else {
 		/* Do Nothing (# is not pressed) */
 	}
+	
 	return pressed;
 }
