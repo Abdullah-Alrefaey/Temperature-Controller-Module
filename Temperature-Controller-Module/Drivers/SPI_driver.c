@@ -14,12 +14,13 @@ void SPI_MasterInit(void)
 	DIO_vsetPINDir('B',5,1);
 	DIO_vsetPINDir('B',7,1);
 	
+	DIO_vsetPINDir('B', 6, 0);
+	
 	// Enable Master mode
 	SPCR |= (1 << MSTR);
 	
-	// Select SPI Mode 
-	SPCR&= ~(1<<CPHA);
-	SPCR|= 1<<CPOL;
+	// Select SPI Mode
+	SPCR &= ~(1<<CPOL);
 	
 	// Set clock to SC/128
 	SPCR |= (1 << SPR0);
@@ -29,7 +30,7 @@ void SPI_MasterInit(void)
     SPCR |= (1 << SPE);
 }
 
-char SPI_MasterTransmitchar(unsigned char Data)
+char SPI_MasterTransmitchar(char Data)
 {
 	// Write to SPDR 
 	SPDR=Data;
