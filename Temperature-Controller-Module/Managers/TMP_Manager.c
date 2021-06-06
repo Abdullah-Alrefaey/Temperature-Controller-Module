@@ -37,17 +37,43 @@ void Update_CRT_Temperature()
 }
 
 void Update_SET_Temperature()
-{	
-	/* This means when (150 ms) is passed */
-	if (counter2 >= 15)
+{
+	char x = 0xff;
+	uint8_t temp = 0;
+	
+	do {
+		x = keypad_u8check_press();
+		_delay_ms(200);
+	} while (x == 0xff);
+	
+	temp = x * 10;
+	x = 0xff;
+	
+	do {
+		x = keypad_u8check_press();
+		_delay_ms(200);
+	} while(x == 0xff);
+
+	temp += x;
+	
+	SET_Temperature = temp;
+}
+
+/*
+void Update_SET_Temperature()
+{		
+	
+	/ * This means when (200 ms) is passed * /
+	if (SET_TEMP_COUNTER >= 20)
 	{
-		/* Get SET Temperature From Keypad */
-		reading_buffer[pos] = keypad_u8check_press();
-		
-		/* Check that User Pressed an actual Key */
+		/ * Get SET Temperature From Keypad * /
+		/ *reading_buffer[pos] = keypad_u8check_press();* /
+				
+		/ * Check that User Pressed an actual Key * /
 		if (reading_buffer[pos] != NOTPRESSED)
 		{
-			/* Clear SET Temperature */
+			
+			/ * Clear SET Temperature * /
 			if (reading_buffer[pos] == '*')
 			{
 				reading_buffer[0] = '0';
@@ -62,31 +88,23 @@ void Update_SET_Temperature()
 				}
 				else
 				{
-					/* Convert String Value to integer */
+					/ * Convert String Value to integer * /
 					SET_Temperature = atoi(reading_buffer);
-					/* (pos is 1 now) we need to reset it with 0*/
+					/ * (pos is 1 now) we need to reset it with 0* /
 					pos = 0;
 				}
 			}
 		}
-		counter2 = 0;
+		else
+		{
+			/ * Do Nothing (Nothing is pressed) * /
+		}
+		
+		SET_TEMP_COUNTER = 0;
 	}
 	else
 	{
-		/* Do Nothing, Didn't reach the required time */
+		/ * Do Nothing, Didn't reach the required time * /
 	}
 }
-
-uint8_t check_off_key()
-{
-	/* This means when (100 ms) is passed */
-	if (counter3 >= 10)
-	{
-		counter3 = 0;
-		return check_OPKey();
-	}
-	else
-	{
-		/* Do Nothing, Didn't reach the required time */
-	}
-}
+*/
