@@ -33,9 +33,11 @@ char TC72_Read(){
 	// Temperature Measurement
 	char temp;
 	temp = SPI_MasterTransmitchar(0x02);
+	_delay_ms(1);
 	
 	// Signal Check with the TC72, TODO: Check Necessity of This Step
 	temp = SPI_MasterTransmitchar(0x00);
+	_delay_ms(1);
 	
 	// Finish Communication
 	DIO_Write_PIN('B', 4, 0);
