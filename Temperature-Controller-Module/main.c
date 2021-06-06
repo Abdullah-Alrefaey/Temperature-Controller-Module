@@ -20,17 +20,19 @@ extern uint8_t CRT_Temperature;
 extern uint8_t SET_Temperature;
 extern uint8_t state_indx;
 
+extern double Vr;
+extern double Vt;
+
 int main(void)
 {
 	// Start Main Application
-	// WelcomeScreen();
-	// IdleScreen();
-	LCD_vInit();
+	WelcomeScreen();
+	IdleScreen();
+	// LCD_vInit();
 	keypad_vInit();
-	timer_CTC_init_interrupt();
-	PotInit();
+	
 	HeaterInit();
-	double V = 0;
+	
 	uint8_t op_pressed = 0;
 	
     while (1)
@@ -38,16 +40,18 @@ int main(void)
 		/* Check if you are in STANDBY State -> Update Value */
 		if (state_indx == 0)
 		{
-			update_set_temp();
+			Update_SET_Temperature();
 		}
 		
-		// update_crt_temp();
-		// update_res();
+		Update_CRT_Temperature();
+		
+		Update_Vt();
+		Update_Vr();
 	
-		V = GetPotVolt();
-		SetHeaterVolt(5.0, V);
-		Display_SET_Temperature(V);
-		// Display_CRT_Temperature(CRT_Temperature);
+		SetHeaterVolt(Vt, Vr);
+		
+		Display_SET_Temperature(SET_Temperature);
+		Display_CRT_Temperature(CRT_Temperature);
 		
 		
     }
