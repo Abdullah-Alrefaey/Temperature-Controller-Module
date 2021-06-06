@@ -2,7 +2,7 @@
  * spi_driver.h
  *
  * Created: 5/6/2021 5:20:42 PM
- * Author : Ahmad Abdalmageed
+ * Author: Ahmad Abdalmageed
  */ 
 
 
