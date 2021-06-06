@@ -10,6 +10,8 @@
 extern uint8_t SET_Temperature;
 extern uint8_t CRT_Temperature;
 
+extern uint8_t state_indx;
+
 void WelcomeScreen()
 {
 	/* Setup LCD PORT and PINs Configurations */
@@ -85,24 +87,38 @@ void Display_SET_Temperature(uint8_t value)
 
 void Display_CRT_Temperature(uint8_t value)
 {
-	char temp_value[2];
-	
-	/* If Current temperature is less than 10, its value shall be written on the form 0X */
-	if (value < 10)
+	if (state_indx == ERROR_INDEX)
 	{
-		/* Converts Units to character */
-		temp_value[0] = '0';
-		temp_value[1] = value + '0';
+		Display_CRT_Temperature_ERROR();
 	}
 	else
 	{
-		sprintf(temp_value, "%d", value);
+		char temp_value[2];
+		
+		/* If Current temperature is less than 10, its value shall be written on the form 0X */
+		if (value < 10)
+		{
+			/* Converts Units to character */
+			temp_value[0] = '0';
+			temp_value[1] = value + '0';
+		}
+		else
+		{
+			sprintf(temp_value, "%d", value);
+		}
+		
+		/* Location of YY in LCD (CRT:YY) */
+		LCD_movecursor(1, 15);
+		LCD_vSend_string(temp_value);
 	}
-	
+}
+
+void Display_CRT_Temperature_ERROR()
+{
 	/* Location of YY in LCD (CRT:YY) */
 	LCD_movecursor(1, 15);
-	LCD_vSend_string(temp_value);
-	
+	LCD_vSend_char(0xFF);
+	LCD_vSend_char(0xFF);
 }
 
 void Display_STATE(char *state)
