@@ -9,7 +9,7 @@
 #ifndef DSP_MANAGER_H_
 #define DSP_MANAGER_H_
 
-#define F_CPU 16000000UL
+/*#define F_CPU 16000000UL*/
 
 #include <stdio.h>
 #include <stdlib.h>
