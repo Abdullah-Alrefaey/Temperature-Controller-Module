@@ -13,6 +13,10 @@
 #include "DIO.h"
 #include "SPI_driver.h"
 
+// Driver Defines 
+#define One_Shot 0x14
+#define Continous 0x04
+
 // Driver Functions
 void TC72_Init(char mode);
 char TC72_Read();

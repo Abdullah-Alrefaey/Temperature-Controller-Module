@@ -1,5 +1,9 @@
-#include "std_macros.h"
-#include <avr/io.h>
+/*
+ * 
+ * Edited by : Ahmad Abdalmageed
+ */
+
+#include "DIO.h"
 
 void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t dir)
 {
@@ -15,45 +19,45 @@ void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t dir)
 			if (dir == 1)
 			{
 				// Set the direction of the given pinNumber in port A as output
-				SET_BIT(DDRA, pinNumber);
+				DDRA |= (1 << pinNumber);
 			}
 			else if (dir == 0)
 			{
 				// Set the direction of the given pinNumber in port A as input
-				CLR_BIT(DDRA, pinNumber);
+				DDRA &= ~(1 << pinNumber);
 			}
 			break;
 
 		case 'B':
 			if (dir == 1)
 			{
-				SET_BIT(DDRB, pinNumber);
+				DDRB |= (1 << pinNumber);
 			}
 			else if (dir == 0)
 			{
-				CLR_BIT(DDRB, pinNumber);
+				DDRB &= ~(1 << pinNumber);
 			}
 			break;
 
 		case 'C':
 			if (dir == 1)
 			{
-				SET_BIT(DDRC, pinNumber);
+				DDRC |= (1 << pinNumber);
 			}
 			else if (dir == 0)
 			{
-				CLR_BIT(DDRC, pinNumber);
+				DDRC &= ~(1 << pinNumber);
 			}
 			break;
 
 		case 'D':
 			if (dir == 1)
 			{
-				SET_BIT(DDRD, pinNumber);
+				DDRD |= (1 << pinNumber);
 			}
 			else if (dir == 0)
 			{
-				CLR_BIT(DDRD, pinNumber);
+				DDRD &= ~(1 << pinNumber);
 			}
 			break;
 	}
@@ -67,45 +71,45 @@ void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t value)
 			if (value == 1)
 			{
 				// Set the direction of the given pinNumber in port A as high (1)
-				SET_BIT(PORTA, pinNumber);
+				PORTA |= (1 << pinNumber);
 			}
 			else if (value == 0)
 			{
 				// Set the direction of the given pinNumber in port A as low (0)
-				CLR_BIT(PORTA, pinNumber);
+				PORTA &= ~(1 << pinNumber);
 			}
 			break;
 
 		case 'B':
 			if (value == 1)
 			{
-				SET_BIT(PORTB, pinNumber);
+				PORTB |= (1 << pinNumber);
 			}
 			else if (value == 0)
 			{
-				CLR_BIT(PORTB, pinNumber);
+				PORTB &= ~(1 << pinNumber);
 			}
 			break;
 
 		case 'C':
 			if (value == 1)
 			{
-				SET_BIT(PORTC, pinNumber);
+				PORTC |= (1 << pinNumber);
 			}
 			else if (value == 0)
 			{
-				CLR_BIT(PORTC, pinNumber);
+				PORTC &= ~(1 << pinNumber);
 			}
 			break;
 
 		case 'D':
 			if (value == 1)
 			{
-				SET_BIT(PORTD, pinNumber);
+				PORTD |= (1 << pinNumber);
 			}
 			else if (value == 0)
 			{
-				CLR_BIT(PORTD, pinNumber);
+				PORTD &= ~(1 << pinNumber);
 			}
 			break;
 	}
@@ -117,20 +121,21 @@ uint8_t DIO_Read_PIN(char portName, uint8_t pinNumber)
 
 	switch(portName)
 	{
+		/*READ_BIT(reg, bit) == ((reg & (1 << bit)) >> bit)*/
 		case 'A':
-			x = READ_BIT(PINA, pinNumber);
+			x = ((PINA & (1 << pinNumber)) >> pinNumber);
 			break;
 
 		case 'B':
-			x = READ_BIT(PINB, pinNumber);
+			x = ((PINB & (1 << pinNumber)) >> pinNumber);
 			break;
 
 		case 'C':
-			x = READ_BIT(PINC, pinNumber);
+			x = ((PINC & (1 << pinNumber)) >> pinNumber);
 			break;
 
 		case 'D':
-			x = READ_BIT(PIND, pinNumber);
+			x = ((PIND & (1 << pinNumber)) >> pinNumber);
 			break;
 	}
 	return x;
@@ -141,19 +146,19 @@ void DIO_Toggle_PIN(char portName, uint8_t pinNumber)
 	switch(portName)
 	{
 		case 'A':
-			TOGGLE_BIT(PORTA, pinNumber);
+			PORTA ^= (1 << pinNumber);
 			break;
 
 		case 'B':
-			TOGGLE_BIT(PORTB, pinNumber);
+			PORTB ^= (1 << pinNumber);
 			break;
 
 		case 'C':
-			TOGGLE_BIT(PORTC, pinNumber);
+			PORTC ^= (1 << pinNumber);
 			break;
 
 		case 'D':
-			TOGGLE_BIT(PORTD, pinNumber);
+			PORTD ^= (1 << pinNumber);
 			break;
 	}
 }
@@ -288,44 +293,44 @@ void DIO_Connect_PullUp(char portName, uint8_t pinNumber, uint8_t value)
 		case 'A':
 			if (value == 1)
 			{
-				SET_BIT(PORTA, pinNumber);
+				PORTA |= (1 << pinNumber);
 			}
 			else
 			{
-				CLR_BIT(PORTA, pinNumber);
+				PORTA &= ~(1 << pinNumber);
 			}
 			break;
 			
 		case 'B':
 			if (value == 1)
 			{
-				SET_BIT(PORTB, pinNumber);
+				PORTB |= (1 << pinNumber);
 			}
 			else
 			{
-				CLR_BIT(PORTB, pinNumber);
+				PORTB &= ~(1 << pinNumber);
 			}
 			break;
 		
 		case 'C':
 			if (value == 1)
 			{
-				SET_BIT(PORTC, pinNumber);
+				PORTC |= (1 << pinNumber);
 			}
 			else
 			{
-				CLR_BIT(PORTC, pinNumber);
+				PORTC &= ~(1 << pinNumber);
 			}
 			break;
 		
 		case 'D':
 			if (value == 1)
 			{
-				SET_BIT(PORTD, pinNumber);
+				PORTD |= (1 << pinNumber);
 			}
 			else
 			{
-				CLR_BIT(PORTD, pinNumber);
+				PORTD &= ~(1 << pinNumber);
 			}
 			break;
 	}
