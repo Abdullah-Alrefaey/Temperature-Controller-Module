@@ -11,11 +11,15 @@
 #include "Managers/Schedular.h"
 #include "Managers/TMP_Manager.h"
 #include "Managers/DSP_Manager.h"
+#include "Managers/Heater_Control.h"
 
 #include "Drivers/Keypad.h"
+#include "Drivers/TC72.h"
 
 extern uint8_t CRT_Temperature;
 extern uint8_t SET_Temperature;
+
+extern char * states[4];
 extern uint8_t state_indx;
 
 extern double Vr;
@@ -27,29 +31,38 @@ int main(void)
 	WelcomeScreen();
 	IdleScreen();
 	keypad_vInit();
-	
+	TC72_Init(One_Shot);
+	Schedular_vInit();
 	HeaterInit();
-	
-	uint8_t op_pressed = 0;
-	
+		
     while (1)
     {
-		/* Check if you are in STANDBY State -> Update Value */
-		/*if (state_indx == 0)
-		{
-			Update_SET_Temperature();
-		}*/
-		
-		Update_CRT_Temperature();
-		
-		Update_Vt();
-		Update_Vr();
-	
-		SetHeaterVolt(Vt, Vr);
-		
 		Display_SET_Temperature(SET_Temperature);
 		Display_CRT_Temperature(CRT_Temperature);
+		Display_STATE(states[state_indx]);
 		
+		/* Check if you are in STANDBY STATE:
+		 * Update SET_Temperature Value From The User
+		 * Check if User Pressed '#' To Switch to OPERATION STATE
+		 */
+		if (state_indx == 0)
+		{
+			Update_SET_Temperature();
+						
+			Check_Operation_State();
+		}
+		
+		/* Check if you are in OPERATION STATE */
+		if (state_indx == 1)
+		{
+			Update_CRT_Temperature();
+			Update_Vt();
+			Update_Vr();
+			
+			Check_STANDBY_State();
+		}
+		
+		SetHeaterVolt(Vt, Vr);
 		
     }
 }
