@@ -11,14 +11,15 @@
 
 #define F_CPU 16000000UL
 
+#include <stdlib.h>
+
 #include <util/delay.h>
 
 #include "../Drivers/TC72.h"
 #include "../Drivers/Keypad.h"
-#include "Heater_Control.h"
 
 void Update_CRT_Temperature();
 void Update_SET_Temperature();
-uint8_t check_off_key();
+uint8_t test();
 
 #endif /* TMP_MANAGER_H_ */
