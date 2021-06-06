@@ -1,5 +1,3 @@
-
-
 #ifndef DIO_H_
 #define DIO_H_
 
@@ -73,7 +71,7 @@ void DIO_Write_PORT(char portName, uint8_t portValue);
 	Function Arguments   : char portName
 	Function Description : read the value of the port.
 */
-uint8_t DIO_Read_PORT(char portName);
+uint8_t DIO_Read_PORT(unsigned char portName);
 
 /*
 	Function Name        : DIO_Toggle_PORT
