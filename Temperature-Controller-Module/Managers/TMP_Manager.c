@@ -38,73 +38,61 @@ void Update_CRT_Temperature()
 
 void Update_SET_Temperature()
 {
-	char x = 0xff;
-	uint8_t temp = 0;
+	char value = NOTPRESSED;
+	uint8_t temp_reading = 0;
 	
+	/* Wait for user to enter tens */
 	do {
-		x = keypad_u8check_press();
+		value = keypad_u8check_press();
+		
+		/* This delay is used to solve the debouncing problem of buttons */
 		_delay_ms(200);
-	} while (x == 0xff);
+	} while (value == NOTPRESSED);
 	
-	temp = x * 10;
-	x = 0xff;
+	/* Multiply the value by 10 to set it as tens */
+	temp_reading = value * 10;
+	value = NOTPRESSED;
 	
+	/* Wait for user to enter units */
 	do {
-		x = keypad_u8check_press();
+		value = keypad_u8check_press();
 		_delay_ms(200);
-	} while(x == 0xff);
+	} while (value == NOTPRESSED);
 
-	temp += x;
+	/* Add units to the previous tens to store the whole number */
+	temp_reading += value;
 	
-	SET_Temperature = temp;
+	/* Update SET_Temperature with the final value */
+	SET_Temperature = temp_reading;
 }
 
 /*
+
 void Update_SET_Temperature()
 {		
-	
-	/ * This means when (200 ms) is passed * /
-	if (SET_TEMP_COUNTER >= 20)
-	{
-		/ * Get SET Temperature From Keypad * /
-		/ *reading_buffer[pos] = keypad_u8check_press();* /
+	/ * Get SET Temperature From Keypad * /
+	reading_buffer[pos] = keypad_u8check_press();
+	_delay_ms(300);
 				
-		/ * Check that User Pressed an actual Key * /
-		if (reading_buffer[pos] != NOTPRESSED)
+	/ * Check that User Pressed an actual Key * /
+	if (reading_buffer[pos] != NOTPRESSED)
+	{
+		if (pos == 0)
 		{
-			
-			/ * Clear SET Temperature * /
-			if (reading_buffer[pos] == '*')
-			{
-				reading_buffer[0] = '0';
-				reading_buffer[1] = '0';
-				SET_Temperature = atoi(reading_buffer);
-			}
-			else
-			{
-				if (pos == 0)
-				{
-					pos++;
-				}
-				else
-				{
-					/ * Convert String Value to integer * /
-					SET_Temperature = atoi(reading_buffer);
-					/ * (pos is 1 now) we need to reset it with 0* /
-					pos = 0;
-				}
-			}
+			pos++;
 		}
 		else
 		{
-			/ * Do Nothing (Nothing is pressed) * /
+			/ * Convert String Value to integer * /
+			SET_Temperature = atoi(reading_buffer);
+			/ * (pos is 1 now) we need to reset it with 0* /
+			pos = 0;
 		}
-		
-		SET_TEMP_COUNTER = 0;
 	}
 	else
 	{
-		/ * Do Nothing, Didn't reach the required time * /
+		/ * Do Nothing (Nothing is pressed) * /
 	}
 }
 */
+

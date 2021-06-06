@@ -32,8 +32,10 @@ int main(void)
 	Schedular_vInit();
 	HeaterInit();
 		
-    while (1)
+	while (1)
     {
+		
+		
 		Display_SET_Temperature(SET_Temperature);
 		Display_CRT_Temperature(CRT_Temperature);
 		Display_STATE(states[state_indx]);
@@ -45,7 +47,7 @@ int main(void)
 		if (state_indx == 0)
 		{
 			Update_SET_Temperature();
-						
+			Display_SET_Temperature(SET_Temperature);
 			Check_Operation_State();
 		}
 		
@@ -56,10 +58,12 @@ int main(void)
 			Update_Vt();
 			Update_Vr();
 			
+			SetHeaterVolt(Vt, Vr);
+			
 			Check_STANDBY_State();
 		}
 		
-		SetHeaterVolt(Vt, Vr);
+		
 		
     }
 }

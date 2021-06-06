@@ -30,7 +30,7 @@ void Update_Vt()
 	}
 	else if (SET_Temperature > CRT_Temperature)
 	{
-		Vt = ((SET_Temperature - CRT_Temperature) / 100) * 10;
+		Vt = ((SET_Temperature - CRT_Temperature) / 100.0) * 10;
 	}
 }
 
@@ -56,44 +56,53 @@ void SetHeaterVolt(double Vt, double Vr)
 	 */
 	
 	uint8_t Duty = 0;
-	double DutyPer = 0;
-	DutyPer = (((Vr * 2)/10) * Vt) / 10;
-	Duty = floor(DutyPer*255);
+	double DutyPercentage = 0;
+	DutyPercentage = (((Vr * 2)/10) * Vt) / 10; /* Range: 0 -> 1 */
+	Duty = floor(DutyPercentage*255.0);
+	SPI_MasterTransmitchar(Duty);
 	Set_PWM_Duty(2, Duty);
 }
 
 void Check_Operation_State()
 {	
-	/* This means when (100 ms) is passed */
+	/* Change To OPERATIONAL State if user pressed '#' key */
+	
+	char value = NOTPRESSED;
+	
+	/* Wait for user to enter tens */
+	do {
+		value = keypad_u8check_press();
+		
+		/* This delay is used to solve the debouncing problem of buttons */
+		_delay_ms(300);
+	} while (value != 12);
+		
+	state_indx = 1;
+}
+
+/*
+void Check_Operation_State()
+{	
+	/ * This means when (100 ms) is passed * /
 	if (HASH_KEY_COUNTER >= 10)
 	{
-		/* Change To OPERATIONAL State if user pressed '#' key */
-		char x = 0xff;
-		
-		do {
-			x = check_OPKey();
-			_delay_ms(200);
-		} while (x == 0xff);
-		
-		state_indx = 1;
-		
-		/*if (check_OPKey() == 1)
+		/ * Change To OPERATIONAL State if user pressed '#' key * /
+		if (check_OPKey() == 1)
 		{
 			state_indx = 1;
-		}*/
-		
+		}		
 		HASH_KEY_COUNTER = 0;
 	}
 	else
 	{
-		/* Do Nothing, Didn't reach the required time */
+		/ * Do Nothing, Didn't reach the required time * /
 	}
-}
+}*/
 
 void Check_STANDBY_State()
 {
-	/* This means when (100 ms) is passed */
-	if (HASH_KEY_COUNTER >= 10)
+	/* This means when (200 ms) is passed */
+	if (HASH_KEY_COUNTER >= 20)
 	{
 		/* Change To OPERATIONAL State if user pressed '#' key */
 		if (check_OPKey() == 1)

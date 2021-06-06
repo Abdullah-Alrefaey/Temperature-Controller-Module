@@ -30,14 +30,14 @@ void WelcomeScreen()
 		{
 			LCD_vShiftDisplay(1);
 			/* TODO: Convert this delay to a periodic timer function */
-			_delay_ms(5);
+			_delay_ms(1);
 		}
 		
 		/* The welcome word shall move from left to right until the other end of the screen */
 		for (steps = 1; steps < 16; steps++)
 		{
 			LCD_vShiftDisplay(0);
-			_delay_ms(5);
+			_delay_ms(1);
 		}
 	}
 }

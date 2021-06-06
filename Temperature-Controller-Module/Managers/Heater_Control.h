@@ -12,6 +12,7 @@
 #include "../Drivers/Potentiometer.h"
 #include "../Drivers/PWM.h"
 #include "../Drivers/Keypad.h"
+#include "../Drivers/SPI.h"
 
 void HeaterInit(void);
 void SetHeaterVolt(double TargetV, double PotV);
