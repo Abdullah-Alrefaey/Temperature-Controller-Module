@@ -20,7 +20,7 @@ extern uint8_t state_indx;
 /************************************************************************/
 void Schedular_vInit(void)
 {
-	timer_CTC_init_interrupt();
+	Timer0_CTC_vInit_Interrupt();
 }
 
 /************************************************************************/
