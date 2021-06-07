@@ -34,7 +34,7 @@ int main(void)
 		
 	while (1)
     {
-		Display_SET_Temperature(SET_Temperature);
+		// Display_SET_Temperature(SET_Temperature);
 		Display_CRT_Temperature(CRT_Temperature);
 		Display_STATE(states[state_indx]);
 		
@@ -47,10 +47,9 @@ int main(void)
 			/* PWM OFF */
 			Heater_vDisable();
 			
-			SetHeaterVolt(Vt, Vr);
 			Update_SET_Temperature();
-			Display_SET_Temperature(SET_Temperature);
-			Check_OPERATION_State_Key();
+			// Display_SET_Temperature(SET_Temperature);
+			// Check_OPERATION_State_Key();
 		}
 		
 		/* Check if you are in OPERATION STATE */

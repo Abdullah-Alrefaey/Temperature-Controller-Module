@@ -48,7 +48,7 @@
 	 uint8_t coloumn; 
 	 uint8_t ON;
 	 uint8_t returnval = NOTPRESSED;
-	 uint8_t counter_debounce = 10;
+	 uint8_t counter_debounce = 1;
 	 
 	 // Matrix Loop Check for each Keypad Element
 	 for(row = 0; row < 4; row++){

@@ -11,7 +11,9 @@ void ADC_vinit(void)
 	ADMUX |= (1 << REFS0);
 	
 	/* Select Pin 7 For ADC */
-	ADMUX |= (1<<MUX0) | (1<<MUX1) | (1<<MUX2);
+	ADMUX |= (1<<MUX0);
+	ADMUX |= (1<<MUX1);
+	ADMUX |= (1<<MUX2);
 	
 	/* Enable ADC */
 	ADCSRA |= (1 << ADEN);
