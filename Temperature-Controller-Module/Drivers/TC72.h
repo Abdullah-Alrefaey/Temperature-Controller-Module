@@ -1,6 +1,5 @@
 /************************************************************************/
-/*                          Keypad Driver                               */
-/*                   Author: Ahmad Abdalmageed                          */
+/*                          TC27   Driver                               */
 /************************************************************************/
 #ifndef TC72_H_
 #define TC72_H_
@@ -24,15 +23,15 @@
 
 /************************************************************************/
 /* Function Description : TC72 Sensor Initiator Function                */
-/* Function Arguments   : char mode --> TC72 Operation Mode             */
-/* Function Returns     : None                                          */
+/* Function Arguments   : char mode                                     */
+/* Function Returns     : void                                          */
 /************************************************************************/
 void TC72_Init(char mode);
 
 /************************************************************************/
 /* Function Description : TC72 Communication Protocol Function          */
-/* Function Arguments   : None                                          */
-/* Function Returns     : None                                          */
+/* Function Arguments   : void                                          */
+/* Function Returns     : char                                          */
 /************************************************************************/
 char TC72_Read(void);
 
