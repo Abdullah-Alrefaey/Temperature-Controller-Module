@@ -1,18 +1,37 @@
-/*
- * Potentiometer.h
- *
- * Created: 05-Jun-21 4:23:16 PM
- *  Author: Refaey
- */ 
-
-
+/************************************************************************/
+/*                          Keypad Driver                               */
+/************************************************************************/
 #ifndef POTENTIOMETER_H_
 #define POTENTIOMETER_H_
 
+/************************************************************************/
+/* Library Imports                                                      */
+/************************************************************************/
 #include "ADC.h"
 
+/************************************************************************/
+/* Driver Functions                                                     */
+/************************************************************************/
+
+/************************************************************************/
+/* Function Description : Potentiometer Module Initiation Function      */
+/* Function Arguments   : void                                          */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void Potentiometer_vInit(void);
+
+/************************************************************************/
+/* Function Description : Potentiometer Module Disable Function         */
+/* Function Arguments   : void                                          */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void Potentiometer_vDisable(void);
+
+/************************************************************************/
+/* Function Description : Read Potentiometer Value                      */
+/* Function Arguments   : void                                          */
+/* Function Returns     : double                                        */
+/************************************************************************/
 double Potentiometer_Read(void);
 
 #endif /* POTENTIOMETER_H_ */
