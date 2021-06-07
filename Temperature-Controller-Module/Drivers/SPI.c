@@ -1,44 +1,54 @@
-/*
- * SPI.c
- *
- * Created: 5/6/2021 5:20:42 PM
- * Author: Ahmad Abdalmageed
- */ 
-
+/************************************************************************/
+/*                          SPI    Driver                               */
+/************************************************************************/
 #include "SPI.h"
+extern char PORTS[4];
 
+/************************************************************************/
+/* Function Description:                                                */
+/* SPI Protocol Initialization. Master Mode is set, Also the Clock Phase*/
+/* and Polarity. Pre-Scaler is set to 128                               */
+/************************************************************************/
 void SPI_MasterInit(void)
 {	
 	// Set SS / MOSI / SCK  as output pins for master*/
-	DIO_vsetPINDir('B', 4, 1);
-	DIO_vsetPINDir('B', 5, 1);
-	DIO_vsetPINDir('B', 7, 1);
+	DIO_vsetPINDir(PORTS[1], 4, 1);
+	DIO_vsetPINDir(PORTS[1], 5, 1);
+	DIO_vsetPINDir(PORTS[1], 7, 1);
 	
 	// Set MISO as Input
-	DIO_vsetPINDir('B', 6, 0);
+	DIO_vsetPINDir(PORTS[1], 6, 0);
 	
 	// Enable Master mode
-	SPCR |= (1 << MSTR);
+	SPCR |= (U_ONE << MSTR);
 	
 	// Select SPI Mode, Found Mode Compatible with Proteus 8.10
-	SPCR &= ~(1 << CPOL);
-	SPCR |= (1 << CPHA);
+	SPCR &= ~(U_ONE << CPOL);
+	SPCR |= (U_ONE << CPHA);
 
 	// Set clock to SC/128
-	SPCR |= (1 << SPR0);
-	SPCR |= (1 << SPR1);
+	SPCR |= (U_ONE << SPR0);
+	SPCR |= (U_ONE << SPR1);
 	
 	// Enable SPI
-    SPCR |= (1 << SPE);
+    SPCR |= (U_ONE << SPE);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Main Data Send Function, The Data is Written on the Data Registers   */
+/* The Shifting Operation then starts, Then the Content of the SPDR is  */
+/* Returned                                                             */
+/************************************************************************/
 char SPI_MasterTransmitchar(char Data)
 {	
 	// Write to SPDR 
 	SPDR = Data;
 	
-	// Await SPI Communication to Finish
-	while( ((SPSR & (1 << SPIF)) >> SPIF) == 0 );
+	while( ((SPSR & (U_ONE << SPIF)) >> SPIF) == U_ZERO )
+	{
+			// Await SPI Communication to Finish	
+	}
 	
 	// FLush SPDR Register
 	return SPDR ;
