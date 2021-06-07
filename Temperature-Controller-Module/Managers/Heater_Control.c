@@ -46,7 +46,7 @@ void LEDs_States_vInit()
 void Heater_vInit(void)
 {
 	Potentiometer_vInit();
-	PWM_vInit(2, 1, 2);
+	PWM_vInit(2U, 1U, 2U);
 }
 
 /************************************************************************/
