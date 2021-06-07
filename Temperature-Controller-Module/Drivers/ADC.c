@@ -1,51 +1,70 @@
-/*
- * ADC_driver.c
- *
- */ 
+/************************************************************************/
+/*                          ADC Driver                                  */
+/************************************************************************/
 
 #include "ADC.h"
 
-void ADC_vinit(void)
+/************************************************************************/
+/* Function Description:                                                */
+/* Initialize ADC on Pin A7, Reference voltage is selected as external, */
+/* the pin is selected using the built-in multiplexer & the prescaler   */
+/* is set to 1/128 so that the ADC Frequency is less than 200KHz,       */
+/* a requirement to ensure maximum accuracy                             */
+/************************************************************************/
+void ADC_vInit(void)
 {
 	/* Use AVcc as Ref Voltage, Connect Capacitor (to ground) to ARef */
-	ADMUX |= (1 << REFS0);
+	ADMUX |= (1U << REFS0);
 	
 	/* Select Pin 7 For ADC */
-	ADMUX |= (1<<MUX0);
-	ADMUX |= (1<<MUX1);
-	ADMUX |= (1<<MUX2);
+	ADMUX |= (1U<<MUX0);
+	ADMUX |= (1U<<MUX1);
+	ADMUX |= (1U<<MUX2);
 	
 	/* Enable ADC */
-	ADCSRA |= (1 << ADEN);
+	ADCSRA |= (1U << ADEN);
 	
 	/* Set ADC Clock Scaler to 1/128 */
-	ADCSRA |= (1 << ADPS2);
-	ADCSRA |= (1 << ADPS1);
-	ADCSRA |= (1 << ADPS0);
+	ADCSRA |= (1U << ADPS2);
+	ADCSRA |= (1U << ADPS1);
+	ADCSRA |= (1U << ADPS0);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Clear the ADC enable bit, disabling the ADC                          */
+/************************************************************************/
 void ADC_vDisable(void)
 {
 	/* Disable ADC */
-	ADCSRA &= ~(1 << ADEN);
+	ADCSRA &= ~(1U << ADEN);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Reads the ADC value, Due to the registers being 8-bit & the ADC      */
+/* 8-bit, the value is divided to 2 registers, first we read the lowest */
+/* value bits & store them in a variable, then we read the remaining    */
+/* high bits shifted by 8 and store them in the same variable, hence we */
+/* use the right-justified mode, this shift produces the correct order  */
+/* of the bits, thus the correct number                                 */
+/************************************************************************/
 uint16_t ADC_u16Read(void)
 {
-	uint16_t ADCVal = 0;
+	uint16_t ADCVal = 0U;
 	
 	/*Start ADC Conversion*/
-	ADCSRA |= (1 << ADSC); 
-	
-	/* Wait Till ADC Conversion is Done*/
-	/*IS_BIT_CLR(reg, bit)	! ( (reg & (1 << bit) ) >> bit)*/
-	while(!((ADCSRA & (1 << ADIF)) >> ADIF));
+	ADCSRA |= (1U << ADSC);
+
+    while((ADCSRA & (1U<<ADIF)) == 0U){
+        /* Wait Till ADC Conversion is Done, By Waiting Till ADC Interrupt Flag is Set */
+	};
 	
 	/* Clear ADC Interrupt  Flag */
-	ADCSRA |= (1 << ADIF);
+	ADCSRA |= (1U << ADIF);
 	
-	/* Read The ADC Value*/
+	/* Read The 10-Bit ADC Value */
 	ADCVal = (ADCL);
-	ADCVal |= (ADCH<<8);
+	ADCVal |= ((volatile uint16_t)ADCH<<8);
 	return ADCVal;
 }
