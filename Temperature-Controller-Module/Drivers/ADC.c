@@ -11,7 +11,9 @@ void ADC_vinit(void)
 	ADMUX |= (1 << REFS0);
 	
 	/* Select Pin 7 For ADC */
-	ADMUX |= (1<<MUX0) | (1<<MUX1) | (1<<MUX2);
+	ADMUX |= (1<<MUX0);
+	ADMUX |= (1<<MUX1);
+	ADMUX |= (1<<MUX2);
 	
 	/* Enable ADC */
 	ADCSRA |= (1 << ADEN);
@@ -20,6 +22,12 @@ void ADC_vinit(void)
 	ADCSRA |= (1 << ADPS2);
 	ADCSRA |= (1 << ADPS1);
 	ADCSRA |= (1 << ADPS0);
+}
+
+void ADC_vDisable(void)
+{
+	/* Disable ADC */
+	ADCSRA &= ~(1 << ADEN);
 }
 
 uint16_t ADC_u16Read(void)

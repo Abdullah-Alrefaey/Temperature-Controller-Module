@@ -12,6 +12,7 @@
 #include "ADC.h"
 
 void Potentiometer_vInit(void);
+void Potentiometer_vDisable(void);
 double Potentiometer_Read(void);
 
 #endif /* POTENTIOMETER_H_ */

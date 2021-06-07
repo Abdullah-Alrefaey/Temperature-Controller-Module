@@ -11,16 +11,14 @@
 // Driver Definitions
 #define NOTPRESSED 0xff
 #define KEYPADPORT 'A'
+#define HASH_KEY 12
 
 // Driver Imports 
 #include "DIO.h"
 
-#define F_CPU 16000000UL
-#include <util/delay.h>
-
 // Driver Functions
 void keypad_vInit();
 uint8_t keypad_u8check_press();
-uint8_t check_OPKey();
+uint8_t keypad_Check_OPKey();
 
 #endif /* KEYPAD_DRIVER_H_ */

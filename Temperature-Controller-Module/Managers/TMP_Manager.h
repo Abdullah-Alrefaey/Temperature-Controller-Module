@@ -17,6 +17,10 @@
 
 #include "../Drivers/TC72.h"
 #include "../Drivers/Keypad.h"
+#include "../Drivers/LCD.h"
+#include "../Drivers/LED.h"
+
+#include "DSP_Manager.h" /* Remove Later */
 
 void Update_CRT_Temperature();
 void Update_SET_Temperature();

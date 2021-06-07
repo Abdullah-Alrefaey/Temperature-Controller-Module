@@ -9,9 +9,10 @@
 #ifndef SCHEDULAR_H_
 #define SCHEDULAR_H_
 
-#include "../Drivers/Timer.h"
+#define F_CPU 16000000UL
 
-#include <stdint.h>
+#include "../Drivers/Timer.h"
+#include "Mode_Config.h"
 
 #include <avr/io.h>
 #include <avr/interrupt.h>

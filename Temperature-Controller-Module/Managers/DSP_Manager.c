@@ -66,7 +66,7 @@ void IdleScreen()
 void Display_SET_Temperature(uint8_t value)
 {	
 	char temp_value[2];
-	
+		
 	/* If Set temperature is less than 10, its value shall be written on the form 0X */
 	if (value < 10)
 	{
@@ -78,11 +78,10 @@ void Display_SET_Temperature(uint8_t value)
 	{
 		sprintf(temp_value, "%d", value);
 	}
-	
+		
 	/* Location of XX in LCD (SET:XX) */
 	LCD_movecursor(1, 5);
 	LCD_vSend_string(temp_value);
-	
 }
 
 void Display_CRT_Temperature(uint8_t value)

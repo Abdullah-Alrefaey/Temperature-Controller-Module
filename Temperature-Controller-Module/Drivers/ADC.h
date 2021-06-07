@@ -12,5 +12,6 @@
 
 void ADC_vinit(void);
 uint16_t ADC_u16Read(void);
+void ADC_vDisable(void);
 
 #endif /* ADC_DRIVER_H_ */

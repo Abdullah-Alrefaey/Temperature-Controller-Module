@@ -4,7 +4,7 @@
  */ 
  
 /*#define F_CPU 8000000UL*/
-#define F_CPU 16000000UL
+
 #include "Managers/Schedular.h"
 #include "Managers/TMP_Manager.h"
 #include "Managers/DSP_Manager.h"
@@ -42,31 +42,30 @@ int main(void)
 		 * Update SET_Temperature Value From The User
 		 * Check if User Pressed '#' To Switch to OPERATION STATE
 		 */
-		if (state_indx == 0)
+		if (state_indx == STANDBY_INDEX)
 		{
 			/* PWM OFF */
 			Heater_vDisable();
 			
-			SetHeaterVolt(Vt, Vr);
 			Update_SET_Temperature();
 			Display_SET_Temperature(SET_Temperature);
-			Check_OPERATION_State_Key();
+			Check_HASH_Key();
 		}
 		
 		/* Check if you are in OPERATION STATE */
-		if (state_indx == 1)
+		if (state_indx == OPERATION_INDEX)
 		{
 			/* Start Heater */
 			Heater_vInit();
-			
-			/* Update PWM Wave */
-			SetHeaterVolt(Vt, Vr);
 			
 			Update_CRT_Temperature();
 			Update_Vt();
 			Update_Vr();
 			
-			Check_STANDBY_State();
+			/* Update PWM Wave */
+			SetHeaterVolt(Vt, Vr);
+			
+			Check_HASH_Key();
 			Check_NORMAL_State();
 			
 			/* This function should handle Error 3 min */
@@ -74,22 +73,22 @@ int main(void)
 		}
 		
 		/* Check if you are in NORMAL STATE */
-		if (state_indx == 2)
+		if (state_indx == NORMAL_INDEX)
 		{
 			/* PWM OFF */
 			Heater_vDisable();
 			
 			Update_CRT_Temperature();
 						
-			Check_STANDBY_State();			
+			Check_HASH_Key();		
 			Check_OPERATION_State();	
 			Check_ERROR_State();		
 		}
 		
 		/* Check if you are in ERROR STATE */
-		if (state_indx == 3)
+		if (state_indx == ERROR_INDEX)
 		{
-			/* PWM OFF */
+			/* PWM and ADC OFF */
 			Heater_vDisable();
 			
 			/* Must POWER OFF */
