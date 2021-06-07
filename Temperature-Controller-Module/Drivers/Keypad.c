@@ -43,10 +43,12 @@
  */
  uint8_t keypad_u8check_press(){
 	 uint8_t kp[4][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {0, 0, 12}};
+	 uint8_t prev[4][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};	 
 	 uint8_t row;
 	 uint8_t coloumn; 
-	 uint8_t x;
+	 uint8_t ON;
 	 uint8_t returnval = NOTPRESSED;
+	 uint8_t counter_debounce = 10;
 	 
 	 // Matrix Loop Check for each Keypad Element
 	 for(row = 0; row < 4; row++){
@@ -59,21 +61,29 @@
 		 // Send Signal LOW
 		 DIO_Write_PIN(KEYPADPORT, row, 0);
 		 
-		 for(coloumn = 0 ; coloumn < 3; coloumn++){
+		 for(coloumn = 0 ; coloumn < 3; coloumn++)
+		 {
 			 // Read Sent Signal  	 
-			 x = DIO_Read_PIN(KEYPADPORT, (coloumn+4));
+			 ON = DIO_Read_PIN(KEYPADPORT, (coloumn+4));
 			 
 			 // Button Pressed
-			 if(x == 0){
+			 if(ON == 0 && prev[row][coloumn] == 0){
+				 /*The Button is pressed but needs De-Bouncing*/
+				 prev[row][coloumn] = 1;
+				 counter_debounce = counter_debounce - 1;
+				 
+			 } else if (counter_debounce == 0 && prev[row][coloumn] == 1){
+				 // Current Element is De-Bounced 
 				 returnval = kp[row][coloumn];
+				 prev[row][coloumn] = 0;
 				 break;
-			 } else{
-				 // Current Element is not Pressed 
+			 } else {
+				 // No Button Pressed
 			 }
 		 }
 		
 		// Break Higher Loop 
-		if(x==0){
+		if(ON == 0 && counter_debounce == 0){
 			break;
 		} else{
 			// Do Nothing 

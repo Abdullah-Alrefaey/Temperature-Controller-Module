@@ -15,9 +15,6 @@
 // Driver Imports 
 #include "DIO.h"
 
-#define F_CPU 16000000UL
-#include <util/delay.h>
-
 // Driver Functions
 void keypad_vInit();
 uint8_t keypad_u8check_press();
