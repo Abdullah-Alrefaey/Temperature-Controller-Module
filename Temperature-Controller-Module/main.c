@@ -28,7 +28,7 @@ int main(void)
 	WelcomeScreen();
 	IdleScreen();
 	keypad_vInit();
-	TC72_Init(One_Shot);
+	TC72_Init(ONE_SHOT_MODE);
 	Schedular_vInit();
 	LEDs_States_vInit();
 		
@@ -63,7 +63,7 @@ int main(void)
 			Update_Vr();
 			
 			/* Update PWM Wave */
-			SetHeaterVolt(Vt, Vr);
+			Heater_vSet_Volt(Vt, Vr);
 			
 			Check_HASH_Key();
 			Check_NORMAL_State();
