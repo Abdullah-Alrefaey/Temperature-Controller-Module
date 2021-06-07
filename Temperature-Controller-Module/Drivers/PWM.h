@@ -28,7 +28,7 @@ void PWM_vInit(uint8_t Timer, uint8_t Mode, uint8_t Scale);
 	Function Arguments   : void
 	Function Description : Disables PWN
 */
-void PWM_vDisable(void);
+void PWM_vDisable(uint8_t Timer);
 
 /*
 	Function Name        : PWM_vSet_Duty

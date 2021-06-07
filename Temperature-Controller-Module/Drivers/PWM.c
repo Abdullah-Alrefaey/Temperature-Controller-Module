@@ -68,9 +68,18 @@ void PWM_vInit(uint8_t Timer, uint8_t Mode, uint8_t Scale){
 /* Function Description:                                                */
 /* Disconnect The Comparator, Enable Normal Pin Operation               */
 /************************************************************************/
-void PWM_vDisable(void)
+void PWM_vDisable(uint8_t Timer)
 {
-	DIO_vsetPINDir('D', 7U, 0U);
+    if (Timer == 0U)
+    {
+        TCCR0 = (U_ZERO<<COM01) | (U_ZERO<<COM00);
+    }
+    else if (Timer == 2U)
+    {
+        TCCR2 = (U_ZERO<<COM21) | (U_ZERO<<COM20);
+    } else {
+        /* Unknown Timer Value */
+    }
 }
 
 /****************************************************************************/
