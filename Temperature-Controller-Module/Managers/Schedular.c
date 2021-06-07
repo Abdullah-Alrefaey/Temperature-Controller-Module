@@ -8,9 +8,14 @@
 #include "Schedular.h"
 
 volatile uint8_t CRT_TEMP_COUNTER = 0;
-volatile uint8_t SET_TEMP_COUNTER = 0;
+volatile uint8_t SET_TEMP_COUNTER = 0; /* Remove This Later (Not used) */
 volatile uint8_t HASH_KEY_COUNTER = 0;
 volatile uint8_t ADC_COUNTER = 0;
+volatile uint16_t ERROR_COUNTER = 0;
+
+extern uint8_t SET_Temperature;
+extern uint8_t CRT_Temperature;
+extern uint8_t state_indx;
 
 void Schedular_vInit()
 {
@@ -23,4 +28,9 @@ ISR(TIMER0_COMP_vect)
 	SET_TEMP_COUNTER++;
 	HASH_KEY_COUNTER++;
 	ADC_COUNTER++;
+	
+	if (state_indx  == 1 && (SET_Temperature - CRT_Temperature) > 5)
+	{
+		ERROR_COUNTER++;
+	}
 }

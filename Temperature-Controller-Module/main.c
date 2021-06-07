@@ -64,7 +64,7 @@ int main(void)
 			Check_NORMAL_State();
 			
 			/* This function should handle Error 3 min */
-			/*Check_ERROR_State();*/
+			Check_ERROR_State_Timer();
 		}
 		
 		/* Check if you are in NORMAL STATE */
