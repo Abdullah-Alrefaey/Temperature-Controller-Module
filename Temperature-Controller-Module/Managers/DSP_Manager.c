@@ -87,7 +87,7 @@ void Display_SET_Temperature(uint8_t value)
 
 void Display_CRT_Temperature(uint8_t value)
 {
-	if (state_indx == ERROR_INDEX)
+	if (state_indx == ERROR_INDEX || state_indx == STANDBY_INDEX)
 	{
 		Display_CRT_Temperature_ERROR();
 	}

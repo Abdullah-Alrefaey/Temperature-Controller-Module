@@ -30,7 +30,7 @@ int main(void)
 	keypad_vInit();
 	TC72_Init(One_Shot);
 	Schedular_vInit();
-	HeaterInit();
+	LEDs_States_vInit();
 		
 	while (1)
     {
@@ -45,8 +45,8 @@ int main(void)
 		if (state_indx == 0)
 		{
 			/* PWM OFF */
-			Vt = 0;
-			Vr = 0;
+			Heater_vDisable();
+			
 			SetHeaterVolt(Vt, Vr);
 			Update_SET_Temperature();
 			Display_SET_Temperature(SET_Temperature);
@@ -56,6 +56,12 @@ int main(void)
 		/* Check if you are in OPERATION STATE */
 		if (state_indx == 1)
 		{
+			/* Start Heater */
+			Heater_vInit();
+			
+			/* Update PWM Wave */
+			SetHeaterVolt(Vt, Vr);
+			
 			Update_CRT_Temperature();
 			Update_Vt();
 			Update_Vr();
@@ -71,8 +77,8 @@ int main(void)
 		if (state_indx == 2)
 		{
 			/* PWM OFF */
-			Vt = 0;
-			Vr = 0;
+			Heater_vDisable();
+			
 			Update_CRT_Temperature();
 						
 			Check_STANDBY_State();			
@@ -84,13 +90,9 @@ int main(void)
 		if (state_indx == 3)
 		{
 			/* PWM OFF */
-			Vt = 0;
-			Vr = 0;
+			Heater_vDisable();
 			
 			/* Must POWER OFF */
 		}
-		
-		/* Update PWM Wave */
-		SetHeaterVolt(Vt, Vr);
     }
 }
