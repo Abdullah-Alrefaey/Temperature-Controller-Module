@@ -39,6 +39,7 @@ void Heater_vInit(void)
 
 void Heater_vDisable(void)
 {
+	Potentiometer_vDisable();
 	PWM_vDisable();
 }
 
@@ -112,17 +113,18 @@ void Check_OPERATION_State()
 }
 
 /* TODO: Fix Debouncing Issue */
+/*
 void Check_STANDBY_State()
 {
-	/* This means when (200 ms) is passed */
+	/ * This means when (200 ms) is passed * /
 	if (HASH_KEY_COUNTER >= 20)
 	{
-		/* Change To OPERATIONAL State if user pressed '#' key */
+		/ * Change To OPERATIONAL State if user pressed '#' key * /
 		if (check_OPKey() == 1)
 		{
-			state_indx = 0;
+			state_indx = STANDBY_INDEX;
 			
-			/* Reset Error Counter */
+			/ * Reset Error Counter * /
 			ERROR_COUNTER = 0;
 			
 			LED_vTurnOff(LEDs_PORT, NORMAL_LED);
@@ -134,15 +136,15 @@ void Check_STANDBY_State()
 	}
 	else
 	{
-		/* Do Nothing, Didn't reach the required time */
+		/ * Do Nothing, Didn't reach the required time * /
 	}
-}
+}*/
 
 void Check_NORMAL_State()
 {
 	if (abs(SET_Temperature - CRT_Temperature) <= 5)
 	{
-		state_indx = 2;
+		state_indx = NORMAL_INDEX;
 		
 		/* Reset Error Counter */
 		ERROR_COUNTER = 0;
@@ -158,7 +160,7 @@ void Check_ERROR_State()
 	/* Change To ERROR State if CRT - SET > 10 */
 	if ((CRT_Temperature - SET_Temperature) > 10)
 	{
-		state_indx = 3;
+		state_indx = ERROR_INDEX;
 		LED_vTurnOff(LEDs_PORT, NORMAL_LED);
 		LED_vTurnOn(LEDs_PORT, ERROR_LED);
 	}
@@ -177,10 +179,55 @@ void Check_ERROR_State_Timer()
 	if (ERROR_COUNTER > 14500)
 	{
 		/* Change To ERROR State */
-		state_indx = 3;
+		state_indx = ERROR_INDEX;
 		ERROR_COUNTER = 0;
 		LED_vTurnOff(LEDs_PORT, OPERATION_LED);
 		LED_vTurnOn(LEDs_PORT, ERROR_LED);
+	}
+	else
+	{
+		/* Do Nothing, Didn't reach the required time */
+	}
+}
+
+
+void Check_HASH_Key()
+{
+	/* This means when (200 ms) is passed */
+	if (HASH_KEY_COUNTER >= 20)
+	{
+		/* Check if user pressed # */
+		if (check_OPKey() == 1)
+		{
+			/* Switch to OPERATION STATE if already in STANDBY */
+			if (state_indx == STANDBY_INDEX)
+			{
+				state_indx = OPERATION_INDEX;
+				LED_vTurnOff(LEDs_PORT, STANDBY_LED);
+				LED_vTurnOn(LEDs_PORT, OPERATION_LED);
+			}
+			/* Switch to STANDBY STATE if already in STANDBY */
+			else if (state_indx == OPERATION_INDEX || state_indx == NORMAL_INDEX)
+			{
+				state_indx = STANDBY_INDEX;
+				LED_vTurnOff(LEDs_PORT, NORMAL_LED);
+				LED_vTurnOff(LEDs_PORT, OPERATION_LED);
+				LED_vTurnOn(LEDs_PORT, STANDBY_LED);
+			}
+			else
+			{
+				/* Do Nothing */
+			}
+			
+			/* Reset Error Counter */
+			ERROR_COUNTER = 0;
+		}
+		else
+		{
+			/* Do Nothing (Hash is not pressed) */
+		}
+		
+		HASH_KEY_COUNTER = 0;
 	}
 	else
 	{

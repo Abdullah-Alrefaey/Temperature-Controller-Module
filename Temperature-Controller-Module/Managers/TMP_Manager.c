@@ -71,18 +71,15 @@ void Update_SET_Temperature()
 void Update_SET_Temperature()
 {	
 	/* This means when (200 ms) is passed */
-	if (SET_TEMP_COUNTER >= 10)
-	{
-		LED_vInit('D', 0);
-		LED_vTurnOn('D', 0);
-		
+	if (SET_TEMP_COUNTER >= 20)
+	{	
 		/* Get SET Temperature From Keypad */
 		reading_buffer = keypad_u8check_press();
-		Display_SET_Temperature(reading_buffer);
 
 		/* Check that User Pressed an actual Key */
-		if (reading_buffer != NOTPRESSED)
+		if (reading_buffer != NOTPRESSED && reading_buffer != HASH_KEY)
 		{
+			SET_Temperature = reading_buffer;
 			if (pos == 0)
 			{
 				temp_reading = reading_buffer * 10;
