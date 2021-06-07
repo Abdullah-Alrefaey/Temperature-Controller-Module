@@ -1,11 +1,17 @@
-/*
- * Timer.c
- *
- */ 
+/************************************************************************/
+/*                          Timer Driver                                */
+/************************************************************************/
  
 #include "Timer.h"
 
-void timer_CTC_init_interrupt(void)
+/************************************************************************/
+/* Function Description:                                                */
+/* Initialize Timer0 with CTC Mode and store a specific value in OCR    */ 
+/* Register to be compared in each Timer Tick.                          */
+/* Select the Timer Clock to calculate Timer Tick Time and ISR Time.    */
+/* Enable the Global Interrupt Bit and Timer0 Interrupt                 */
+/************************************************************************/
+void Timer0_CTC_vInit_Interrupt(void)
 {
 	/* select CTC mode*/
 	TCCR0 |= (1 << WGM01);

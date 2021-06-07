@@ -26,7 +26,7 @@
 void LEDs_States_vInit(void);
 
 /************************************************************************/
-/* Function Description : Initialize The Heater (ADC and PWM ON         */
+/* Function Description : Initialize The Heater (ADC and PWM ON)        */
 /* Function Arguments   : None                                          */
 /* Function Returns     : void                                          */
 /************************************************************************/

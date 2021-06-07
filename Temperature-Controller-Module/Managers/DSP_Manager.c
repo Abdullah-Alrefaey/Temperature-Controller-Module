@@ -1,18 +1,19 @@
-/*
- * DSP_Manager.c
- *
- * Created: 03-Jun-21 1:51:34 PM
- *  Author: Refaey
- */ 
-
+/************************************************************************/
+/*                          Display Manager                             */
+/************************************************************************/
 #include "DSP_Manager.h"
 
 extern uint8_t SET_Temperature;
 extern uint8_t CRT_Temperature;
-
 extern uint8_t state_indx;
 
-void WelcomeScreen()
+
+/************************************************************************/
+/* Function Description:                                                */
+/* Initiate the LCD Screen with a Welcoming Animation, Display "WELCOME"*/
+/* on the Screen then shift the word left and right for 3 Times         */ 
+/************************************************************************/
+void WelcomeScreen(void)
 {
 	/* Setup LCD PORT and PINs Configurations */
 	LCD_vInit();
@@ -24,10 +25,12 @@ void WelcomeScreen()
 	LCD_movecursor(1, steps);
 	LCD_vSend_string("WELCOME");
 	
-	/* The welcome Screen shall display the word “WELCOME” on the Character LCD */
+	/* The welcome Screen shall display the word “WELCOME” */
+	/* on the Character LCD */
 	for (animation_loops = 3; animation_loops > 0; animation_loops--)
 	{
-		/* The welcome word shall move from right to left until the end of the screen */
+		/* The welcome word shall move from right to left until the */
+		/* end of the screen */
 		for (steps = 16; steps > 1; steps--)
 		{
 			LCD_vShiftDisplay(1);
@@ -35,7 +38,8 @@ void WelcomeScreen()
 			_delay_ms(1);
 		}
 		
-		/* The welcome word shall move from left to right until the other end of the screen */
+		/* The welcome word shall move from left to right until */
+		/*  the other end of the screen */
 		for (steps = 1; steps < 16; steps++)
 		{
 			LCD_vShiftDisplay(0);
@@ -44,7 +48,13 @@ void WelcomeScreen()
 	}
 }
 
-void IdleScreen()
+/************************************************************************/
+/* Function Description:                                                */
+/* The Idle Screen Displays the Set Temperature (Default 25 C) and the  */
+/* Current Temperature Read from the Temperature Sensor. Also Displays  */
+/* the Current Process State                                            */
+/************************************************************************/
+void IdleScreen(void)
 {
 	LCD_clearscreen();
 	LCD_vSend_string("SET:");
@@ -63,11 +73,17 @@ void IdleScreen()
 	Display_STATE("STANDBY");
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Displays the Set Temperature by the User, The Number entered is      */
+/* Converted to a String and passed to the LCD                          */
+/************************************************************************/
 void Display_SET_Temperature(uint8_t value)
 {	
 	char temp_value[2];
 		
-	/* If Set temperature is less than 10, its value shall be written on the form 0X */
+	/* If Set temperature is less than 10,*/ 
+	/* its value shall be written on the form 0X */
 	if (value < 10)
 	{
 		/* Converts Units to character */
@@ -84,6 +100,13 @@ void Display_SET_Temperature(uint8_t value)
 	LCD_vSend_string(temp_value);
 }
 
+
+/************************************************************************/
+/* Function Description:                                                */
+/* Displays the Current Temperature by the User, The Number entered is  */
+/* Converted to a String and passed to the LCD. This Function Checks if */
+/* the Current State is Error State the Display is then Changed         */ 
+/************************************************************************/
 void Display_CRT_Temperature(uint8_t value)
 {
 	if (state_indx == ERROR_INDEX || state_indx == STANDBY_INDEX)
@@ -94,7 +117,8 @@ void Display_CRT_Temperature(uint8_t value)
 	{
 		char temp_value[2];
 		
-		/* If Current temperature is less than 10, its value shall be written on the form 0X */
+		/* If Current temperature is less than 10, */
+		/* its value shall be written on the form 0X */
 		if (value < 10)
 		{
 			/* Converts Units to character */
@@ -112,6 +136,10 @@ void Display_CRT_Temperature(uint8_t value)
 	}
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Display the Error State Temperature                                  */
+/************************************************************************/
 void Display_CRT_Temperature_ERROR()
 {
 	/* Location of YY in LCD (CRT:YY) */
@@ -120,6 +148,10 @@ void Display_CRT_Temperature_ERROR()
 	LCD_vSend_char(0xFF);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Display the System State                                             */
+/************************************************************************/
 void Display_STATE(char *state)
 {
 	/* System state section shall be written on the form STATE: SSSSS. 

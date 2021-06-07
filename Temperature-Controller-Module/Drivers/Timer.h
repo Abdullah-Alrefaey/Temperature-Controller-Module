@@ -1,22 +1,25 @@
-/*
- * Timer.h
- *
- */ 
-
+/************************************************************************/
+/*                          Timer Driver                                */
+/************************************************************************/
 
 #ifndef TIMER_H_
 #define TIMER_H_
 
-
+/************************************************************************/
+/*                          Library Imports                             */
+/************************************************************************/
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-/*
-	Function Name        : timer_CTC_init_interrupt
-	Function Returns     : void
-	Function Arguments   : void
-	Function Description : initialize the interrupt of the CTC mode of timer0.
-*/
-void timer_CTC_init_interrupt(void);
+/************************************************************************/
+/*                          Timer Functions                             */
+/************************************************************************/
+
+/************************************************************************/
+/* Function Description : Initialize The Timer0 Interrupt in CTC MODE   */
+/* Function Arguments   : None                                          */
+/* Function Returns     : void                                          */
+/************************************************************************/
+void Timer0_CTC_vInit_Interrupt(void);
 
 #endif /* TIMER_H_ */

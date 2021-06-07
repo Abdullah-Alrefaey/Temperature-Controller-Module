@@ -1,19 +1,34 @@
 /************************************************************************/
 /*                          Potentiometer Driver                        */
 /************************************************************************/
-
 #include "Potentiometer.h"
+#include "ADC.h"
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Potentiometer Initiation depends on the ADC Driver Initiation,       */
+/* SEE DOCUMENTATION IN ADC.H                                           */
+/************************************************************************/
 void Potentiometer_vInit(void)
 {
-	ADC_vInit();
+	ADC_vinit();	
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Potentiometer Disable Functionality                                  */
+/* SEE DOCUMENTATION IN ADC.H                                           */
+/************************************************************************/
 void Potentiometer_vDisable(void)
 {
 	ADC_vDisable();
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Read Voltage Applied on the Potentiometer using the ADC Functionality*/
+/* and Map the Output to 5 Volts                                        */
+/************************************************************************/
 double Potentiometer_Read(void)
 {
 	double VPot = 0;
