@@ -1,29 +1,41 @@
-/*
- * TMP_Manager.h
- *
- * Created: 05-Jun-21 2:31:41 PM
- *  Author: Refaey
- */ 
-
-
+/************************************************************************/
+/*                          Temperature Manager                         */
+/************************************************************************/
 #ifndef TMP_MANAGER_H_
 #define TMP_MANAGER_H_
 
+/************************************************************************/
+/* Manager Definitions                                                  */
+/************************************************************************/
 #define F_CPU 16000000UL
 
+/************************************************************************/
+/* Manager Imports                                                      */
+/************************************************************************/
 #include <stdlib.h>
-
 #include <util/delay.h>
-
 #include "../Drivers/TC72.h"
 #include "../Drivers/Keypad.h"
 #include "../Drivers/LCD.h"
 #include "../Drivers/LED.h"
 
-#include "DSP_Manager.h" /* Remove Later */
 
-void Update_CRT_Temperature();
-void Update_SET_Temperature();
-uint8_t test();
+/************************************************************************/
+/* Driver Functions                                                     */
+/************************************************************************/
+
+/************************************************************************/
+/* Function Description : Current Temperature Update Function           */
+/* Function Arguments   : void                                          */
+/* Function Returns     : void                                          */
+/************************************************************************/
+void Update_CRT_Temperature(void);
+
+/************************************************************************/
+/* Function Description : Current Temperature Update Function           */
+/* Function Arguments   : void                                          */
+/* Function Returns     : void                                          */
+/************************************************************************/
+void Update_SET_Temperature(void);
 
 #endif /* TMP_MANAGER_H_ */

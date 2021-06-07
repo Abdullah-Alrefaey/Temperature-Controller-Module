@@ -1,5 +1,5 @@
 /************************************************************************/
-/*                          Heater Control Driver                       */
+/*                          Heater Control Manager                      */
 /************************************************************************/
 
 #include "Heater_Control.h"
@@ -182,8 +182,10 @@ void Check_ERROR_State_Timer()
 	* We need 3 minutes, so counter should be 180 second x 100 = 18000
 	* But it's actually 17200 for some fractions remaining
 	
-	* NOTE: When testing with ERROR_COUNTER > 17200, the elapsed time to execute the error was about 3.40 seconds
-	* The calculations are determined in a correct way, so to solve then we will decrement the ERROR_COUNTER a little
+	* NOTE: When testing with ERROR_COUNTER > 17200, the elapsed time to
+	* execute the error was about 3.40 seconds
+	* The calculations are determined in a correct way, so to solve then we
+	* will decrement the ERROR_COUNTER a little
 	*/
 	if (ERROR_COUNTER > 14500)
 	{

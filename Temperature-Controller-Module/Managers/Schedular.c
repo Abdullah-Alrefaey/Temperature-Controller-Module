@@ -1,14 +1,10 @@
-/*
- * Schedular.c
- *
- * Created: 05-Jun-21 4:14:58 PM
- *  Author: Refaey
- */ 
-
+/************************************************************************/
+/*                          Scheduler Manager                           */
+/************************************************************************/
 #include "Schedular.h"
 
 volatile uint8_t CRT_TEMP_COUNTER = 0;
-volatile uint8_t SET_TEMP_COUNTER = 0; /* Remove This Later (Not used) */
+volatile uint8_t SET_TEMP_COUNTER = 0;
 volatile uint8_t HASH_KEY_COUNTER = 0;
 volatile uint8_t ADC_COUNTER = 0;
 volatile uint16_t ERROR_COUNTER = 0;
@@ -17,11 +13,22 @@ extern uint8_t SET_Temperature;
 extern uint8_t CRT_Temperature;
 extern uint8_t state_indx;
 
-void Schedular_vInit()
+/************************************************************************/
+/* Function Description:                                                */
+/* Descending the Layers to the HAL Layer and use the Timer Initiator   */
+/* Function, SEE DESCRIPTION IN TIMER.C                                 */
+/************************************************************************/
+void Schedular_vInit(void)
 {
 	timer_CTC_init_interrupt();
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Interrupt Service Routine Function. This is a Timer Function, We use */ 
+/* to update our counter and extend it's use to multiple Timer Based    */
+/* Processes                                                            */
+/************************************************************************/
 ISR(TIMER0_COMP_vect)
 {
 	CRT_TEMP_COUNTER++;
