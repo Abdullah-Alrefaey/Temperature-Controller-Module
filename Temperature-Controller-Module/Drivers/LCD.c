@@ -1,10 +1,15 @@
-/*
- * LCD.c
- *
- */ 
+/************************************************************************/
+/*                          LCD Driver                                  */
+/************************************************************************/
 
 #include "LCD.h"
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Initialize of LCD in eight_bits_mode or four_bits_mode depending on  */
+/* the defined mode in LCD.h file.                                      */
+/* This mode will be checked in each function                           */
+/************************************************************************/
 void LCD_vInit(void)
 {
 	_delay_ms(30);
@@ -64,7 +69,11 @@ void LCD_vInit(void)
 	#endif
 }
 
-
+/************************************************************************/
+/* Function Description:                                                */
+/* Send Falling Edge to Enable LCD Display by setting the EN PIN in the */
+/* LCD for 2 ms then clear it                                           */
+/************************************************************************/
 void send_falling_edge(void)
 {
 	/* Used to enable the LCD display 
@@ -75,6 +84,11 @@ void send_falling_edge(void)
 	_delay_ms(2);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Send a hex command to the LCD Register to execute a specific command */
+/* Commands such as clearing the screen or shift the cursor,.. etc.     */
+/************************************************************************/
 void LCD_vSend_cmd(char cmd)
 {
 	#if defined eight_bits_mode
@@ -94,6 +108,10 @@ void LCD_vSend_cmd(char cmd)
 	_delay_ms(1);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Display the given character on the LCD                               */
+/************************************************************************/
 void LCD_vSend_char(char data)
 {
 	#if defined eight_bits_mode
@@ -113,7 +131,11 @@ void LCD_vSend_char(char data)
 	_delay_ms(1);
 }
 
-
+/************************************************************************/
+/* Function Description:                                                */
+/* Display the given string on the LCD by displaying each character in  */
+/* a loop till the string ends.                                         */
+/************************************************************************/
 void LCD_vSend_string(char *data)
 {
 	while((*data) != '\0')
@@ -123,13 +145,21 @@ void LCD_vSend_string(char *data)
 	}
 }
 
-void LCD_clearscreen()
+/************************************************************************/
+/* Function Description:                                                */
+/* Clear The Entire Screen by sending a specific command to the LCD     */
+/************************************************************************/
+void LCD_clearscreen(void)
 {
 	LCD_vSend_cmd(CLR_SCREEN);
-	_delay_ms(10);
+	_delay_ms(1);
 }
 
-void LCD_movecursor(char row, char coloumn)
+/************************************************************************/
+/* Function Description:                                                */
+/* Move the cursor to the specified location as row and column          */
+/************************************************************************/
+void LCD_movecursor(uint8_t row, uint8_t coloumn)
 {
 	char data = 0;
 	
@@ -162,6 +192,11 @@ void LCD_movecursor(char row, char coloumn)
 	_delay_ms(1);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Shift the Entire Display of the LCD by sending a specific command to */
+/* the LCD. Doesn't require shifting the cursor and write a new value.  */
+/************************************************************************/
 void LCD_vShiftDisplay(uint8_t direction)
 {
 	/* Shift Left */
