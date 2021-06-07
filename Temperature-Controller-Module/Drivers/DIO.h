@@ -26,18 +26,18 @@
 /*						  uint8_t direction                             */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t direction);
+void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t dir);
 
 
 /************************************************************************/
 /* Function Description : Set the value of the given pin in the given   */
-/*                        port (outputvalue 0 = low : 1 = high)         */
+/*                        port (value 0 = low : 1 = high)               */
 /* Function Arguments   : char portName                                 */
 /*                        uint8_t pinNumber                             */
-/*						  uint8_t outputvalue                           */
+/*						  uint8_t value                                 */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t outputvalue);
+void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t value);
 
 
 
@@ -63,10 +63,10 @@ void DIO_Toggle_PIN(char portName, uint8_t pinNumber);
 /* Function Description : set the direction of whole port.              */
 /*                        (direction 0 = input : 1 = output)            */
 /* Function Arguments   : char portName                                 */
-/*                        uint8_t direction                             */
+/*                        uint8_t dir                                   */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void DIO_Set_PORT_Direction(char portName, uint8_t direction);
+void DIO_Set_PORT_Direction(char portName, uint8_t dir);
 
 /************************************************************************/
 /* Function Description : Write the value to all port pins              */
