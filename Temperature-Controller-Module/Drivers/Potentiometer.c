@@ -1,16 +1,12 @@
-/*
- * Potentiometer.c
- *
- * Created: 05-Jun-21 4:23:23 PM
- *  Author: Refaey
- */ 
+/************************************************************************/
+/*                          Potentiometer Driver                        */
+/************************************************************************/
 
 #include "Potentiometer.h"
-#include "ADC.h"
 
 void Potentiometer_vInit(void)
 {
-	ADC_vinit();	
+	ADC_vInit();
 }
 
 void Potentiometer_vDisable(void)
