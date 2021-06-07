@@ -1,51 +1,51 @@
-/*
- * ADC_driver.c
- *
- */ 
+/************************************************************************/
+/*                          ADC Driver                                  */
+/************************************************************************/
 
 #include "ADC.h"
 
-void ADC_vinit(void)
+
+void ADC_vInit(void)
 {
 	/* Use AVcc as Ref Voltage, Connect Capacitor (to ground) to ARef */
-	ADMUX |= (1 << REFS0);
+	ADMUX |= (1U << REFS0);
 	
 	/* Select Pin 7 For ADC */
-	ADMUX |= (1<<MUX0);
-	ADMUX |= (1<<MUX1);
-	ADMUX |= (1<<MUX2);
+	ADMUX |= (1U<<MUX0);
+	ADMUX |= (1U<<MUX1);
+	ADMUX |= (1U<<MUX2);
 	
 	/* Enable ADC */
-	ADCSRA |= (1 << ADEN);
+	ADCSRA |= (1U << ADEN);
 	
 	/* Set ADC Clock Scaler to 1/128 */
-	ADCSRA |= (1 << ADPS2);
-	ADCSRA |= (1 << ADPS1);
-	ADCSRA |= (1 << ADPS0);
+	ADCSRA |= (1U << ADPS2);
+	ADCSRA |= (1U << ADPS1);
+	ADCSRA |= (1U << ADPS0);
 }
 
 void ADC_vDisable(void)
 {
 	/* Disable ADC */
-	ADCSRA &= ~(1 << ADEN);
+	ADCSRA &= ~(1U << ADEN);
 }
 
 uint16_t ADC_u16Read(void)
 {
-	uint16_t ADCVal = 0;
+	uint16_t ADCVal = 0U;
 	
 	/*Start ADC Conversion*/
-	ADCSRA |= (1 << ADSC); 
-	
-	/* Wait Till ADC Conversion is Done*/
-	/*IS_BIT_CLR(reg, bit)	! ( (reg & (1 << bit) ) >> bit)*/
-	while(!((ADCSRA & (1 << ADIF)) >> ADIF));
+	ADCSRA |= (1U << ADSC);
+
+	while(!((ADCSRA & (1U << ADIF)) >> ADIF)){
+        /* Wait Till ADC Conversion is Done*/
+	};
 	
 	/* Clear ADC Interrupt  Flag */
-	ADCSRA |= (1 << ADIF);
+	ADCSRA |= (1U << ADIF);
 	
-	/* Read The ADC Value*/
+	/* Read The 10-Bit ADC Value */
 	ADCVal = (ADCL);
-	ADCVal |= (ADCH<<8);
+	ADCVal |= ((volatile uint16_t)ADCH<<8);
 	return ADCVal;
 }
