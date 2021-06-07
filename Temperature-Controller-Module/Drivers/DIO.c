@@ -3,6 +3,7 @@
 /************************************************************************/
 #include "DIO.h"
 
+char PORTS[4] = {'A', 'B', 'C', 'D'};
 
 void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t dir)
 {

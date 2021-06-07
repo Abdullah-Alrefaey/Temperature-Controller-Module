@@ -8,7 +8,7 @@
 /* Driver Definitions                                                   */
 /************************************************************************/
 #define NOTPRESSED 0xff
-#define KEYPADPORT 'A'
+#define KEYPADPORT 0
 #define HASH_KEY 12
 #define DEBOUNCING_COUNTER 1
 

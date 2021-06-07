@@ -4,6 +4,7 @@
 /************************************************************************/
 #include "Keypad.h"
 
+extern char PORTS[4];
 uint8_t prev[4][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 uint8_t counter_debounce = DEBOUNCING_COUNTER;
 uint8_t hash_debounce = DEBOUNCING_COUNTER;
@@ -17,20 +18,20 @@ uint8_t hash_debounce = DEBOUNCING_COUNTER;
  void keypad_vInit(){
 	 
 	 // Set Output Pins 
-	 DIO_vsetPINDir(KEYPADPORT, 0, 1);
-	 DIO_vsetPINDir(KEYPADPORT, 1, 1);
-	 DIO_vsetPINDir(KEYPADPORT, 2, 1);
-	 DIO_vsetPINDir(KEYPADPORT, 3, 1);
+	 DIO_vsetPINDir(PORTS[KEYPADPORT], 0, 1);
+	 DIO_vsetPINDir(PORTS[KEYPADPORT], 1, 1);
+	 DIO_vsetPINDir(PORTS[KEYPADPORT], 2, 1);
+	 DIO_vsetPINDir(PORTS[KEYPADPORT], 3, 1);
 	 
 	 // Set Input 
-	 DIO_vsetPINDir(KEYPADPORT, 4, 0);
-	 DIO_vsetPINDir(KEYPADPORT, 5, 0);
-	 DIO_vsetPINDir(KEYPADPORT, 6, 0);
+	 DIO_vsetPINDir(PORTS[KEYPADPORT], 4, 0);
+	 DIO_vsetPINDir(PORTS[KEYPADPORT], 5, 0);
+	 DIO_vsetPINDir(PORTS[KEYPADPORT], 6, 0);
 	 					   
 	 // Pull Up 
-	 DIO_Connect_PullUp(KEYPADPORT, 4, 1);
-	 DIO_Connect_PullUp(KEYPADPORT, 5, 1);
-	 DIO_Connect_PullUp(KEYPADPORT, 6, 1);
+	 DIO_Connect_PullUp(PORTS[KEYPADPORT], 4, 1);
+	 DIO_Connect_PullUp(PORTS[KEYPADPORT], 5, 1);
+	 DIO_Connect_PullUp(PORTS[KEYPADPORT], 6, 1);
 	  
  }
 
@@ -52,17 +53,17 @@ uint8_t hash_debounce = DEBOUNCING_COUNTER;
 	 // Matrix Loop Check for each Keypad Element
 	 for(row = 0; row < 4; row++){
 		 // Set Output Pins HIGH
-		 DIO_Write_PIN(KEYPADPORT, 0, 1);
-		 DIO_Write_PIN(KEYPADPORT, 1, 1);
-		 DIO_Write_PIN(KEYPADPORT, 2, 1);
-		 DIO_Write_PIN(KEYPADPORT, 3, 1);
+		 DIO_Write_PIN(PORTS[KEYPADPORT], 0, 1);
+		 DIO_Write_PIN(PORTS[KEYPADPORT], 1, 1);
+		 DIO_Write_PIN(PORTS[KEYPADPORT], 2, 1);
+		 DIO_Write_PIN(PORTS[KEYPADPORT], 3, 1);
 		 		 
 		 // Send Signal LOW
-		 DIO_Write_PIN(KEYPADPORT, row, 0);
+		 DIO_Write_PIN(PORTS[KEYPADPORT], row, 0);
 		 for(coloumn = 0 ; coloumn < 3; coloumn++)
 		 {
 			 // Read Sent Signal  	 
-			 ON = DIO_Read_PIN(KEYPADPORT, (coloumn+4));
+			 ON = DIO_Read_PIN(PORTS[KEYPADPORT], (coloumn+4));
 			 
 			 // Button Pressed
 			 if(ON == 0)
@@ -113,13 +114,13 @@ uint8_t keypad_Check_OPKey()
 	uint8_t pressed = 0;
 	
 	// Send Signal in Specified Cow
-	DIO_Write_PIN(KEYPADPORT, 0, 1);
-	DIO_Write_PIN(KEYPADPORT, 1, 1);
-	DIO_Write_PIN(KEYPADPORT, 2, 1);
-	DIO_Write_PIN(KEYPADPORT, 3, 0);
+	DIO_Write_PIN(PORTS[KEYPADPORT], 0, 1);
+	DIO_Write_PIN(PORTS[KEYPADPORT], 1, 1);
+	DIO_Write_PIN(PORTS[KEYPADPORT], 2, 1);
+	DIO_Write_PIN(PORTS[KEYPADPORT], 3, 0);
 	
 	// Read from Specified Column
-	btn_val = DIO_Read_PIN(KEYPADPORT, 6);
+	btn_val = DIO_Read_PIN(PORTS[KEYPADPORT], 6);
 	
 	if (btn_val == 0){
 		// Decrease Counter
