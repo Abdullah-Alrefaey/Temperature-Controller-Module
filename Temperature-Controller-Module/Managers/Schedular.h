@@ -9,8 +9,6 @@
 #ifndef SCHEDULAR_H_
 #define SCHEDULAR_H_
 
-#define F_CPU 16000000UL
-
 #include "../Drivers/Timer.h"
 #include "Mode_Config.h"
 
