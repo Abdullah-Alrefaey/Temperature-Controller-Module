@@ -103,11 +103,7 @@ void Update_Vr()
 /* start the PWM wave which will be displayed on the Oscilloscope.      */
 /************************************************************************/
 void Heater_vSet_Volt(double V_target, double V_pot)
-{
-	/* Vt: Target Voltage
-	 * Vr: Calibration Resistor Voltage
-	 */
-	
+{	
 	uint8_t Duty = 0;
 	double DutyPercentage = 0;
 	DutyPercentage = (((V_pot * 2)/10) * V_target) / 10; /* Range: 0 -> 1 */
@@ -117,7 +113,9 @@ void Heater_vSet_Volt(double V_target, double V_pot)
 
 /************************************************************************/
 /* Function Description:                                                */
-/* Check if the condition to switch to OPERATION STATE is satisfied     */
+/* Check if the condition of switching to OPERATION STATE is satisfied  */
+/* and update state_indx with the new STATE index                       */
+/* Change the LEDs based on the condition                               */
 /************************************************************************/
 void Check_OPERATION_State()
 {
@@ -130,6 +128,14 @@ void Check_OPERATION_State()
 	}	
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Check if the condition of switching to NORMAL STATE is satisfied     */
+/* and update state_indx with the new STATE index.                      */
+/* Reset ERROR_COUNTER to 0, we don't want to start the timer unless if */
+/* the heater was in OPERATION STATE                                    */
+/* Change the LEDs based on the condition                               */
+/************************************************************************/
 void Check_NORMAL_State()
 {
 	if (abs(SET_Temperature - CRT_Temperature) <= 5)
@@ -144,7 +150,12 @@ void Check_NORMAL_State()
 	}
 }
 
-
+/************************************************************************/
+/* Function Description:                                                */
+/* Check if the condition of switching to ERROR STATE is satisfied      */
+/* and update state_indx with the new STATE index.                      */
+/* Change the LEDs based on the condition                               */
+/************************************************************************/
 void Check_ERROR_State()
 {
 	/* Change To ERROR State if CRT - SET > 10 */
@@ -157,6 +168,13 @@ void Check_ERROR_State()
 	}
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Check if the condition of switching to ERROR STATE is satisfied      */
+/* and update state_indx with the new STATE index.                      */
+/* This ERROR Check in case of (SET-CRT) > 5 for 3 minutes.             */
+/* Change the LEDs based on the condition                               */
+/************************************************************************/
 void Check_ERROR_State_Timer()
 {
 	/* Each count = 10.048 ms
@@ -181,7 +199,16 @@ void Check_ERROR_State_Timer()
 	}
 }
 
-
+/************************************************************************/
+/* Function Description:                                                */
+/* Check periodically every 200ms if the user pressed '#' key.          */
+/* keypad_Check_OPKey function returns 1 if user pressed '#'            */
+/* Check the current and STATE and based on this STATE the heater will  */
+/* switch to other STATE.                                               */        
+/* Reset ERROR_COUNTER to 0, we don't want to start the timer unless if */
+/* the heater was in OPERATION STATE                                    */
+/* Change the LEDs based on the condition                               */
+/************************************************************************/
 void Check_HASH_Key()
 {
 	/* This means when (200 ms) is passed */
