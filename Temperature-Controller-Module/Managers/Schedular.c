@@ -29,7 +29,7 @@ ISR(TIMER0_COMP_vect)
 	HASH_KEY_COUNTER++;
 	ADC_COUNTER++;
 	
-	if (state_indx  == 1 && (SET_Temperature - CRT_Temperature) > 5)
+	if (state_indx  == OPERATION_INDEX && (SET_Temperature - CRT_Temperature) > 5)
 	{
 		ERROR_COUNTER++;
 	}
