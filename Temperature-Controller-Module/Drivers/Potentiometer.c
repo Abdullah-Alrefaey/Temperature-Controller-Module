@@ -8,12 +8,12 @@
 #include "Potentiometer.h"
 #include "ADC.h"
 
-void PotInit(void)
+void Potentiometer_vInit(void)
 {
 	ADC_vinit();	
 }
 
-double GetPotVolt(void)
+double Potentiometer_Read(void)
 {
 	double VPot = 0;
 	uint16_t ADCReading = 0;

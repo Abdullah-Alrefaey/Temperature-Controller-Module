@@ -7,7 +7,7 @@
  
 #include "DIO.h"
 
-void PWM_Init(uint8_t Timer, uint8_t Mode, uint8_t Scale){
+void PWM_vInit(uint8_t Timer, uint8_t Mode, uint8_t Scale){
 	if (Timer == 0)
 	{
 		/* Set Timer0 on Fast PWM (Mode=1) or Phase Correct (Mode=0) With Non-Inverted Output */
@@ -53,7 +53,7 @@ void PWM_Init(uint8_t Timer, uint8_t Mode, uint8_t Scale){
 	
 }
 
-void Set_PWM_Duty(uint8_t Timer, uint8_t Duty){
+void PWM_vSet_Duty(uint8_t Timer, uint8_t Duty){
 	if (Timer == 0)
 	{
 		OCR0 = Duty;

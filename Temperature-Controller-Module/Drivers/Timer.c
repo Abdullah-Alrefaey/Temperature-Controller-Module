@@ -25,7 +25,7 @@ void timer_CTC_init_interrupt(void)
 	 * Timer Tick Time (TTT) = 1 / Timer Clock
 	 * TTT = 1024/16 MHz = 0.064 ms
 	 * Timer Count = 157 (Value in OCR we need to compare with)
-	 * Timer Overflow Time = 157 * 0.064 = 10 ms
+	 * Timer Overflow Time = 157 * 0.064 = 10.048 ms
 	 * This means every 10 ms The Timer Interrupt will occur
 	 */
 	

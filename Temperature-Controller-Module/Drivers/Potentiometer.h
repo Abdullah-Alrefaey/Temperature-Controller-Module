@@ -11,7 +11,7 @@
 
 #include "ADC.h"
 
-void PotInit(void);
-double GetPotVolt(void);
+void Potentiometer_vInit(void);
+double Potentiometer_Read(void);
 
 #endif /* POTENTIOMETER_H_ */
