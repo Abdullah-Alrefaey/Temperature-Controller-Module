@@ -198,6 +198,12 @@
     <Compile Include="Managers\Heater_Control.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Managers\Mode_Config.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Managers\Mode_Config.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Managers\Schedular.c">
       <SubType>compile</SubType>
     </Compile>
