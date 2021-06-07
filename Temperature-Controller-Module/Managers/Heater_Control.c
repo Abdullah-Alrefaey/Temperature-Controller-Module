@@ -56,7 +56,7 @@ void Heater_vInit(void)
 void Heater_vDisable(void)
 {
 	Potentiometer_vDisable();
-	PWM_vDisable();
+	PWM_vDisable(2U);
 }
 
 /************************************************************************/
