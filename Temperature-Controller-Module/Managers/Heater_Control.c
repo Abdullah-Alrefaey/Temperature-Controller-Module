@@ -1,5 +1,8 @@
-#include "Heater_Control.h"
+/************************************************************************/
+/*                          Heater Control Driver                       */
+/************************************************************************/
 
+#include "Heater_Control.h"
 
 extern uint8_t SET_Temperature;
 extern uint8_t CRT_Temperature;
@@ -19,6 +22,11 @@ uint8_t state_indx = 0;
 double Vt = 0;		
 double Vr = 0;
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Initialize the 4 STATES LEDs which are used to indicate the current  */
+/* state of the heater                                                  */
+/************************************************************************/
 void LEDs_States_vInit()
 {
 	/* Initialize STATES LEDs for Better Indication */
@@ -31,18 +39,32 @@ void LEDs_States_vInit()
 	LED_vTurnOn(LEDs_PORT, STANDBY_LED);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Initialize the Heater Functionalities (Calibration Resistor and PWM) */
+/************************************************************************/
 void Heater_vInit(void)
 {
 	Potentiometer_vInit();
 	PWM_vInit(2, 1, 2);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Disable the Heater Functionalities (Calibration Resistor and PWM)    */
+/************************************************************************/
 void Heater_vDisable(void)
 {
 	Potentiometer_vDisable();
 	PWM_vDisable();
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Update Target Voltage Value in the given equation based on the       */
+/* difference between SET_Temperature and CRT_Temperature               */
+/* The Vt is used to determine the Duty Cycle                           */
+/************************************************************************/
 void Update_Vt()
 {
 	if (SET_Temperature <= CRT_Temperature)
@@ -55,6 +77,12 @@ void Update_Vt()
 	}
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Update Calibration Resistor Voltage Periodically each 500 ms using   */
+/* Potentiometer_Read function which is based on ADC.                   */
+/* The ADC_COUNTER is reset after                                       */
+/************************************************************************/
 void Update_Vr()
 {
 	/* This means when (500 ms) is passed */
@@ -69,7 +97,12 @@ void Update_Vr()
 	}
 }
 
-void SetHeaterVolt(double Vt, double Vr)
+/************************************************************************/
+/* Function Description:                                                */
+/* Calculate the Duty Cycle Percentage from the given equation and      */
+/* start the PWM wave which will be displayed on the Oscilloscope.      */
+/************************************************************************/
+void Heater_vSet_Volt(double V_target, double V_pot)
 {
 	/* Vt: Target Voltage
 	 * Vr: Calibration Resistor Voltage
@@ -77,12 +110,15 @@ void SetHeaterVolt(double Vt, double Vr)
 	
 	uint8_t Duty = 0;
 	double DutyPercentage = 0;
-	DutyPercentage = (((Vr * 2)/10) * Vt) / 10; /* Range: 0 -> 1 */
+	DutyPercentage = (((V_pot * 2)/10) * V_target) / 10; /* Range: 0 -> 1 */
 	Duty = floor(DutyPercentage*255.0);
-	SPI_MasterTransmitchar(Duty);
 	PWM_vSet_Duty(2, Duty);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Check if the condition to switch to OPERATION STATE is satisfied     */
+/************************************************************************/
 void Check_OPERATION_State()
 {
 	/* Change To OPERATIONAL State if SET - CRT > 5 */
