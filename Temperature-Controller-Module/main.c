@@ -67,6 +67,7 @@ int main(void)
 			
 			Check_HASH_Key();
 			Check_NORMAL_State();
+			Check_ERROR_State();
 			
 			/* This function should handle Error 3 min */
 			Check_ERROR_State_Timer();

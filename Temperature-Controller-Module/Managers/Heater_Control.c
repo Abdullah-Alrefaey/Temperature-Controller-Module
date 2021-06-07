@@ -162,6 +162,7 @@ void Check_ERROR_State()
 	{
 		state_indx = ERROR_INDEX;
 		LED_vTurnOff(LEDs_PORT, NORMAL_LED);
+		LED_vTurnOff(LEDs_PORT, OPERATION_LED);
 		LED_vTurnOn(LEDs_PORT, ERROR_LED);
 	}
 }
