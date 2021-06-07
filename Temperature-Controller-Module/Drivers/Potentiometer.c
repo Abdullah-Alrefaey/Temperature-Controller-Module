@@ -13,6 +13,11 @@ void Potentiometer_vInit(void)
 	ADC_vinit();	
 }
 
+void Potentiometer_vDisable(void)
+{
+	ADC_vDisable();
+}
+
 double Potentiometer_Read(void)
 {
 	double VPot = 0;
