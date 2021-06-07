@@ -83,7 +83,7 @@ void LCD_vSend_string(char *data);
 /* Function Arguments   : None                                          */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void LCD_clearscreen(void);
+void LCD_vClear_Screen(void);
 
 /************************************************************************/
 /* Function Description : Display a character on LCD                    */
@@ -91,7 +91,7 @@ void LCD_clearscreen(void);
 /*                      : uint8_t col: col number (1 -> 16)             */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void LCD_movecursor(uint8_t row, uint8_t coloumn);
+void LCD_vMove_Cursor(uint8_t row, uint8_t coloumn);
 
 /************************************************************************/
 /* Function Description : Shift the Entire Display of the LCD           */

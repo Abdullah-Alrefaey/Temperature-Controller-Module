@@ -22,7 +22,7 @@ void WelcomeScreen(void)
 	uint8_t animation_loops = 3;
 	
 	uint8_t steps = 16;
-	LCD_movecursor(1, steps);
+	LCD_vMove_Cursor(1, steps);
 	LCD_vSend_string("WELCOME");
 	
 	/* The welcome Screen shall display the word “WELCOME” */
@@ -56,10 +56,10 @@ void WelcomeScreen(void)
 /************************************************************************/
 void IdleScreen(void)
 {
-	LCD_clearscreen();
+	LCD_vClear_Screen();
 	LCD_vSend_string("SET:");
 	
-	LCD_movecursor(1, 11);
+	LCD_vMove_Cursor(1, 11);
 	LCD_vSend_string("CRT:");
 	
 	/* Update Temperatures Values */
@@ -67,7 +67,7 @@ void IdleScreen(void)
 	Display_CRT_Temperature(CRT_Temperature);
 
 	/* Update System State */
-	LCD_movecursor(2, 1);
+	LCD_vMove_Cursor(2, 1);
 	LCD_vSend_string("STATE:");
 
 	Display_STATE("STANDBY");
@@ -96,7 +96,7 @@ void Display_SET_Temperature(uint8_t value)
 	}
 		
 	/* Location of XX in LCD (SET:XX) */
-	LCD_movecursor(1, 5);
+	LCD_vMove_Cursor(1, 5);
 	LCD_vSend_string(temp_value);
 }
 
@@ -131,7 +131,7 @@ void Display_CRT_Temperature(uint8_t value)
 		}
 		
 		/* Location of YY in LCD (CRT:YY) */
-		LCD_movecursor(1, 15);
+		LCD_vMove_Cursor(1, 15);
 		LCD_vSend_string(temp_value);
 	}
 }
@@ -143,7 +143,7 @@ void Display_CRT_Temperature(uint8_t value)
 void Display_CRT_Temperature_ERROR()
 {
 	/* Location of YY in LCD (CRT:YY) */
-	LCD_movecursor(1, 15);
+	LCD_vMove_Cursor(1, 15);
 	LCD_vSend_char(0xFF);
 	LCD_vSend_char(0xFF);
 }
@@ -159,7 +159,7 @@ void Display_STATE(char *state)
 	 */
 
 	/* Location of System State in LCD (STATE:SSSSS) */
-	LCD_movecursor(2, 7);
+	LCD_vMove_Cursor(2, 7);
 	LCD_vSend_string(state);
 	LCD_vSend_string("     ");
 }

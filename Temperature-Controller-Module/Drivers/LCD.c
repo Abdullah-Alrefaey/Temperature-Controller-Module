@@ -149,7 +149,7 @@ void LCD_vSend_string(char *data)
 /* Function Description:                                                */
 /* Clear The Entire Screen by sending a specific command to the LCD     */
 /************************************************************************/
-void LCD_clearscreen(void)
+void LCD_vClear_Screen(void)
 {
 	LCD_vSend_cmd(CLR_SCREEN);
 	_delay_ms(1);
@@ -159,7 +159,7 @@ void LCD_clearscreen(void)
 /* Function Description:                                                */
 /* Move the cursor to the specified location as row and column          */
 /************************************************************************/
-void LCD_movecursor(uint8_t row, uint8_t coloumn)
+void LCD_vMove_Cursor(uint8_t row, uint8_t coloumn)
 {
 	char data = 0;
 	
