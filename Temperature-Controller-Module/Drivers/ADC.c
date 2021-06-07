@@ -4,7 +4,13 @@
 
 #include "ADC.h"
 
-
+/************************************************************************/
+/* Function Description:                                                */
+/* Initialize ADC on Pin A7, Reference voltage is selected as external, */
+/* the pin is selected using the built-in multiplexer & the prescaler   */
+/* is set to 1/128 so that the ADC Frequency is less than 200KHz,       */
+/* a requirement to ensure maximum accuracy                             */
+/************************************************************************/
 void ADC_vInit(void)
 {
 	/* Use AVcc as Ref Voltage, Connect Capacitor (to ground) to ARef */
@@ -24,12 +30,25 @@ void ADC_vInit(void)
 	ADCSRA |= (1U << ADPS0);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Clear the ADC enable bit, disabling the ADC                          */
+/************************************************************************/
 void ADC_vDisable(void)
 {
 	/* Disable ADC */
 	ADCSRA &= ~(1U << ADEN);
 }
 
+/************************************************************************/
+/* Function Description:                                                */
+/* Reads the ADC value, Due to the registers being 8-bit & the ADC      */
+/* 8-bit, the value is divided to 2 registers, first we read the lowest */
+/* value bits & store them in a variable, then we read the remaining    */
+/* high bits shifted by 8 and store them in the same variable, hence we */
+/* use the right-justified mode, this shift produces the correct order  */
+/* of the bits, thus the correct number                                 */
+/************************************************************************/
 uint16_t ADC_u16Read(void)
 {
 	uint16_t ADCVal = 0U;
@@ -37,8 +56,8 @@ uint16_t ADC_u16Read(void)
 	/*Start ADC Conversion*/
 	ADCSRA |= (1U << ADSC);
 
-	while(!((ADCSRA & (1U << ADIF)) >> ADIF)){
-        /* Wait Till ADC Conversion is Done*/
+    while((ADCSRA & (1U<<ADIF)) == 0U){
+        /* Wait Till ADC Conversion is Done, By Waiting Till ADC Interrupt Flag is Set */
 	};
 	
 	/* Clear ADC Interrupt  Flag */
