@@ -197,7 +197,7 @@ void Check_HASH_Key()
 	if (HASH_KEY_COUNTER >= 20)
 	{
 		/* Check if user pressed # */
-		if (check_OPKey() == 1)
+		if (keypad_Check_OPKey() == 1)
 		{
 			/* Switch to OPERATION STATE if already in STANDBY */
 			if (state_indx == STANDBY_INDEX)

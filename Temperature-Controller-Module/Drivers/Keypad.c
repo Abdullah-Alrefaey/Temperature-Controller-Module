@@ -5,6 +5,12 @@
  */ 
  #include "Keypad.h"
 
+#define DEBOUNCING_COUNTER 1
+
+uint8_t prev[4][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+uint8_t counter_debounce = DEBOUNCING_COUNTER;
+uint8_t hash_debounce = DEBOUNCING_COUNTER;
+
 /*
  * Keypad Initialization 
  *
@@ -43,12 +49,10 @@
  */
  uint8_t keypad_u8check_press(){
 	 uint8_t kp[4][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {0, 0, 12}};
-	 uint8_t prev[4][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};	 
 	 uint8_t row;
 	 uint8_t coloumn; 
 	 uint8_t ON;
 	 uint8_t returnval = NOTPRESSED;
-	 uint8_t counter_debounce = 1;
 	 
 	 // Matrix Loop Check for each Keypad Element
 	 for(row = 0; row < 4; row++){
@@ -67,7 +71,7 @@
 			 ON = DIO_Read_PIN(KEYPADPORT, (coloumn+4));
 			 
 			 // Button Pressed
-			 if(ON == 0 && prev[row][coloumn] == 0){
+			 if(ON == 0){
 				 /*The Button is pressed but needs De-Bouncing*/
 				 prev[row][coloumn] = 1;
 				 counter_debounce = counter_debounce - 1;
@@ -76,8 +80,10 @@
 				 // Current Element is De-Bounced 
 				 returnval = kp[row][coloumn];
 				 prev[row][coloumn] = 0;
+				 counter_debounce = DEBOUNCING_COUNTER;
 				 break;
 			 } else {
+				 
 				 // No Button Pressed
 			 }
 		 }
@@ -102,7 +108,7 @@
   * This Function return 1 if the # Key is Pressed
   * and 0 if not
   */
-uint8_t check_OPKey()
+uint8_t keypad_Check_OPKey()
 {
 	char val;
 	uint8_t pressed = 0;
@@ -117,9 +123,11 @@ uint8_t check_OPKey()
 	val = DIO_Read_PIN(KEYPADPORT, 6);
 	
 	if (val == 0){
+		hash_debounce = hash_debounce - 1;
+	} else if (hash_debounce == 0) {
+		/* Finish Debouncing -> return pressed value */
+		hash_debounce = DEBOUNCING_COUNTER;
 		pressed = 1;
-	} else {
-		/* Do Nothing (# is not pressed) */
 	}
 	
 	return pressed;
