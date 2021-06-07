@@ -1,6 +1,5 @@
 /************************************************************************/
-/*                          Keypad Driver                               */
-/*                   Author: Ahmad Abdalmageed                          */
+/*                          TC27   Driver                               */
 /************************************************************************/
 #ifndef TC72_H_
 #define TC72_H_
@@ -8,8 +7,8 @@
 /************************************************************************/
 /* Driver Definitions                                                   */
 /************************************************************************/
-#define One_Shot 0x14
-#define Continous 0x04
+#define ONE_SHOT_MODE 0x14
+#define CONTINOUS_MODE 0x04
 
 /************************************************************************/
 /* Library Imports                                                      */
@@ -24,17 +23,17 @@
 
 /************************************************************************/
 /* Function Description : TC72 Sensor Initiator Function                */
-/* Function Arguments   : char mode --> TC72 Operation Mode             */
-/* Function Returns     : None                                          */
+/* Function Arguments   : char mode                                     */
+/* Function Returns     : void                                          */
 /************************************************************************/
 void TC72_Init(char mode);
 
 /************************************************************************/
 /* Function Description : TC72 Communication Protocol Function          */
-/* Function Arguments   : None                                          */
-/* Function Returns     : None                                          */
+/* Function Arguments   : void                                          */
+/* Function Returns     : char                                          */
 /************************************************************************/
-char TC72_Read();
+char TC72_Read(void);
 
 #endif /*TC72_H_*/
 /************************************************************************/

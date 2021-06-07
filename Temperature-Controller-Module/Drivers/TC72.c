@@ -9,7 +9,7 @@
 /* TC72 SPI Communication Protocol Initiator Function, Initiates the SPI*/
 /* Master Mode and Select the Control Register with 0x80 Address and    */
 /* Specify the Sensor's Operation Mode. One-Shot, Only one Temperature  */
-/* is taken on writing to the Sensor. Continous Mode, the sensor takes  */
+/* is taken on writing to the Sensor. Continuous Mode, the sensor takes */
 /* a reading ever 150 ms and store it in the Data Register              */ 
 /************************************************************************/
 void TC72_Init(char mode){
@@ -39,7 +39,7 @@ void TC72_Init(char mode){
 /* Temp.). We are only Interested in the MSB which is selected from the */
 /* 0x02 Register.                                                       */
 /************************************************************************/
-char TC72_Read(){
+char TC72_Read(void){
 	// Create a Rising Edge on the
 	// TC72 Port to Start SPI Communication 
 	DIO_Write_PIN('B', 4, 1);
