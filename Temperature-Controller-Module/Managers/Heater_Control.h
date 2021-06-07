@@ -22,7 +22,6 @@ void Heater_vDisable(void);
 void SetHeaterVolt(double TargetV, double PotV);
 void Update_Vt();
 void Update_Vr();
-void Check_OPERATION_State_Key();
 void Check_OPERATION_State();
 void Check_STANDBY_State();
 void Check_NORMAL_State();

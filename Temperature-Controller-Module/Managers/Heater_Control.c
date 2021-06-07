@@ -83,24 +83,6 @@ void SetHeaterVolt(double Vt, double Vr)
 	PWM_vSet_Duty(2, Duty);
 }
 
-void Check_OPERATION_State_Key()
-{	
-	/* Change To OPERATIONAL State if user pressed '#' key */
-	char value = NOTPRESSED;
-	
-	/* Wait for user to enter tens */
-	do {
-		value = keypad_u8check_press();
-		
-		/* This delay is used to solve the debouncing problem of buttons */
-		_delay_ms(300);
-	} while (value != 12);
-		
-	state_indx = 1;
-	LED_vTurnOff(LEDs_PORT, STANDBY_LED);
-	LED_vTurnOn(LEDs_PORT, OPERATION_LED);
-}
-
 void Check_OPERATION_State()
 {
 	/* Change To OPERATIONAL State if SET - CRT > 5 */
@@ -111,34 +93,6 @@ void Check_OPERATION_State()
 		LED_vTurnOn(LEDs_PORT, OPERATION_LED);
 	}	
 }
-
-/* TODO: Fix Debouncing Issue */
-/*
-void Check_STANDBY_State()
-{
-	/ * This means when (200 ms) is passed * /
-	if (HASH_KEY_COUNTER >= 20)
-	{
-		/ * Change To OPERATIONAL State if user pressed '#' key * /
-		if (check_OPKey() == 1)
-		{
-			state_indx = STANDBY_INDEX;
-			
-			/ * Reset Error Counter * /
-			ERROR_COUNTER = 0;
-			
-			LED_vTurnOff(LEDs_PORT, NORMAL_LED);
-			LED_vTurnOff(LEDs_PORT, OPERATION_LED);
-			LED_vTurnOn(LEDs_PORT, STANDBY_LED);
-		}
-		
-		HASH_KEY_COUNTER = 0;
-	}
-	else
-	{
-		/ * Do Nothing, Didn't reach the required time * /
-	}
-}*/
 
 void Check_NORMAL_State()
 {
