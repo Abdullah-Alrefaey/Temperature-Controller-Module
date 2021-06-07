@@ -16,7 +16,7 @@ const char LEDs_PORT = 'B';
 char * states[4] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
 	
 /* First Start in STANDBY STATE */
-uint8_t state_indx = 0;
+uint8_t state_indx = 0U;
 
 /* Calibration Resistor Voltage (Used to determine Duty Cycle Percentage) */
 double Vt = 0;		
@@ -74,6 +74,8 @@ void Update_Vt()
 	else if (SET_Temperature > CRT_Temperature)
 	{
 		Vt = ((SET_Temperature - CRT_Temperature) / 100.0) * 10;
+	} else {
+	    /* Impossible Condition, Wrote All Possible Ones For Readability */
 	}
 }
 
@@ -89,7 +91,7 @@ void Update_Vr()
 	if (ADC_COUNTER >= 50)
 	{
 		Vr = Potentiometer_Read();
-		ADC_COUNTER = 0;
+		ADC_COUNTER = 0U;
 	}
 	else
 	{
@@ -104,11 +106,11 @@ void Update_Vr()
 /************************************************************************/
 void Heater_vSet_Volt(double V_target, double V_pot)
 {	
-	uint8_t Duty = 0;
+	uint8_t Duty = 0U;
 	double DutyPercentage = 0;
 	DutyPercentage = (((V_pot * 2)/10) * V_target) / 10; /* Range: 0 -> 1 */
 	Duty = floor(DutyPercentage*255.0);
-	PWM_vSet_Duty(2, Duty);
+	PWM_vSet_Duty(2U, Duty);
 }
 
 /************************************************************************/
@@ -122,7 +124,7 @@ void Check_OPERATION_State()
 	/* Change To OPERATIONAL State if SET - CRT > 5 */
 	if ((SET_Temperature - CRT_Temperature) > 5)
 	{
-		state_indx = 1;
+		state_indx = 1U;
 		LED_vTurnOff(LEDs_PORT, NORMAL_LED);
 		LED_vTurnOn(LEDs_PORT, OPERATION_LED);
 	}	
@@ -143,7 +145,7 @@ void Check_NORMAL_State()
 		state_indx = NORMAL_INDEX;
 		
 		/* Reset Error Counter */
-		ERROR_COUNTER = 0;
+		ERROR_COUNTER = 0U;
 		
 		LED_vTurnOff(LEDs_PORT, OPERATION_LED);
 		LED_vTurnOn(LEDs_PORT, NORMAL_LED);
@@ -191,7 +193,7 @@ void Check_ERROR_State_Timer()
 	{
 		/* Change To ERROR State */
 		state_indx = ERROR_INDEX;
-		ERROR_COUNTER = 0;
+		ERROR_COUNTER = 0U;
 		LED_vTurnOff(LEDs_PORT, OPERATION_LED);
 		LED_vTurnOn(LEDs_PORT, ERROR_LED);
 	}
@@ -240,14 +242,14 @@ void Check_HASH_Key()
 			}
 			
 			/* Reset Error Counter */
-			ERROR_COUNTER = 0;
+			ERROR_COUNTER = 0U;
 		}
 		else
 		{
 			/* Do Nothing (Hash is not pressed) */
 		}
 		
-		HASH_KEY_COUNTER = 0;
+		HASH_KEY_COUNTER = 0U;
 	}
 	else
 	{
