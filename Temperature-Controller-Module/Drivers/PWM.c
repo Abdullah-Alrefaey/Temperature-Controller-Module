@@ -53,6 +53,11 @@ void PWM_vInit(uint8_t Timer, uint8_t Mode, uint8_t Scale){
 	
 }
 
+void PWM_vDisable()
+{
+	DIO_vsetPINDir('D', 7, 0);
+}
+
 void PWM_vSet_Duty(uint8_t Timer, uint8_t Duty){
 	if (Timer == 0)
 	{

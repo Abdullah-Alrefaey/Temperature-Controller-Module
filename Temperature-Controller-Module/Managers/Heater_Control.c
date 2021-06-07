@@ -19,7 +19,7 @@ uint8_t state_indx = 0;
 double Vt = 0;		
 double Vr = 0;
 
-void HeaterInit(void)
+void LEDs_States_vInit()
 {
 	/* Initialize STATES LEDs for Better Indication */
 	LED_vInit(LEDs_PORT, STANDBY_LED);
@@ -29,9 +29,17 @@ void HeaterInit(void)
 	
 	/* Heater start in STANDBY State */
 	LED_vTurnOn(LEDs_PORT, STANDBY_LED);
-	
+}
+
+void Heater_vInit(void)
+{
 	Potentiometer_vInit();
 	PWM_vInit(2, 1, 2);
+}
+
+void Heater_vDisable(void)
+{
+	PWM_vDisable();
 }
 
 void Update_Vt()

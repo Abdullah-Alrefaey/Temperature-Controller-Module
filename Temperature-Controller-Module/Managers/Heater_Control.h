@@ -23,7 +23,9 @@
 #define NORMAL_LED 2
 #define ERROR_LED 3
 
-void HeaterInit(void);
+void LEDs_States_vInit();
+void Heater_vInit(void);
+void Heater_vDisable(void);
 void SetHeaterVolt(double TargetV, double PotV);
 void Update_Vt();
 void Update_Vr();

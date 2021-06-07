@@ -20,6 +20,8 @@
 */
 void PWM_vInit(uint8_t Timer, uint8_t Mode, uint8_t Scale);
 
+void PWM_vDisable();
+
 /*
 	Function Name        : PWM_vSet_Duty
 	Function Returns     : void
