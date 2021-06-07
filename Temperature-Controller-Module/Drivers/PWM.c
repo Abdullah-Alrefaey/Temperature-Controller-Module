@@ -9,8 +9,11 @@
 
 /************************************************************************/
 /* Function Description:                                                */
-/*                                                                      */
-/*                                                                      */
+/* Initializes PWM Function on the selected timer by turning on it's    */
+/* comparator register, setting it's operation mode & needed prescale,  */
+/* the prescale value will be selected to ensure that the PWM frequency */
+/* lies within the operating frequency (1KHZ-3KHZ) of the PWM2Analogue  */
+/* Module.                                                              */
 /************************************************************************/
 void PWM_vInit(uint8_t Timer, uint8_t Mode, uint8_t Scale){
 	if (Timer == 0U)
