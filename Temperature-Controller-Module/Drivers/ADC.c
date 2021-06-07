@@ -24,6 +24,12 @@ void ADC_vinit(void)
 	ADCSRA |= (1 << ADPS0);
 }
 
+void ADC_vDisable(void)
+{
+	/* Disable ADC */
+	ADCSRA &= ~(1 << ADEN);
+}
+
 uint16_t ADC_u16Read(void)
 {
 	uint16_t ADCVal = 0;
