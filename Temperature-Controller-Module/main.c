@@ -1,8 +1,8 @@
 /*
  * main.c
  *
- */ 
- 
+ */
+
 /*#define F_CPU 8000000UL*/
 
 #include "Managers/Schedular.h"
