@@ -16,12 +16,12 @@ void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t dir)
 	switch (portName)
 	{
 		case 'A':
-			if (dir == 1)
+			if (dir == U_ONE)
 			{
 				/*Set the direction of the given pinNumber in port A as output*/
 				DDRA |= (U_ONE << pinNumber);
 			}
-			else if (dir == 0)
+			else if (dir == U_ZERO)
 			{
 				/*Set the direction of the given pinNumber in port A as input*/
 				DDRA &= ~(U_ONE << pinNumber);
@@ -33,11 +33,11 @@ void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t dir)
 			break;
 
 		case 'B':
-			if (dir == 1)
+			if (dir == U_ONE)
 			{
 				DDRB |= (U_ONE << pinNumber);
 			}
-			else if (dir == 0)
+			else if (dir == U_ZERO)
 			{
 				DDRB &= ~(U_ONE << pinNumber);
 			}
@@ -48,11 +48,11 @@ void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t dir)
 			break;
 
 		case 'C':
-			if (dir == 1)
+			if (dir == U_ONE)
 			{
 				DDRC |= (U_ONE << pinNumber);
 			}
-			else if (dir == 0)
+			else if (dir == U_ZERO)
 			{
 				DDRC &= ~(U_ONE << pinNumber);
 			}
@@ -64,11 +64,11 @@ void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t dir)
 			break;
 
 		case 'D':
-			if (dir == 1)
+			if (dir == U_ONE)
 			{
 				DDRD |= (U_ONE << pinNumber);
 			}
-			else if (dir == 0)
+			else if (dir == U_ZERO)
 			{
 				DDRD &= ~(U_ONE << pinNumber);
 			}
@@ -88,14 +88,14 @@ void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t value)
 	switch(portName)
 	{
 		case 'A':
-			if (value == 1)
+			if (value == U_ONE)
 			{
-				/*Set the direction of the given pinNumber in port A as high (1)*/
+				/*Set the direction of the given pinNumber in port A as high (U_ONE)*/
 				PORTA |= (U_ONE << pinNumber);
 			}
-			else if (value == 0)
+			else if (value == U_ZERO)
 			{
-				/*Set the direction of the given pinNumber in port A as low (0)*/
+				/*Set the direction of the given pinNumber in port A as low (U_ZERO)*/
 				PORTA &= ~(U_ONE << pinNumber);
 			}
 			else
@@ -106,11 +106,11 @@ void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t value)
 			break;
 
 		case 'B':
-			if (value == 1)
+			if (value == U_ONE)
 			{
 				PORTB |= (U_ONE << pinNumber);
 			}
-			else if (value == 0)
+			else if (value == U_ZERO)
 			{
 				PORTB &= ~(U_ONE << pinNumber);
 			}
@@ -122,11 +122,11 @@ void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t value)
 			break;
 
 		case 'C':
-			if (value == 1)
+			if (value == U_ONE)
 			{
 				PORTC |= (U_ONE << pinNumber);
 			}
-			else if (value == 0)
+			else if (value == U_ZERO)
 			{
 				PORTC &= ~(U_ONE << pinNumber);
 			}
@@ -138,11 +138,11 @@ void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t value)
 			break;
 
 		case 'D':
-			if (value == 1)
+			if (value == U_ONE)
 			{
 				PORTD |= (U_ONE << pinNumber);
 			}
-			else if (value == 0)
+			else if (value == U_ZERO)
 			{
 				PORTD &= ~(U_ONE << pinNumber);
 			}
@@ -159,7 +159,7 @@ void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t value)
 
 uint8_t DIO_Read_PIN(char portName, uint8_t pinNumber)
 {
-	uint8_t x = 0;
+	uint8_t x = U_ZERO;
 
 	switch(portName)
 	{
@@ -217,11 +217,11 @@ void DIO_Set_PORT_Direction(char portName, uint8_t dir)
 	switch(portName)
 	{
 		case 'A':
-			if (dir == 1)
+			if (dir == U_ONE)
 			{
 				DDRA = 0xffU;
 			}
-			else if (dir == 0)
+			else if (dir == U_ZERO)
 			{
 				DDRA = 0x00U;
 			}
@@ -233,11 +233,11 @@ void DIO_Set_PORT_Direction(char portName, uint8_t dir)
 			break;
 
 		case 'B':
-			if (dir == 1)
+			if (dir == U_ONE)
 			{
 				DDRB = 0xffU;
 			}
-			else if (dir == 0)
+			else if (dir == U_ZERO)
 			{
 				DDRB = 0x00U;
 			}
@@ -249,11 +249,11 @@ void DIO_Set_PORT_Direction(char portName, uint8_t dir)
 			break;
 
 		case 'C':
-			if (dir == 1)
+			if (dir == U_ONE)
 			{
 				DDRC = 0xffU;
 			}
-			else if (dir == 0)
+			else if (dir == U_ZERO)
 			{
 				DDRC = 0x00U;
 			}
@@ -265,11 +265,11 @@ void DIO_Set_PORT_Direction(char portName, uint8_t dir)
 			break;
 
 		case 'D':
-			if (dir == 1)
+			if (dir == U_ONE)
 			{
 				DDRD = 0xffU;
 			}
-			else if (dir == 0)
+			else if (dir == U_ZERO)
 			{
 				DDRD = 0x00U;
 			}
@@ -310,7 +310,7 @@ void DIO_Write_PORT(char portName, uint8_t portValue)
 
 uint8_t DIO_Read_PORT(char portName)
 {
-	uint8_t x = 0;
+	uint8_t x = U_ZERO;
 
 	switch(portName)
 	{
@@ -365,7 +365,7 @@ void DIO_Connect_PullUp(char portName, uint8_t pinNumber, uint8_t value)
 	switch(portName)
 	{
 		case 'A':
-			if (value == 1)
+			if (value == U_ONE)
 			{
 				PORTA |= (U_ONE << pinNumber);
 			}
@@ -376,7 +376,7 @@ void DIO_Connect_PullUp(char portName, uint8_t pinNumber, uint8_t value)
 			break;
 			
 		case 'B':
-			if (value == 1)
+			if (value == U_ONE)
 			{
 				PORTB |= (U_ONE << pinNumber);
 			}
@@ -388,7 +388,7 @@ void DIO_Connect_PullUp(char portName, uint8_t pinNumber, uint8_t value)
 			break;
 		
 		case 'C':
-			if (value == 1)
+			if (value == U_ONE)
 			{
 				PORTC |= (U_ONE << pinNumber);
 			}
@@ -400,7 +400,7 @@ void DIO_Connect_PullUp(char portName, uint8_t pinNumber, uint8_t value)
 			break;
 		
 		case 'D':
-			if (value == 1)
+			if (value == U_ONE)
 			{
 				PORTD |= (U_ONE << pinNumber);
 			}
@@ -479,7 +479,7 @@ void DIO_Write_Low_5_Nibble(char portName, uint8_t value)
 	uint8_t mask = 0x1fU;
 	value &= mask;
 	
-	// value &= 0x1f;
+	 /*value &= 0x1f;*/
 
 	switch(portName)
 	{
