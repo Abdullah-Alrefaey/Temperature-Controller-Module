@@ -113,8 +113,13 @@ void Check_STANDBY_State()
 		if (check_OPKey() == 1)
 		{
 			state_indx = 0;
+			
+			/* Reset Error Counter */
+			ERROR_COUNTER = 0;
+			
 			LED_vTurnOff(LEDs_PORT, NORMAL_LED);
-			LED_vTurnOn(LEDs_PORT, OPERATION_LED);
+			LED_vTurnOff(LEDs_PORT, OPERATION_LED);
+			LED_vTurnOn(LEDs_PORT, STANDBY_LED);
 		}
 		
 		HASH_KEY_COUNTER = 0;
@@ -130,6 +135,10 @@ void Check_NORMAL_State()
 	if (abs(SET_Temperature - CRT_Temperature) <= 5)
 	{
 		state_indx = 2;
+		
+		/* Reset Error Counter */
+		ERROR_COUNTER = 0;
+		
 		LED_vTurnOff(LEDs_PORT, OPERATION_LED);
 		LED_vTurnOn(LEDs_PORT, NORMAL_LED);
 	}
@@ -149,14 +158,16 @@ void Check_ERROR_State()
 
 void Check_ERROR_State_Timer()
 {
-	/* Each count = 10ms
+	/* Each count = 10.048 ms
 	* This means when 100 count is equal to 1 second
 	* We need 3 minutes, so counter should be 180 second x 100 = 18000
 	* But it's actually 17200 for some fractions remaining
+	
+	* NOTE: When testing with ERROR_COUNTER > 17200, the elapsed time to execute the error was about 3.40 seconds
+	* The calculations are determined in a correct way, so to solve then we will decrement the ERROR_COUNTER a little
 	*/
-	if (ERROR_COUNTER > 17200)
+	if (ERROR_COUNTER > 14500)
 	{
-		LED_vTurnOn('B', 0);
 		/* Change To ERROR State */
 		state_indx = 3;
 		ERROR_COUNTER = 0;
