@@ -1,112 +1,130 @@
+/************************************************************************/
+/*                          DIO Driver                                  */
+/************************************************************************/
 #ifndef DIO_H_
 #define DIO_H_
 
+/************************************************************************/
+/* Driver Imports                                                       */
+/************************************************************************/
+#define U_ONE 1U
+#define U_ZERO 0U
+
+/************************************************************************/
+/* Driver Imports                                                       */
+/************************************************************************/
 #include <stdint.h>
 #include <avr/io.h>
 
 
-/*
-	Function Name        : DIO_vsetPINDir
-	Function Returns     : void
-	Function Arguments   : char portName, uint8_t pinNumber, uint8_t direction
-	Function Description : Set the direction of the given pin in the given port (direction 0 = input : 1 = output)
-*/
+
+/************************************************************************/
+/* Function Description : Set the direction of the given pin given port */
+/*                        (direction 0 = input : 1 = output)            */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t pinNumber                             */
+/*						  uint8_t direction                             */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void DIO_vsetPINDir(char portName, uint8_t pinNumber, uint8_t direction);
 
 
-/*
-	Function Name        : DIO_Write_PIN
-	Function Returns     : void
-	Function Arguments   : char portName, uint8_t pinNumber, uint8_t outputvalue
-	Function Description : Set the value of the given pin in the given port (outputvalue 0 = low : 1 = high) 
-*/
+/************************************************************************/
+/* Function Description : Set the value of the given pin in the given   */
+/*                        port (outputvalue 0 = low : 1 = high)         */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t pinNumber                             */
+/*						  uint8_t outputvalue                           */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t outputvalue);
 
 
-/*
-	Function Name        : DIO_Read_PIN
-	Function Returns     : uint8_t
-	Function Arguments   : char portName, uint8_t pinNumber
-	Function Description : Returns 1 if the value of the given pin is high and zero if the value is low
-*/
+
+/************************************************************************/
+/* Function Description : Returns 1 if the value of the given pin is    */
+/*                        high and zero if the value is low             */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t pinNumber                             */
+/* Function Returns     : uint8_t                                       */
+/************************************************************************/
 uint8_t DIO_Read_PIN(char portName, uint8_t pinNumber);
 
-
-/*
-	Function Name        : DIO_Toggle_PIN
-	Function Returns     : void
-	Function Arguments   : char portName, uint8_t pinNumber
-	Function Description : Reverse the value of the given pin in the given port.
-*/
+/************************************************************************/
+/* Function Description : Reverse the value of the given pin in the     */ 
+/*                        given port                                    */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t pinNumber                             */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void DIO_Toggle_PIN(char portName, uint8_t pinNumber);
 
-
-/*
-	Function Name        : DIO_Set_PORT_Direction
-	Function Returns     : void
-	Function Arguments   : char portName, uint8_t direction
-	Function Description : set the direction of whole port. (direction 0 = input : 1 = output)
-*/
+/************************************************************************/
+/* Function Description : set the direction of whole port.              */
+/*                        (direction 0 = input : 1 = output)            */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t direction                             */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void DIO_Set_PORT_Direction(char portName, uint8_t direction);
 
-
-/*
-	Function Name        : DIO_Write_PORT
-	Function Returns     : void
-	Function Arguments   : char portName, uint8_t portValue
-	Function Description : Write the value to all port pins (direction 0 = input : 1 = output).
-*/
+/************************************************************************/
+/* Function Description : Write the value to all port pins              */
+/*                        (direction 0 = input : 1 = output)            */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t portValue                             */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void DIO_Write_PORT(char portName, uint8_t portValue);
 
 
-/*
-	Function Name        : DIO_Read_PORT
-	Function Returns     : uint8_t
-	Function Arguments   : char portName
-	Function Description : read the value of the port.
-*/
-uint8_t DIO_Read_PORT(unsigned char portName);
+/************************************************************************/
+/* Function Description : Read the value of the port                    */
+/* Function Arguments   : char portName                                 */
+/* Function Returns     : uint8_t                                       */
+/************************************************************************/
+uint8_t DIO_Read_PORT(char portName);
 
-/*
-	Function Name        : DIO_Toggle_PORT
-	Function Returns     : uint8_t
-	Function Arguments   : char portName
-	Function Description : Reverse the value of the given port.
-*/
+/************************************************************************/
+/* Function Description : Reverse the value of the given port           */
+/* Function Arguments   : char portName                                 */
+/* Function Returns     : uint8_t                                       */
+/************************************************************************/
 void DIO_Toggle_PORT(char portName);
 
-
-/*
-	Function Name        : DIO_Write_Low_Nibble
-	Function Returns     : void
-	Function Arguments   : char portName, uint8_t value
-	Function Description : Set low nibble to the given port.
-*/
+/************************************************************************/
+/* Function Description : Set low nibble to the given port              */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t value                                 */
+/* Function Returns     : uint8_t                                       */
+/************************************************************************/
 void DIO_Write_Low_Nibble(char portName, uint8_t value);
 
-/*
-	Function Name        : DIO_Write_High_Nibble
-	Function Returns     : void
-	Function Arguments   : char portName, uint8_t value
-	Function Description : Set high nibble to the given port.
-*/
+/************************************************************************/
+/* Function Description : Set high nibble to the given port.            */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t value                                 */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void DIO_Write_High_Nibble(char portName, uint8_t value);
 
 
-/*
-	Function Name        : DIO_Write_Low_5_Nibble
-	Function Returns     : void
-	Function Arguments   : char portName, uint8_t value
-	Function Description : Set low nibble to the given port.
-*/
+/************************************************************************/
+/* Function Description : DIO_Write_Low_5_Nibble.                       */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t value                                 */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void DIO_Write_Low_5_Nibble(char portName, uint8_t value);
 
-/*
-	Function Name        : DIO_Connect_PullUp
-	Function Returns     : void
-	Function Arguments   : char portName, uint8_t pinNumber, uint8_t value
-	Function Description : Connect PullUp to the given port and pin number.
-*/
+/************************************************************************/
+/* Function Description : Connect PullUp to the given port and pin      */   
+/*                        number                                        */
+/* Function Arguments   : char portName                                 */
+/*                        uint8_t value                                 */
+/* Function Returns     : void                                          */
+/************************************************************************/
 void DIO_Connect_PullUp(char portName, uint8_t pinNumber, uint8_t value);
 
 #endif
+/************************************************************************/
