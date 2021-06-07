@@ -1,10 +1,6 @@
-/*
- * TMP_Manager.c
- *
- * Created: 05-Jun-21 2:31:24 PM
- *  Author: Refaey
- */ 
-
+/************************************************************************/
+/*                          Temperature Manager                         */
+/************************************************************************/
 #include "TMP_Manager.h"
 
 /* Declare and Define Global Variables Shared with other files */
@@ -18,10 +14,16 @@ extern uint8_t state_indx;
 
 uint8_t reading_buffer = 0;
 uint8_t temp_reading = 0;
-uint8_t pos = 0;		/* Indicates the units and tens in SET Temperature */
+uint8_t pos = 0; /* Indicates the units and tens in SET Temperature */
 
 uint8_t debouncing_counter = 0;
 
+
+/*************************************************************************/
+/* Function Description:                                                 */
+/* Read/Fetch Current Temperature from TC72 and Reset Current Temperature*/
+/* Counter.                                                              */
+/*************************************************************************/
 void Update_CRT_Temperature()
 {
 	/* This means when (200 ms) is passed */
@@ -36,38 +38,12 @@ void Update_CRT_Temperature()
 	}
 }
 
-/*
-void Update_SET_Temperature()
-{
-	char value = NOTPRESSED;
-	uint8_t temp_reading = 0;
-	
-	/ * Wait for user to enter tens * /
-	do {
-		value = keypad_u8check_press();
-		
-		/ * This delay is used to solve the debouncing problem of buttons * /
-		_delay_ms(200);
-	} while (value == NOTPRESSED);
-	
-	/ * Multiply the value by 10 to set it as tens * /
-	temp_reading = value * 10;
-	value = NOTPRESSED;
-	
-	/ * Wait for user to enter units * /
-	do {
-		value = keypad_u8check_press();
-		_delay_ms(200);
-	} while (value == NOTPRESSED);
 
-	/ * Add units to the previous tens to store the whole number * /
-	temp_reading += value;
-	
-	/ * Update SET_Temperature with the final value * /
-	SET_Temperature = temp_reading;
-}*/
-
-
+/*************************************************************************/
+/* Function Description:                                                 */
+/* Read/Fetch the Set Temperature given/written by the User on Keypad.   */
+/* The Fetch is done every 200 ms                                        */
+/*************************************************************************/
 void Update_SET_Temperature()
 {	
 	/* This means when (200 ms) is passed */
@@ -107,5 +83,3 @@ void Update_SET_Temperature()
 		/* Do Nothing, Didn't reach the required time */
 	}	
 }
-
-
