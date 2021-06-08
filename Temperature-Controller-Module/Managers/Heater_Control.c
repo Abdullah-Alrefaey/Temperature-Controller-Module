@@ -43,7 +43,7 @@ void LEDs_States_vInit()
 /* Function Description:                                                */
 /* Initialize the Heater Functionalities (Calibration Resistor and PWM) */
 /************************************************************************/
-void Heater_vInit(void)
+void Heater_vEnable(void)
 {
 	Potentiometer_vInit();
 	PWM_vInit(2U, 1U, 2U);

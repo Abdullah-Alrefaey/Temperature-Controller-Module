@@ -18,13 +18,23 @@ uint8_t pos = 0; /* Indicates the units and tens in SET Temperature */
 
 uint8_t debouncing_counter = 0;
 
+/*************************************************************************/
+/* Function Description:                                                 */
+/* Initialization of the keypad and TC72 Temperature Sensor to the entire*/ 
+/* system.                                                               */
+/*************************************************************************/
+void TMP_Manager_vInit(void)
+{
+	keypad_vInit();
+	TC72_Init(ONE_SHOT_MODE);
+}
 
 /*************************************************************************/
 /* Function Description:                                                 */
 /* Read/Fetch Current Temperature from TC72 and Reset Current Temperature*/
 /* Counter.                                                              */
 /*************************************************************************/
-void Update_CRT_Temperature()
+void Update_CRT_Temperature(void)
 {
 	/* This means when (200 ms) is passed */
 	if (CRT_TEMP_COUNTER >= 20)
@@ -44,7 +54,7 @@ void Update_CRT_Temperature()
 /* Read/Fetch the Set Temperature given/written by the User on Keypad.   */
 /* The Fetch is done every 200 ms                                        */
 /*************************************************************************/
-void Update_SET_Temperature()
+void Update_SET_Temperature(void)
 {	
 	/* This means when (200 ms) is passed */
 	if (SET_TEMP_COUNTER >= 20)

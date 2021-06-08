@@ -30,7 +30,7 @@ void LEDs_States_vInit(void);
 /* Function Arguments   : None                                          */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void Heater_vInit(void);
+void Heater_vEnable(void);
 
 /************************************************************************/
 /* Function Description : Disable The Heater (ADC and PWM OFF)          */

@@ -25,6 +25,13 @@
 /************************************************************************/
 
 /************************************************************************/
+/* Function Description : Temperature Manager Initialization            */
+/* Function Arguments   : void                                          */
+/* Function Returns     : void                                          */
+/************************************************************************/
+void TMP_Manager_vInit(void);
+
+/************************************************************************/
 /* Function Description : Current Temperature Update Function           */
 /* Function Arguments   : void                                          */
 /* Function Returns     : void                                          */
