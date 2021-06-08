@@ -4,6 +4,8 @@
 
 #include "LCD.h"
 
+extern char PORTS[4];
+
 /************************************************************************/
 /* Function Description:                                                */
 /* Initialize of LCD in eight_bits_mode or four_bits_mode depending on  */
@@ -14,15 +16,15 @@ void LCD_vInit(void)
 {
 	_delay_ms(30);
 	
-	#if defined eight_bits_mode
-		DIO_vsetPINDir(PORT_NAME, 0, 1);
-		DIO_vsetPINDir(PORT_NAME, 1, 1);
-		DIO_vsetPINDir(PORT_NAME, 2, 1);
-		DIO_vsetPINDir(PORT_NAME, 3, 1);
-		DIO_vsetPINDir(PORT_NAME, 4, 1);
-		DIO_vsetPINDir(PORT_NAME, 5, 1);
-		DIO_vsetPINDir(PORT_NAME, 6, 1);
-		DIO_vsetPINDir(PORT_NAME, 7, 1);
+	#if defined EIGHT_BITS_MODE
+		DIO_vsetPINDir(PORTS[LCD_PORT], 0, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 1, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 2, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 3, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 4, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 5, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 6, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 7, 1);
 		DIO_vsetPINDir('B', EN, 1);
 		DIO_vsetPINDir('B', RW, 1);
 		DIO_vsetPINDir('B', RS, 1);
@@ -41,29 +43,34 @@ void LCD_vInit(void)
 		LCD_vSend_cmd(ENTRY_MODE); // entry mode
 		_delay_ms(1);
 		
-	#elif defined four_bits_mode
-		DIO_vsetPINDir(PORT_NAME, 4, 1);
-		DIO_vsetPINDir(PORT_NAME, 5, 1);
-		DIO_vsetPINDir(PORT_NAME, 6, 1);
-		DIO_vsetPINDir(PORT_NAME, 7, 1);
-		DIO_vsetPINDir(PORT_NAME, EN, 1);
-		DIO_vsetPINDir(PORT_NAME, RW, 1);
-		DIO_vsetPINDir(PORT_NAME, RS, 1);
-   		DIO_Write_PIN(PORT_NAME, RW, 0);
+	#elif defined FOUR_BITS_MODE
+		DIO_vsetPINDir(PORTS[LCD_PORT], 4, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 5, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 6, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], 7, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], EN, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], RW, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], RS, 1);
+   		DIO_Write_PIN(PORTS[LCD_PORT], RW, 0);
 		   
-		LCD_vSend_cmd(RETURN_HOME); // return home
+		/* Send Return Home Command */
+		LCD_vSend_cmd(RETURN_HOME);
 		_delay_ms(10);
 		
-		LCD_vSend_cmd(FOUR_BITS); // 4-bit mode
+		/* Enable 4-bit Mode */
+		LCD_vSend_cmd(FOUR_BITS);
 		_delay_ms(1);
 		
-		LCD_vSend_cmd(CURSOR_OFF_DISPLAN_ON); // display on cursor off
+		/* Display ON, Cursor OFF */
+		LCD_vSend_cmd(CURSOR_OFF_DISPLAN_ON); 
 		_delay_ms(1);
 		
-		LCD_vSend_cmd(CLR_SCREEN); // clear the screen
+		/* Clear The Entire Screen */
+		LCD_vSend_cmd(CLR_SCREEN); // 
 		_delay_ms(10);
 		
-		LCD_vSend_cmd(ENTRY_MODE); // entry mode
+		/* Choose Entry Mode */
+		LCD_vSend_cmd(ENTRY_MODE);
 		_delay_ms(1);
 		
 	#endif
@@ -78,9 +85,9 @@ void send_falling_edge(void)
 {
 	/* Used to enable the LCD display 
 	*/
-	DIO_Write_PIN(PORT_NAME, EN, 1);
+	DIO_Write_PIN(PORTS[LCD_PORT], EN, 1);
 	_delay_ms(2);
-	DIO_Write_PIN(PORT_NAME, EN, 0);
+	DIO_Write_PIN(PORTS[LCD_PORT], EN, 0);
 	_delay_ms(2);
 }
 
@@ -91,17 +98,17 @@ void send_falling_edge(void)
 /************************************************************************/
 void LCD_vSend_cmd(char cmd)
 {
-	#if defined eight_bits_mode
-		DIO_Write_PORT(PORT_NAME, cmd);
-		DIO_Write_PIN(PORT_NAME, RS, 0);
+	#if defined EIGHT_BITS_MODE
+		DIO_Write_PORT(PORTS[LCD_PORT], cmd);
+		DIO_Write_PIN(PORTS[LCD_PORT], RS, 0);
 		send_falling_edge();
 	
-	#elif defined four_bits_mode
-		DIO_Write_High_Nibble(PORT_NAME, cmd >> 4);
-		DIO_Write_PIN(PORT_NAME, RS, 0);
+	#elif defined FOUR_BITS_MODE
+		DIO_Write_High_Nibble(PORTS[LCD_PORT], cmd >> 4);
+		DIO_Write_PIN(PORTS[LCD_PORT], RS, 0);
 		send_falling_edge();
-		DIO_Write_High_Nibble(PORT_NAME, cmd);
-		DIO_Write_PIN(PORT_NAME, RS, 0);
+		DIO_Write_High_Nibble(PORTS[LCD_PORT], cmd);
+		DIO_Write_PIN(PORTS[LCD_PORT], RS, 0);
 		send_falling_edge();
 	#endif
 	
@@ -114,17 +121,17 @@ void LCD_vSend_cmd(char cmd)
 /************************************************************************/
 void LCD_vSend_char(char data)
 {
-	#if defined eight_bits_mode
-		DIO_Write_PORT(PORT_NAME, data);
-		DIO_Write_PIN(PORT_NAME, RS, 1);
+	#if defined EIGHT_BITS_MODE
+		DIO_Write_PORT(PORTS[LCD_PORT], data);
+		DIO_Write_PIN(PORTS[LCD_PORT], RS, 1);
 		send_falling_edge();
 	
-	#elif defined four_bits_mode
-		DIO_Write_High_Nibble(PORT_NAME, data >> 4);
-		DIO_Write_PIN(PORT_NAME, RS, 1);
+	#elif defined FOUR_BITS_MODE
+		DIO_Write_High_Nibble(PORTS[LCD_PORT], data >> 4);
+		DIO_Write_PIN(PORTS[LCD_PORT], RS, 1);
 		send_falling_edge();
-		DIO_Write_High_Nibble(PORT_NAME, data);
-		DIO_Write_PIN(PORT_NAME, RS, 1);
+		DIO_Write_High_Nibble(PORTS[LCD_PORT], data);
+		DIO_Write_PIN(PORTS[LCD_PORT], RS, 1);
 		send_falling_edge();
 	#endif
 	

@@ -9,11 +9,9 @@
 /*                          Library Imports                             */
 /************************************************************************/
 #include "DIO.h"
-#include "LCD_config.h"
 
 #define F_CPU 16000000UL
 #include <util/delay.h>
-
 
 /************************************************************************/
 /* Driver Definitions                                                   */
@@ -26,13 +24,17 @@
 #define SHIFT_LEFT 0x18
 #define SHIFT_RIGHT 0x1c
 
-#if defined four_bits_mode
+/* #define eight_bits_mode */
+#define FOUR_BITS_MODE
+#define LCD_PORT 2
+
+#if defined FOUR_BITS_MODE
 #define RS 1
 #define RW 2
 #define EN 3
 #define FOUR_BITS 0x28
 
-#elif defined eight_bits_mode
+#elif defined EIGHT_BITS_MODE
 #define EN 0
 #define RS 1
 #define RW 2
