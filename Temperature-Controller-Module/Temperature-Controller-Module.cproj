@@ -144,9 +144,6 @@
     <Compile Include="Drivers\LCD.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\LCD_config.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Drivers\LED.c">
       <SubType>compile</SubType>
     </Compile>
