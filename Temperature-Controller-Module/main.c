@@ -10,7 +10,6 @@
 #include "Managers/DSP_Manager.h"
 #include "Managers/Heater_Control.h"
 
-#include "Drivers/Keypad.h"
 #include "Drivers/TC72.h"
 
 extern uint8_t CRT_Temperature;
@@ -22,14 +21,21 @@ extern uint8_t state_indx;
 extern double Vr;
 extern double Vt;
 
+uint8_t LCD_INITIALIZED = 0;
+
 int main(void)
 {
-	// Start Main Application
-	WelcomeScreen();
-	IdleScreen();
-	keypad_vInit();
-	TC72_Init(ONE_SHOT_MODE);
+	/* Managers Initializations */
 	Schedular_vInit();
+	
+	/* Use Timer Scheduler instead of _delay_ms(30) in the LCD */
+	while (LCD_INITIALIZED == 0)
+	{
+		WelcomeScreen();
+	}
+
+	IdleScreen();
+	TMP_Manager_vInit();
 	LEDs_States_vInit();
 		
 	while (1)
@@ -56,7 +62,7 @@ int main(void)
 		if (state_indx == OPERATION_INDEX)
 		{
 			/* Start Heater */
-			Heater_vInit();
+			Heater_vEnable();
 			
 			Update_CRT_Temperature();
 			Update_Vt();

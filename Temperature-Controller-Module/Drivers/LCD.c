@@ -6,6 +6,7 @@
 
 extern char PORTS[4];
 
+
 /************************************************************************/
 /* Function Description:                                                */
 /* Initialize of LCD in eight_bits_mode or four_bits_mode depending on  */
@@ -14,36 +15,43 @@ extern char PORTS[4];
 /************************************************************************/
 void LCD_vInit(void)
 {
-	_delay_ms(30);
-	
-	#if defined EIGHT_BITS_MODE
-		DIO_vsetPINDir(PORTS[LCD_PORT], 0, 1);
-		DIO_vsetPINDir(PORTS[LCD_PORT], 1, 1);
-		DIO_vsetPINDir(PORTS[LCD_PORT], 2, 1);
-		DIO_vsetPINDir(PORTS[LCD_PORT], 3, 1);
+	#if defined FOUR_BITS_MODE
 		DIO_vsetPINDir(PORTS[LCD_PORT], 4, 1);
 		DIO_vsetPINDir(PORTS[LCD_PORT], 5, 1);
 		DIO_vsetPINDir(PORTS[LCD_PORT], 6, 1);
 		DIO_vsetPINDir(PORTS[LCD_PORT], 7, 1);
-		DIO_vsetPINDir('B', EN, 1);
-		DIO_vsetPINDir('B', RW, 1);
-		DIO_vsetPINDir('B', RS, 1);
-		DIO_Write_PIN('B', RW, 0);
+		DIO_vsetPINDir(PORTS[LCD_PORT], EN, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], RW, 1);
+		DIO_vsetPINDir(PORTS[LCD_PORT], RS, 1);
+		DIO_Write_PIN(PORTS[LCD_PORT], RW, 0);
 		
-		LCD_vSend_cmd(EIGHT_BITS); // 8-bit mode
-		_delay_ms(1);
+		/* Send Return Home Command */
+		LCD_vSend_cmd(RETURN_HOME);
 		
-		LCD_vSend_cmd(CURSOR_ON_DISPLAN_ON); // display on cursor on
+		/* This is unnecessary delays */
+		/*_delay_ms(10);*/
 		
-		_delay_ms(1);
+		/* Enable 4-bit Mode */
+		LCD_vSend_cmd(FOUR_BITS);
+		/*_delay_ms(1);*/
 		
-		LCD_vSend_cmd(CLR_SCREEN); // clear the screen
-		_delay_ms(10);
+		/* Display ON, Cursor OFF */
+		LCD_vSend_cmd(CURSOR_OFF_DISPLAN_ON);
+		/*_delay_ms(1);*/
 		
-		LCD_vSend_cmd(ENTRY_MODE); // entry mode
-		_delay_ms(1);
+		/* Clear The Entire Screen */
+		LCD_vSend_cmd(CLR_SCREEN);
+		/*_delay_ms(10);*/
 		
-	#elif defined FOUR_BITS_MODE
+		/* Choose Entry Mode */
+		LCD_vSend_cmd(ENTRY_MODE);
+		/*_delay_ms(1);*/
+		
+	#endif	
+	
+	/*_delay_ms(30);*/
+		
+	/*#if defined FOUR_BITS_MODE
 		DIO_vsetPINDir(PORTS[LCD_PORT], 4, 1);
 		DIO_vsetPINDir(PORTS[LCD_PORT], 5, 1);
 		DIO_vsetPINDir(PORTS[LCD_PORT], 6, 1);
@@ -53,27 +61,29 @@ void LCD_vInit(void)
 		DIO_vsetPINDir(PORTS[LCD_PORT], RS, 1);
    		DIO_Write_PIN(PORTS[LCD_PORT], RW, 0);
 		   
-		/* Send Return Home Command */
+		/ * Send Return Home Command * /
 		LCD_vSend_cmd(RETURN_HOME);
-		_delay_ms(10);
 		
-		/* Enable 4-bit Mode */
+		/ * This is unnecessary delays * /
+		/ *_delay_ms(10);* /
+		
+		/ * Enable 4-bit Mode * /
 		LCD_vSend_cmd(FOUR_BITS);
-		_delay_ms(1);
+		/ *_delay_ms(1);* /
 		
-		/* Display ON, Cursor OFF */
+		/ * Display ON, Cursor OFF * /
 		LCD_vSend_cmd(CURSOR_OFF_DISPLAN_ON); 
-		_delay_ms(1);
+		/ *_delay_ms(1);* /
 		
-		/* Clear The Entire Screen */
-		LCD_vSend_cmd(CLR_SCREEN); // 
-		_delay_ms(10);
+		/ * Clear The Entire Screen * /
+		LCD_vSend_cmd(CLR_SCREEN); 
+		/ *_delay_ms(10);* /
 		
-		/* Choose Entry Mode */
+		/ * Choose Entry Mode * /
 		LCD_vSend_cmd(ENTRY_MODE);
-		_delay_ms(1);
+		/ *_delay_ms(1);* /
 		
-	#endif
+	#endif*/
 }
 
 /************************************************************************/
@@ -112,6 +122,7 @@ void LCD_vSend_cmd(char cmd)
 		send_falling_edge();
 	#endif
 	
+	/* Required from Datasheet of the LCD */
 	_delay_ms(1);
 }
 

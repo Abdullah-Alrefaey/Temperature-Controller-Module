@@ -3,6 +3,7 @@
 /************************************************************************/
 #include "Schedular.h"
 
+volatile uint8_t LCD_INIT_COUNTER = 0;
 volatile uint8_t CRT_TEMP_COUNTER = 0;
 volatile uint8_t SET_TEMP_COUNTER = 0;
 volatile uint8_t HASH_KEY_COUNTER = 0;
@@ -31,6 +32,11 @@ void Schedular_vInit(void)
 /************************************************************************/
 ISR(TIMER0_COMP_vect)
 {
+	if (state_indx == STANDBY_INDEX)
+	{
+		LCD_INIT_COUNTER++;
+	}
+	
 	CRT_TEMP_COUNTER++;
 	SET_TEMP_COUNTER++;
 	HASH_KEY_COUNTER++;

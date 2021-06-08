@@ -7,6 +7,8 @@ extern uint8_t SET_Temperature;
 extern uint8_t CRT_Temperature;
 extern uint8_t state_indx;
 
+extern uint8_t LCD_INIT_COUNTER;
+extern uint8_t LCD_INITIALIZED;
 
 /************************************************************************/
 /* Function Description:                                                */
@@ -15,36 +17,47 @@ extern uint8_t state_indx;
 /************************************************************************/
 void WelcomeScreen(void)
 {
-	/* Setup LCD PORT and PINs Configurations */
-	LCD_vInit();
-	
-	/* Number of loops for welcome screen animation */
-	uint8_t animation_loops = 3;
-	
-	uint8_t steps = 16;
-	LCD_vMove_Cursor(1, steps);
-	LCD_vSend_string("WELCOME");
-	
-	/* The welcome Screen shall display the word “WELCOME” */
-	/* on the Character LCD */
-	for (animation_loops = 3; animation_loops > 0; animation_loops--)
+	/* Wait 50ms before Initializing the LCD */
+	if (LCD_INIT_COUNTER >= 5)
 	{
-		/* The welcome word shall move from right to left until the */
-		/* end of the screen */
-		for (steps = 16; steps > 1; steps--)
+		/* Setup LCD PORT and PINs Configurations */
+		LCD_vInit();
+		
+		/* Number of loops for welcome screen animation */
+		uint8_t animation_loops = 3;
+		
+		uint8_t steps = 16;
+		LCD_vMove_Cursor(1, steps);
+		LCD_vSend_string("WELCOME");
+		
+		/* The welcome Screen shall display the word “WELCOME” */
+		/* on the Character LCD */
+		for (animation_loops = 3; animation_loops > 0; animation_loops--)
 		{
-			LCD_vShiftDisplay(1);
-			/* TODO: Convert this delay to a periodic timer function */
-			_delay_ms(1);
+			/* The welcome word shall move from right to left until the */
+			/* end of the screen */
+			for (steps = 16; steps > 1; steps--)
+			{
+				LCD_vShiftDisplay(1);
+				/* This shift time is required in the statement */
+				_delay_ms(100);
+			}
+			
+			/* The welcome word shall move from left to right until */
+			/*  the other end of the screen */
+			for (steps = 1; steps < 16; steps++)
+			{
+				LCD_vShiftDisplay(0);
+				_delay_ms(100);
+			}
 		}
 		
-		/* The welcome word shall move from left to right until */
-		/*  the other end of the screen */
-		for (steps = 1; steps < 16; steps++)
-		{
-			LCD_vShiftDisplay(0);
-			_delay_ms(1);
-		}
+		LCD_INIT_COUNTER = 0;
+		LCD_INITIALIZED = 1;
+	}
+	else
+	{
+		/* Didn't reach required time yet */
 	}
 }
 
