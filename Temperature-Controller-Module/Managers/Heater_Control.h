@@ -45,7 +45,7 @@ void Heater_vDisable(void);
 /*                        double V_pot                                  */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void Heater_vSet_Volt(double V_target, double V_pot);
+void Heater_vSet_Volt(float64_t V_target, float64_t V_pot);
 
 /************************************************************************/
 /* Function Description : Update Target Voltage                         */

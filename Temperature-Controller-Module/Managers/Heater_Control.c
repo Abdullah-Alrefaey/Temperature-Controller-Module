@@ -19,15 +19,15 @@ char * states[4] = {"STANDBY", "OPERATION", "NORMAL", "ERROR"};
 uint8_t state_indx = 0U;
 
 /* Calibration Resistor Voltage (Used to determine Duty Cycle Percentage) */
-double Vt = 0;		
-double Vr = 0;
+float64_t Vt = 0;
+float64_t Vr = 0;
 
 /************************************************************************/
 /* Function Description:                                                */
 /* Initialize the 4 STATES LEDs which are used to indicate the current  */
 /* state of the heater                                                  */
 /************************************************************************/
-void LEDs_States_vInit()
+void LEDs_States_vInit(void)
 {
 	/* Initialize STATES LEDs for Better Indication */
 	LED_vInit(LEDs_PORT, STANDBY_LED);
@@ -65,15 +65,15 @@ void Heater_vDisable(void)
 /* difference between SET_Temperature and CRT_Temperature               */
 /* The Vt is used to determine the Duty Cycle                           */
 /************************************************************************/
-void Update_Vt()
+void Update_Vt(void)
 {
 	if (SET_Temperature <= CRT_Temperature)
 	{
-		Vt = 0;
+		Vt = 0.0;
 	}
 	else if (SET_Temperature > CRT_Temperature)
 	{
-		Vt = ((SET_Temperature - CRT_Temperature) / 100.0) * 10;
+		Vt = (((float64_t) SET_Temperature - (float64_t) CRT_Temperature) / 100.0) * 10.0;
 	} else {
 	    /* Impossible Condition, Wrote All Possible Ones For Readability */
 	}
@@ -85,10 +85,10 @@ void Update_Vt()
 /* Potentiometer_Read function which is based on ADC.                   */
 /* The ADC_COUNTER is reset after                                       */
 /************************************************************************/
-void Update_Vr()
+void Update_Vr(void)
 {
 	/* This means when (500 ms) is passed */
-	if (ADC_COUNTER >= 50)
+	if (ADC_COUNTER >= 50U)
 	{
 		Vr = Potentiometer_Read();
 		ADC_COUNTER = 0U;
@@ -104,13 +104,13 @@ void Update_Vr()
 /* Calculate the Duty Cycle Percentage from the given equation and      */
 /* start the PWM wave which will be displayed on the Oscilloscope.      */
 /************************************************************************/
-void Heater_vSet_Volt(double V_target, double V_pot)
+void Heater_vSet_Volt(float64_t V_target, float64_t V_pot)
 {	
-	uint8_t Duty = 0U;
-	double DutyPercentage = 0;
-	DutyPercentage = (((V_pot * 2)/10) * V_target) / 10; /* Range: 0 -> 1 */
-	Duty = floor(DutyPercentage*255.0);
-	PWM_vSet_Duty(2U, Duty);
+	uint8_t HDuty = 0U;
+	float64_t DutyPercentage = 0;
+	DutyPercentage = (((V_pot * 2.0)/10.0) * V_target) / 10.0; /* Range: 0 -> 1 */
+    HDuty = (uint8_t) floor(DutyPercentage*255.0);
+	PWM_vSet_Duty(2U, HDuty);
 }
 
 /************************************************************************/
@@ -119,10 +119,10 @@ void Heater_vSet_Volt(double V_target, double V_pot)
 /* and update state_indx with the new STATE index                       */
 /* Change the LEDs based on the condition                               */
 /************************************************************************/
-void Check_OPERATION_State()
+void Check_OPERATION_State(void)
 {
 	/* Change To OPERATIONAL State if SET - CRT > 5 */
-	if ((SET_Temperature - CRT_Temperature) > 5)
+	if (((int8_t) SET_Temperature - (int8_t) CRT_Temperature) > 5)
 	{
 		state_indx = 1U;
 		LED_vTurnOff(LEDs_PORT, NORMAL_LED);
@@ -138,9 +138,9 @@ void Check_OPERATION_State()
 /* the heater was in OPERATION STATE                                    */
 /* Change the LEDs based on the condition                               */
 /************************************************************************/
-void Check_NORMAL_State()
+void Check_NORMAL_State(void)
 {
-	if (abs(SET_Temperature - CRT_Temperature) <= 5)
+	if (abs((int32_t)SET_Temperature - (int32_t)CRT_Temperature) <= 5)
 	{
 		state_indx = NORMAL_INDEX;
 		
@@ -158,10 +158,10 @@ void Check_NORMAL_State()
 /* and update state_indx with the new STATE index.                      */
 /* Change the LEDs based on the condition                               */
 /************************************************************************/
-void Check_ERROR_State()
+void Check_ERROR_State(void)
 {
 	/* Change To ERROR State if CRT - SET > 10 */
-	if ((CRT_Temperature - SET_Temperature) > 10)
+	if (((int8_t) CRT_Temperature - (int8_t) SET_Temperature) > 10)
 	{
 		state_indx = ERROR_INDEX;
 		LED_vTurnOff(LEDs_PORT, NORMAL_LED);
@@ -177,7 +177,7 @@ void Check_ERROR_State()
 /* This ERROR Check in case of (SET-CRT) > 5 for 3 minutes.             */
 /* Change the LEDs based on the condition                               */
 /************************************************************************/
-void Check_ERROR_State_Timer()
+void Check_ERROR_State_Timer(void)
 {
 	/* Each count = 10.048 ms
 	* This means when 100 count is equal to 1 second
@@ -189,7 +189,7 @@ void Check_ERROR_State_Timer()
 	* The calculations are determined in a correct way, so to solve then we
 	* will decrement the ERROR_COUNTER a little
 	*/
-	if (ERROR_COUNTER > 14500)
+	if (ERROR_COUNTER > 14500U)
 	{
 		/* Change To ERROR State */
 		state_indx = ERROR_INDEX;
@@ -213,13 +213,13 @@ void Check_ERROR_State_Timer()
 /* the heater was in OPERATION STATE                                    */
 /* Change the LEDs based on the condition                               */
 /************************************************************************/
-void Check_HASH_Key()
+void Check_HASH_Key(void)
 {
 	/* This means when (200 ms) is passed */
-	if (HASH_KEY_COUNTER >= 20)
+	if (HASH_KEY_COUNTER >= 20U)
 	{
 		/* Check if user pressed # */
-		if (keypad_Check_OPKey() == 1)
+		if (keypad_Check_OPKey() == 1U)
 		{
 			/* Switch to OPERATION STATE if already in STANDBY */
 			if (state_indx == STANDBY_INDEX)
@@ -229,7 +229,7 @@ void Check_HASH_Key()
 				LED_vTurnOn(LEDs_PORT, OPERATION_LED);
 			}
 			/* Switch to STANDBY STATE if already in STANDBY */
-			else if (state_indx == OPERATION_INDEX || state_indx == NORMAL_INDEX)
+			else if ((state_indx == OPERATION_INDEX) || (state_indx == NORMAL_INDEX))
 			{
 				state_indx = STANDBY_INDEX;
 				LED_vTurnOff(LEDs_PORT, NORMAL_LED);
