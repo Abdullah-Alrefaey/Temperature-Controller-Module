@@ -30,7 +30,7 @@ void WelcomeScreen(void)
 		LCD_vMove_Cursor(1, steps);
 		LCD_vSend_string("WELCOME");
 		
-		/* The welcome Screen shall display the word “WELCOME” */
+		/* The welcome Screen shall display the word ï¿½WELCOMEï¿½ */
 		/* on the Character LCD */
 		for (animation_loops = 3; animation_loops > 0; animation_loops--)
 		{
@@ -176,3 +176,4 @@ void Display_STATE(char *state)
 	LCD_vSend_string(state);
 	LCD_vSend_string("     ");
 }
+
