@@ -10,7 +10,7 @@
 #define NOTPRESSED 0xff
 #define KEYPADPORT 0
 #define HASH_KEY 12
-#define DEBOUNCING_COUNTER 1
+#define DEBOUNCING_COUNTER 1U
 
 /************************************************************************/
 /* Driver Imports                                                       */
