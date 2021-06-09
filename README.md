@@ -117,4 +117,7 @@ We draw this `UML diagram` to describe the system design in a better way. This d
 
 <img src="resources/System_Design.png" />
 
+<!-- Demo Video -->
+<h1 id="demo-video">Demo Video</h1>
 
+<a href="https://www.youtube.com/watch?v=IQxDjfwDjPM" target="_blank">Demo Video</a>
