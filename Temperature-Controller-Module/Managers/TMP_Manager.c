@@ -4,8 +4,8 @@
 #include "TMP_Manager.h"
 
 /* Declare and Define Global Variables Shared with other files */
-uint8_t SET_Temperature = 25;
-uint8_t CRT_Temperature = 0;
+uint8_t SET_Temperature = 25U;
+uint8_t CRT_Temperature = 0U;
 
 extern uint8_t CRT_TEMP_COUNTER;
 extern uint8_t SET_TEMP_COUNTER;
@@ -20,7 +20,7 @@ uint8_t debouncing_counter = 0;
 
 /*************************************************************************/
 /* Function Description:                                                 */
-/* Initialization of the keypad and TC72 Temperature Sensor to the entire*/ 
+/* Initialization of the keypad and TC72 Temperature Sensor to the entire*/
 /* system.                                                               */
 /*************************************************************************/
 void TMP_Manager_vInit(void)
@@ -37,10 +37,10 @@ void TMP_Manager_vInit(void)
 void Update_CRT_Temperature(void)
 {
 	/* This means when (200 ms) is passed */
-	if (CRT_TEMP_COUNTER >= 20)
+	if (CRT_TEMP_COUNTER >= 20U)
 	{
-		CRT_Temperature = TC72_Read();
-		CRT_TEMP_COUNTER = 0;
+		CRT_Temperature = (uint8_t) TC72_Read();
+		CRT_TEMP_COUNTER = 0U;
 	}
 	else
 	{
@@ -57,18 +57,18 @@ void Update_CRT_Temperature(void)
 void Update_SET_Temperature(void)
 {	
 	/* This means when (200 ms) is passed */
-	if (SET_TEMP_COUNTER >= 20)
+	if (SET_TEMP_COUNTER >= 20U)
 	{	
 		/* Get SET Temperature From Keypad */
 		reading_buffer = keypad_u8check_press();
 
 		/* Check that User Pressed an actual Key */
-		if (reading_buffer != NOTPRESSED && reading_buffer != HASH_KEY)
+		if ((reading_buffer != NOTPRESSED) && (reading_buffer != HASH_KEY))
 		{
 			SET_Temperature = reading_buffer;
-			if (pos == 0)
+			if (pos == 0U)
 			{
-				temp_reading = reading_buffer * 10;
+				temp_reading = reading_buffer * 10U;
 				pos++;
 			}
 			else
@@ -77,16 +77,16 @@ void Update_SET_Temperature(void)
 				SET_Temperature = temp_reading;
 				
 				/* (pos is 1 now) we need to reset it with 0*/
-				pos = 0;
+				pos = 0U;
 			}
 		}
 		else
 		{
 			/* Do Nothing (Nothing is pressed) */
-			// LED_vTurnOff('D', 0);
+			/* LED_vTurnOff('D', 0); */
 		}
 		
-		SET_TEMP_COUNTER = 0;
+		SET_TEMP_COUNTER = 0U;
 	}
 	else
 	{
