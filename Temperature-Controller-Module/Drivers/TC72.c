@@ -58,3 +58,4 @@ char TC72_Read(void){
 	DIO_Write_PIN('B', 4, 0);
 	return temp;
 }
+
