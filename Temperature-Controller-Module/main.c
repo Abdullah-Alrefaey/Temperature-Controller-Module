@@ -18,18 +18,19 @@ extern uint8_t SET_Temperature;
 extern char * states[4];
 extern uint8_t state_indx;
 
-extern double Vr;
-extern double Vt;
+extern float64_t Vr;
+extern float64_t Vt;
 
-uint8_t LCD_INITIALIZED = 0;
+uint8_t LCD_INITIALIZED = 0U;
+uint8_t main(void);
 
-int main(void)
+uint8_t main(void)
 {
 	/* Managers Initializations */
 	Schedular_vInit();
 	
 	/* Use Timer Scheduler instead of _delay_ms(30) in the LCD */
-	while (LCD_INITIALIZED == 0)
+	while (LCD_INITIALIZED == 0U)
 	{
 		WelcomeScreen();
 	}
