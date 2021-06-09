@@ -16,23 +16,23 @@
 /************************************************************************/
 /* Driver Definitions                                                   */
 /************************************************************************/
-#define CLR_SCREEN 0x01
-#define CURSOR_ON_DISPLAN_ON 0x0e
-#define CURSOR_OFF_DISPLAN_ON 0x0c
-#define RETURN_HOME 0x02
-#define ENTRY_MODE 0x06
-#define SHIFT_LEFT 0x18
-#define SHIFT_RIGHT 0x1c
+#define CLR_SCREEN 0x01U
+#define CURSOR_ON_DISPLAN_ON 0x0eU
+#define CURSOR_OFF_DISPLAN_ON 0x0cU
+#define RETURN_HOME 0x02U
+#define ENTRY_MODE 0x06U
+#define SHIFT_LEFT 0x18U
+#define SHIFT_RIGHT 0x1cU
 
 /* #define eight_bits_mode */
 #define FOUR_BITS_MODE
-#define LCD_PORT 2
+#define LCD_PORT 2U
 
 #if defined FOUR_BITS_MODE
-#define RS 1
-#define RW 2
-#define EN 3
-#define FOUR_BITS 0x28
+#define RS 1U
+#define RW 2U
+#define EN 3U
+#define FOUR_BITS 0x28U
 
 #elif defined EIGHT_BITS_MODE
 #define EN 0
@@ -78,7 +78,7 @@ void LCD_vSend_char(char data);
 /* Function Arguments   : char *data: string to be displayed on LCD     */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void LCD_vSend_string(char *data);
+void LCD_vSend_string(const char *data);
 
 /************************************************************************/
 /* Function Description : Clear the entire Display off the LCD          */
