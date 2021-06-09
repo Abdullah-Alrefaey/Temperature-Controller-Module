@@ -23,7 +23,7 @@
 
 /************************************************************************/
 /* Function Description : Keypad Interface Initiators Function          */
-/* Function Arguments   : void                                          */ 
+/* Function Arguments   : void                                          */
 /* Function Returns     : void                                          */
 /************************************************************************/
 void keypad_vInit(void);
