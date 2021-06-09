@@ -14,18 +14,18 @@
 void Timer0_CTC_vInit_Interrupt(void)
 {
 	/* select CTC mode*/
-	TCCR0 |= (1 << WGM01);
+	TCCR0 |= (1U << WGM01);
 	
 	/* load a value in OCR0 */
 	/*  */
 	
-	// OCR0 = 80;
+	/* OCR0 = 80;*/
 	OCR0 = 157;
 	
 	/* select timer clock */	
 	/* clk/1024 */
-	TCCR0 |= (1 << CS00);
-	TCCR0 |= (1 << CS02);
+	TCCR0 |= (1U << CS00);
+	TCCR0 |= (1U << CS02);
 	
 	/* Timer Clock = System Clock / pre-scaler
 	 * Timer Tick Time (TTT) = 1 / Timer Clock
@@ -47,6 +47,6 @@ void Timer0_CTC_vInit_Interrupt(void)
 	/* When the OCIE0 bit is enabled, and the I-bit in the Status Register is set (one),
 	 * the Timer/Counter Compare Match Interrupt is enabled.
 	 */
-	TIMSK |= (1 << OCIE0);
+	TIMSK |= (1U << OCIE0);
 }
 
