@@ -7,9 +7,9 @@
 /************************************************************************/
 /* Driver Definitions                                                   */
 /************************************************************************/
-#define NOTPRESSED 0xff
-#define KEYPADPORT 0
-#define HASH_KEY 12
+#define NOTPRESSED 0xffU
+#define KEYPADPORT 0U
+#define HASH_KEY 12U
 #define DEBOUNCING_COUNTER 1U
 
 /************************************************************************/
