@@ -32,7 +32,7 @@ We followed a Layered Architecture to best design our System to meet the User's 
 
 Our Design is also better described through the following diagram which shows the relations between managers and what each file in the project is and it's dependencies.
 
-<img src="Sources\System Design.jpg" style="zoom:67%;" />
+<img src="Sources\System Design.png" style="zoom:67%;" />
 
 
 
