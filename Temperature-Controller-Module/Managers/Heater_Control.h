@@ -105,3 +105,4 @@ void Check_ERROR_State_Timer(void);
 void Check_HASH_Key(void);
 
 #endif /* HEATER_CONTROL_H_ */
+
