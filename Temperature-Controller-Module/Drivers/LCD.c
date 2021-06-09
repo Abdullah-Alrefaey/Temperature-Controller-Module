@@ -156,10 +156,13 @@ void LCD_vSend_char(char data)
 /************************************************************************/
 void LCD_vSend_string(char *data)
 {
-	while((*data) != '\0')
+	uint8_t indx = 0;
+
+	while(data[indx] != '\0')
 	{
-		LCD_vSend_char(*data);
-		data++;
+
+		LCD_vSend_char(data[indx]);
+		indx++;
 	}
 }
 
