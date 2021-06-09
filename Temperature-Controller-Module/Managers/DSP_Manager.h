@@ -54,6 +54,6 @@ void Display_CRT_Temperature_ERROR(void);
 /* Function Arguments   : char* state                                   */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void Display_STATE(const char* state);
+void Display_STATE(const char *state);
 
 #endif /* DSP_MANAGER_H_ */
