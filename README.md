@@ -2,6 +2,7 @@
 
 <!-- Installation -->
 <h1 id="installation">Installation</h1>
+
 The Software used in this project is `Proteus Design Suite`, it is a proprietary software tool suite used primarily for electronic design automation.
 
 It's better to use the same version of the simulation or a newer version to open the simulation file without any problems. We used `Proteus 8.10`.
