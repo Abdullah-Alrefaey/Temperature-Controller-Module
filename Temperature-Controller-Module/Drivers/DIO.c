@@ -160,24 +160,24 @@ void DIO_Write_PIN(char portName, uint8_t pinNumber, uint8_t value)
 uint8_t DIO_Read_PIN(char portName, uint8_t pinNumber)
 {
 	uint8_t x = U_ZERO;
-
+	uint8_t OneBit = 1U;
 	switch(portName)
 	{
 		/*READ_BIT(reg, bit) == ((reg & (1 << bit)) >> bit)*/
 		case 'A':
-			x = ((PINA & (U_ONE << pinNumber)) >> pinNumber);
+			x =  ((PINA & (OneBit << pinNumber)) >> pinNumber);
 			break;
 
 		case 'B':
-			x = ((PINB & (U_ONE << pinNumber)) >> pinNumber);
+			x = ((PINB & (OneBit << pinNumber)) >> pinNumber);
 			break;
 
 		case 'C':
-			x = ((PINC & (U_ONE << pinNumber)) >> pinNumber);
+			x = ((PINC & (OneBit << pinNumber)) >> pinNumber);
 			break;
 
 		case 'D':
-			x = ((PIND & (U_ONE << pinNumber)) >> pinNumber);
+			x = ((PIND & (OneBit << pinNumber)) >> pinNumber);
 			break;
 		default:
 			break;
@@ -310,30 +310,30 @@ void DIO_Write_PORT(char portName, uint8_t portValue)
 
 uint8_t DIO_Read_PORT(char portName)
 {
-	uint8_t x = U_ZERO;
+	uint8_t TempPin = U_ZERO;
 
 	switch(portName)
 	{
 		case 'A':
-			x = PINA;
+		    TempPin = PINA;
 			break;
 
 		case 'B':
-			x = PINB;
+		    TempPin = PINB;
 			break;
 
 		case 'C':
-			x = PINC;
+		    TempPin = PINC;
 			break;
 
 		case 'D':
-			x = PIND;
+		    TempPin = PIND;
 			break;
 		default:
 			break;
 	}
 
-	return x;
+	return TempPin;
 }
 
 void DIO_Toggle_PORT(char portName)
