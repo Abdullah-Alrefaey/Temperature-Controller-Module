@@ -47,13 +47,13 @@ void Display_CRT_Temperature(uint8_t value);
 /* Function Arguments   : uint8_t value                                 */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void Display_CRT_Temperature_ERROR();
+void Display_CRT_Temperature_ERROR(void);
 
 /************************************************************************/
 /* Function Description : Display Current Program State                 */
 /* Function Arguments   : char* state                                   */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void Display_STATE(char* state);
+void Display_STATE(const char* state);
 
 #endif /* DSP_MANAGER_H_ */
