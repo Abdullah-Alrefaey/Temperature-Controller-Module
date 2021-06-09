@@ -12,22 +12,22 @@
 /* a reading ever 150 ms and store it in the Data Register              */ 
 /************************************************************************/
 void TC72_Init(char mode){
-	// Initiate SPI Master in SPI 
+	/* Initiate SPI Master in SPI */
 	SPI_MasterInit();
 	
-	// Create a Rising Edge on the	
-	// TC72 Port to Start SPI Communication
-	DIO_Write_PIN('B', 4, 1);
+	/* Create a Rising Edge on the
+	 TC72 Port to Start SPI Communication*/
+	DIO_Write_PIN('B', 4U, 1U);
 	
-	// Send Signal to Select Control
-	// Register at 0x80
-	SPI_MasterTransmitchar(0x80);
+	/* Send Signal to Select Control
+	   Register at 0x80 */
+	SPI_MasterTransmitchar(0x80U);
 	
-	// Send Signal to Specify Mode
+	/* Send Signal to Specify Mode */
 	SPI_MasterTransmitchar(mode);
 	
-	// Finish Communication 
-	DIO_Write_PIN('B', 4, 0);
+	/* Finish Communication */
+	DIO_Write_PIN('B', 4U, 0U);
 }
 
 /************************************************************************/
@@ -39,23 +39,24 @@ void TC72_Init(char mode){
 /* 0x02 Register.                                                       */
 /************************************************************************/
 char TC72_Read(void){
-	// Create a Rising Edge on the
-	// TC72 Port to Start SPI Communication 
-	DIO_Write_PIN('B', 4, 1);
+	/* Create a Rising Edge on the
+	   TC72 Port to Start SPI Communication */
+	DIO_Write_PIN('B', 4U, 1U);
 	
-	// Select the MSB Mode, Since we are 
-	// not interested in a High Resolution
-	// Temperature Measurement
+	/* Select the MSB Mode, Since we are
+	   not interested in a High Resolution
+	   Temperature Measurement */
 	char temp;
-	temp = SPI_MasterTransmitchar(0x02);
-	//_delay_us(20); // Removed Violation for Testing 
+	temp = SPI_MasterTransmitchar(0x02U);
+	/*_delay_us(20); // Removed Violation for Testing */
 	
-	// Signal Check with the TC72, TODO: Check Necessity of This Step
-	temp = SPI_MasterTransmitchar(0x00);
-	//_delay_us(20); // Removed Violation for Testing 
+	/* Signal Check with the TC72, TODO: Check Necessity of This Step */
+	temp = SPI_MasterTransmitchar(0x00U);
+	/*_delay_us(20); // Removed Violation for Testing */
 	
-	// Finish Communication
-	DIO_Write_PIN('B', 4, 0);
+	/* Finish Communication */
+	DIO_Write_PIN('B', 4U, 0U);
+    SPI_MasterTransmitchar(temp);
 	return temp;
 }
 
