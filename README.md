@@ -7,7 +7,7 @@
 <h3><a href="#system-design">System Design</a></h3>
 
 <!-- Installation -->
-<h1><a name="installation">Installation</a></h1>
+<h1 id="installation">Installation</h1>
 The Software used in this project is `Proteus Design Suite`, it is a proprietary software tool suite used primarily for electronic design automation.
 
 It's better to use the same version of the simulation or a newer version to open the simulation file without any problems. We used `Proteus 8.10`.
@@ -17,7 +17,7 @@ Download Link:
 " target="_blank">Proteus 8.10 SP3</a>
 
 <!-- System Objective -->
-<h1><a name="system-objective">System Objective</a></h1>
+<h1 id="system-objective">System Objective</h1>
 
 Temperature Controller Module is a System designed to provide Temperature Control Functionality in different states. The system provides the ability to reach a targeted temperature called `SET_TEMPERATURE` which is determined by a user interface.
 
@@ -26,7 +26,7 @@ To simulate the heating process, the system uses a Voltage Control Module (PWM) 
 System states are being displayed to the user during the run-time, so the user can know the current system state and which process is running in the background.
 
 <!-- System Components -->
-<h1><a name="system-components">System Components</a></h1>
+<h1 id="system-components">System Components</h1>
 
 The system is composed of the following components:
 - `Microcontroller`: ATmega32 Microcontroller
@@ -37,7 +37,7 @@ The system is composed of the following components:
 - `PWM to Voltage Converter`: Converts the PWM to a targeted decimal voltage
 
 <!-- System Interface -->
-<h1><a name="system-interface">System Interface</a></h1>
+<h1 id="system-interface">System Interface</h1>
 
 Below is the System Design Interface on Proteus 8.10.
 
@@ -50,7 +50,7 @@ For the sake of testing, we added an `Oscilloscope` to simulate the Heating Proc
 <img src="resources/System_Simulation.png"/>
 
 <!-- System Operation -->
-<h1><a name="system-operation">System Operation</a></h1>
+<h1 id="system-operation">System Operation</h1>
 
 In this section we will describe the flow-work of the system from the beginning of the simulation to the end for each state.
 
@@ -104,7 +104,7 @@ We draw this diagram to describe the system states in a better way. This diagram
 
 
 <!-- System Design -->
-<h1><a name="system-design">System Design</a></h1>
+<h1 id="system-design">System Design</h1>
 
 We followed a Layered Architecture to best design our System to meet the User's needs. The Layers Starts from the Top at our Main Script which is a Higher Manager (Mode Manager), Next come the Lower Managers Heater Control, Display Manager Scheduler and Temperature Manager. These four Managers are the Process Controllers for the Mode Manager.
 
