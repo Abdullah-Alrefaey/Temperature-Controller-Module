@@ -93,7 +93,7 @@ void LCD_vClear_Screen(void);
 /*                      : uint8_t col: col number (1 -> 16)             */
 /* Function Returns     : void                                          */
 /************************************************************************/
-void LCD_vMove_Cursor(uint8_t row, uint8_t coloumn);
+void LCD_vMove_Cursor(uint8_t row, uint8_t column);
 
 /************************************************************************/
 /* Function Description : Shift the Entire Display of the LCD           */
