@@ -28,11 +28,11 @@ void Potentiometer_vDisable(void)
 /* Read Voltage Applied on the Potentiometer using the ADC Functionality*/
 /* and Map the Output to 5 Volts                                        */
 /************************************************************************/
-double Potentiometer_Read(void)
+float64_t Potentiometer_Read(void)
 {
-	double VPot = 0;
+    float64_t VPot = 0;
 	uint16_t ADCReading = 0U;
-	ADCReading = ADC_u16Read();
-	VPot = (5.0/1023.0)*ADCReading;
+	ADCReading =  ADC_u16Read();
+	VPot =  (5.0/1023.0)*(float64_t)ADCReading;
 	return VPot;
 }

@@ -8,7 +8,7 @@
 /* Library Imports                                                      */
 /************************************************************************/
 #include "ADC.h"
-
+typedef double float64_t;
 /************************************************************************/
 /* Driver Functions                                                     */
 /************************************************************************/
@@ -32,6 +32,6 @@ void Potentiometer_vDisable(void);
 /* Function Arguments   : void                                          */
 /* Function Returns     : double                                        */
 /************************************************************************/
-double Potentiometer_Read(void);
+float64_t Potentiometer_Read(void);
 
 #endif /* POTENTIOMETER_H_ */
