@@ -156,12 +156,14 @@ void LCD_vSend_char(char data)
 /************************************************************************/
 void LCD_vSend_string(const char *data)
 {
-    while((*data) != '\0')
-    {
-        /* The MISRA 17.4 Warning Doesn't Go Whatever The Method, Probably A CCS Error */
-        LCD_vSend_char(*data);
-        data++;
-    }
+	uint8_t indx = 0;
+
+	while(data[indx] != '\0')
+	{
+
+		LCD_vSend_char(data[indx]);
+		indx++;
+	}
 }
 
 /************************************************************************/
