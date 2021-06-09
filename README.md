@@ -17,7 +17,7 @@ Download Link:
 " target="_blank">Proteus 8.10 SP3</a>
 
 <!-- System Objective -->
-<h1 id="#system-objective">System Objective</h1>
+<h1><a name="system-objective">System Objective</a></h1>
 
 Temperature Controller Module is a System designed to provide Temperature Control Functionality in different states. The system provides the ability to reach a targeted temperature called `SET_TEMPERATURE` which is determined by a user interface.
 
