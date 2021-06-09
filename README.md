@@ -1,10 +1,4 @@
-## Table of contents
-<h3><a href="#installation">Installation</a></h3>
-<h3><a href="#system-objective">System Objective</a></h3>
-<h3><a href="#system-components">System Components</a></h3>
-<h3><a href="#system-interface">System Interface</a></h3>
-<h3><a href="#system-operation">System Operation</a></h3>
-<h3><a href="#system-design">System Design</a></h3>
+# Temperature Controller Module
 
 <!-- Installation -->
 <h1 id="installation">Installation</h1>
@@ -17,7 +11,7 @@ Download Link:
 " target="_blank">Proteus 8.10 SP3</a>
 
 <!-- System Objective -->
-<h1><a name="system-objective">System Objective</a></h1>
+<h1 id="system-objective">System Objective</h1>
 
 Temperature Controller Module is a System designed to provide Temperature Control Functionality in different states. The system provides the ability to reach a targeted temperature called `SET_TEMPERATURE` which is determined by a user interface.
 
@@ -100,7 +94,7 @@ The System Operates in Four different States:
 
 We draw this diagram to describe the system states in a better way. This diagram shows the relations between the states, how the system can switches between states and which components are functioning at each state. 
 
-<img src="resources/System_States_Diagram.jpg"/>
+<img src="resources/System_States_Diagram.png"/>
 
 
 <!-- System Design -->
@@ -120,6 +114,6 @@ Each Manager has a defined set of Tasks:
 
 We draw this `UML diagram` to describe the system design in a better way. This diagram shows the relations the managers their dependencies in the whole project.
 
-<img src="resources/System_Design.jpg" />
+<img src="resources/System_Design.png" />
 
 
