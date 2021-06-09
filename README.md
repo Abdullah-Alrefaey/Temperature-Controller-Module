@@ -47,7 +47,7 @@ On the right side: the backbone of the System is collected; `ATmega32 Microcontr
 
 For the sake of testing, we added an `Oscilloscope` to simulate the Heating Process when Enabling/Disabling the PWM with different Duty Cycles.
 
-<img src="resources/System.png"/>
+<img src="resources/System_Simulation.png"/>
 
 <!-- System Operation -->
 <h1><a name="system-operation">System Operation</a></h1>
@@ -100,7 +100,7 @@ The System Operates in Four different States:
 
 We draw this diagram to describe the system states in a better way. This diagram shows the relations between the states, how the system can switches between states and which components are functioning at each state. 
 
-<img src="resources/System States.jpg"/>
+<img src="resources/System_States_Diagram.jpg"/>
 
 
 <!-- System Design -->
@@ -120,6 +120,6 @@ Each Manager has a defined set of Tasks:
 
 We draw this `UML diagram` to describe the system design in a better way. This diagram shows the relations the managers their dependencies in the whole project.
 
-<img src="resources/System Design.jpg" />
+<img src="resources/System_Design.jpg" />
 
 
