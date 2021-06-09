@@ -85,11 +85,11 @@ void PWM_vDisable(uint8_t Timer)
 /* cycle                                                                    */
 /****************************************************************************/
 void PWM_vSet_Duty(uint8_t Timer, uint8_t Duty){
-	if (Timer == 0)
+	if (Timer == 0U)
 	{
 		OCR0 = Duty;
 	} 
-	else if (Timer == 2)
+	else if (Timer == 2U)
 	{
 		OCR2 = Duty;
 	} else {
