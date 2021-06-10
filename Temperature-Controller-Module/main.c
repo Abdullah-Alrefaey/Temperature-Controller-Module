@@ -1,16 +1,11 @@
-/*
- * main.c
- *
- */
-
-/*#define F_CPU 8000000UL*/
+/************************************************************************/
+/*                          Mode Manager                                */
+/************************************************************************/
 
 #include "Managers/Schedular.h"
 #include "Managers/TMP_Manager.h"
 #include "Managers/DSP_Manager.h"
 #include "Managers/Heater_Control.h"
-
-#include "Drivers/TC72.h"
 
 extern uint8_t CRT_Temperature;
 extern uint8_t SET_Temperature;
@@ -25,12 +20,14 @@ uint8_t LCD_INITIALIZED = 0U;
 
 uint8_t main(void);
 
-uint8_t main(void) {
+uint8_t main(void)
+{
     /* Managers Initializations */
     Schedular_vInit();
 
     /* Use Timer Scheduler instead of _delay_ms(30) in the LCD */
-    while (LCD_INITIALIZED == 0U) {
+    while (LCD_INITIALIZED == 0U)
+	{
         WelcomeScreen();
     }
 
@@ -38,7 +35,8 @@ uint8_t main(void) {
     TMP_Manager_vInit();
     LEDs_States_vInit();
 
-    while (1) {
+    while (1)
+	{
         Display_SET_Temperature(SET_Temperature);
         Display_CRT_Temperature(CRT_Temperature);
         Display_STATE(states[state_indx]);
@@ -47,7 +45,8 @@ uint8_t main(void) {
          * Update SET_Temperature Value From The User
          * Check if User Pressed '#' To Switch to OPERATION STATE
          */
-        if (state_indx == STANDBY_INDEX) {
+        if (state_indx == STANDBY_INDEX)
+		{
             /* PWM OFF */
             Heater_vDisable();
 
@@ -57,7 +56,8 @@ uint8_t main(void) {
         }
 
         /* Check if you are in OPERATION STATE */
-        if (state_indx == OPERATION_INDEX) {
+        if (state_indx == OPERATION_INDEX)
+		{
             /* Start Heater */
             Heater_vEnable();
 
@@ -77,7 +77,8 @@ uint8_t main(void) {
         }
 
         /* Check if you are in NORMAL STATE */
-        if (state_indx == NORMAL_INDEX) {
+        if (state_indx == NORMAL_INDEX)
+		{
             /* PWM OFF */
             Heater_vDisable();
 
@@ -89,7 +90,8 @@ uint8_t main(void) {
         }
 
         /* Check if you are in ERROR STATE */
-        if (state_indx == ERROR_INDEX) {
+        if (state_indx == ERROR_INDEX)
+		{
             /* PWM and ADC OFF */
             Heater_vDisable();
 
