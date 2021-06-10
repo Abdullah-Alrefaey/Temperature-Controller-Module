@@ -9,48 +9,76 @@ extern uint8_t CRT_Temperature;
 extern uint8_t state_indx;
 
 extern uint8_t LCD_INIT_COUNTER;
+extern uint8_t LCD_SHIFT_COUNTER;
 extern uint8_t LCD_INITIALIZED;
+
+uint8_t left_shift_steps = 15U;
+uint8_t right_shift_steps = 0U;
+
+uint8_t animation_loops = 3U;
+
+/************************************************************************/
+/* Function Description:                                                */
+/* Shift the Display of the LCD Left and Right based on a periodic      */
+/* Poller every 100ms.                                                  */
+/* Sets the associated flags and counter based on each loop.            */
+/************************************************************************/
+void ShiftDisplay()
+{
+	/* Shift The Screen every 100ms to the left 15 times */
+	/* Start Shifting Left */
+	if (LCD_SHIFT_COUNTER >= 10U && left_shift_steps > 0)
+	{
+		/* Shift Left */
+		LCD_vShiftDisplay(1U);
+		LCD_SHIFT_COUNTER = 0U;
+		left_shift_steps--;
+	}
+	/* Finished Shifting Left */
+	
+	/* Shift The Screen every 100ms to the right 15 times after */
+	/* the left shift is finished */
+	/* Start Shifting Right */	
+	if (LCD_SHIFT_COUNTER >= 10U && left_shift_steps == 0 && right_shift_steps < 15U)
+	{
+		/* Shift Right */
+		LCD_vShiftDisplay(0U);
+		LCD_SHIFT_COUNTER = 0U;
+		right_shift_steps++;
+	}
+	/* Finished Shifting Right */
+	
+	/* This means finished 1 loop */ 
+	if (right_shift_steps == 15U)
+	{
+		left_shift_steps = 15U;
+		right_shift_steps = 0U;
+		animation_loops--;
+	}
+}
 
 /************************************************************************/
 /* Function Description:                                                */
 /* Initiate the LCD Screen with a Welcoming Animation, Display "WELCOME"*/
 /* on the Screen then shift the word left and right for 3 Times         */
 /************************************************************************/
-void WelcomeScreen(void) {
+void WelcomeScreen(void)
+{
     /* Wait 50ms before Initializing the LCD */
-    if (LCD_INIT_COUNTER >= 5U) {
+    if (LCD_INIT_COUNTER >= 5U)
+	{
         /* Setup LCD PORT and PINs Configurations */
         LCD_vInit();
 
-        /* Number of loops for welcome screen animation */
-        uint8_t animation_loops = 3U;
-
-        uint8_t steps = 16;
-        LCD_vMove_Cursor(1U, steps);
+        LCD_vMove_Cursor(1U, 16);
         LCD_vSend_string("WELCOME");
 
-        /* The welcome Screen shall display the word �WELCOME� */
-        /* on the Character LCD */
-        for (animation_loops = 3U; animation_loops > 0U; animation_loops--) {
-            /* The welcome word shall move from right to left until the */
-            /* end of the screen */
-            for (steps = 16U; steps > 1U; steps--) {
-                LCD_vShiftDisplay(1U);
-                /* This shift time is required in the statement */
-                _delay_ms(100.0);
-            }
-
-            /* The welcome word shall move from left to right until */
-            /*  the other end of the screen */
-            for (steps = 1U; steps < 16U; steps++) {
-                LCD_vShiftDisplay(0U);
-                _delay_ms(100.0);
-            }
-        }
-
+		/* Finish The Initialization */
         LCD_INIT_COUNTER = 0U;
         LCD_INITIALIZED = 1U;
-    } else {
+    }
+	else
+	{
         /* Didn't reach required time yet */
     }
 }
