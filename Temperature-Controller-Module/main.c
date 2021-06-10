@@ -17,6 +17,9 @@ extern float64_t Vr;
 extern float64_t Vt;
 
 uint8_t LCD_INITIALIZED = 0U;
+uint8_t LCD_FINISH_SHIFT = 0U;
+
+extern uint8_t animation_loops;
 
 uint8_t main(void);
 
@@ -25,10 +28,16 @@ uint8_t main(void)
     /* Managers Initializations */
     Schedular_vInit();
 
-    /* Use Timer Scheduler instead of _delay_ms(30) in the LCD */
-    while (LCD_INITIALIZED == 0U)
+	/* Use Timer Scheduler instead of _delay_ms(30) in the LCD */
+	while (LCD_INITIALIZED == 0U)
 	{
-        WelcomeScreen();
+		WelcomeScreen();
+	}
+	
+	/* Stay if this loop till the animation_loops reaches 0 */
+    while (animation_loops != 0U)
+	{
+		ShiftDisplay();
     }
 
     IdleScreen();

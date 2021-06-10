@@ -15,6 +15,13 @@
 /************************************************************************/
 
 /************************************************************************/
+/* Function Description : Shift The Entire Display Left and Right       */
+/* Function Arguments   : void                                          */
+/* Function Returns     : void                                          */
+/************************************************************************/
+void ShiftDisplay(void);
+
+/************************************************************************/
 /* Function Description : Welcome Screen Display Function               */
 /* Function Arguments   : void                                          */
 /* Function Returns     : void                                          */
