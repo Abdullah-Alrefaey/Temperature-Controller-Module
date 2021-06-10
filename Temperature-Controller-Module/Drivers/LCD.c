@@ -2,6 +2,13 @@
 /*                          LCD Driver                                  */
 /************************************************************************/
 
+/************************************************************************/
+/*                          MISRA Justifications                        */
+/************************************************************************/
+/* In LCD_vSend_string Function */
+/* The MISRA 17.4 Warning Doesn't Go Whatever The Method, Even Though We're Using Array
+ * indexing, Probably A CCS Error */
+
 #include "LCD.h"
 
 extern char PORTS[4];
@@ -151,7 +158,7 @@ void LCD_vSend_char(char data) {
 /* a loop till the string ends.                                         */
 /************************************************************************/
 void LCD_vSend_string(const char *data) {
-    uint8_t indx = 0;
+    uint8_t indx = 0U;
 
     while (data[indx] != '\0') {
 
