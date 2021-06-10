@@ -2,6 +2,14 @@
 /*                          Timer Driver                                */
 /************************************************************************/
 
+/************************************************************************/
+/*                          MISRA Justifications                        */
+/************************************************************************/
+/* MISRA Rule 2.1 states that if using assembly is necessary as in our
+ * case, we should encapsulate it or use a macro (although it seems like
+ * it's already a macro), trying on encapsulate the sei in a function
+ * or using another macro didn't have an effect on the MISRA violation */
+
 #include "Timer.h"
 
 /************************************************************************/
@@ -48,4 +56,5 @@ void Timer0_CTC_vInit_Interrupt(void) {
      */
     TIMSK |= (1U << OCIE0);
 }
+
 

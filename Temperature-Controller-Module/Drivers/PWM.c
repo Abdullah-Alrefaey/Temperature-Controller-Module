@@ -1,3 +1,16 @@
+/************************************************************************/
+/*                          PWM Driver                                  */
+/************************************************************************/
+
+/************************************************************************/
+/*                          MISRA Justifications                        */
+/************************************************************************/
+/* The MISRA Advisory Rule 5.7 is Broken according to CCS when we use AVR's
+ * built-in definitions for Registers & Bit names, this is seems like an
+ * error by CCS's Analyzer as per the rule, defining an identifier in a
+ * header & reusing it is accepted, since it always refers to the same
+ * value */
+
 #include "PWM.h"
 
 /************************************************************************/
