@@ -117,7 +117,20 @@ We draw this `UML diagram` to describe the system design in a better way. This d
 
 <img src="resources/System_Design.png" />
 
+<!-- MISRA-C: 2004 Compliant -->
+<h1 id="system-design">MISRA-C: 2004 Compliant</h1>
+
+
+We used <a href="https://www.ti.com/tool/CCSTUDIO" target="_blank">Code Composer Studio</a> to check for MISRA-C: 2004 rules. The whole project is compliant with this version except 3 warnings we justified them in the code.
+
 <!-- Demo Video -->
 <h1 id="demo-video">Demo Video</h1>
 
-<a href="https://www.youtube.com/watch?v=IQxDjfwDjPM" target="_blank">Demo Video</a>
+We recorded this video to explain the system states, system design, and test the simulation on Proteus.
+
+Here is the video link: <a href="https://www.youtube.com/watch?v=IQxDjfwDjPM" target="_blank">Demo Video</a>
+
+<!-- License -->
+<h1>Authors</h1>
+
+Copyright © 2021, **Team #3**. Biomedical Engineering Department, Cairo University.
